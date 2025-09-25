@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-PTSIM Documentation
+How to use, Practical guide
 ===================================
 
 .. toctree::
@@ -11,9 +11,6 @@ PTSIM Documentation
    :caption: Contents:
 
    overview.md
-   install.md
-   tutorial.rst
    cmd-reference.md
-   how-to.rst
    faq.md
 

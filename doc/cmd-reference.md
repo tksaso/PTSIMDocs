@@ -2,1194 +2,770 @@
 
 ## コマンド引数の表記
 
-コマンドに与える引数は、<>で囲んで表ます。  
-また、その内容は、<値:型>と表記しています。  
-<value:type>  
-value 値  
-type  型(s=string, i=int, f=float, d=double)  
+コマンドに与える引数は、{} で囲んで表ます。  
+また、その内容は、 **{値:型}** と表記しています。
 
-例)  
-/G4M/Module/select  <mname:s>  
-引数として文字列型を指定します。引数名はmnameと呼びます。  
+```  
+{value:type}  
+```
 
-利用例）  
+| 値表記 |　説明 |
+|:------|:------|
+| value | 引数の値(変数名) |
+| type | 引数の型(s=string, i=int, f=float, d=double)|  
+
+
+* 記載例
+```
+/G4M/Module/select  {mname:s}  
+```
+引数として文字列型の値を指定します。引数名はmnameと呼びます。  
+
+* 利用例 (文字列型の引数)
+```
 /G4M/Module/select  WaterPhantom  
-
-特に以下の３つの引数名については、以降は説明なく用います。  
-<mname:s>      Beam module name  
-<ifilename:s>  Input file name  
-<ofilename:s>  Output file name  
-<unit:s>       Unit  
-
-
-<!--
- ・FocusGunEdist
-   ・FanBeam
-     ・IAEAphsp
-       ・EvtGun
-         ・Root3d
-
- 　初期粒子発生器の個々の詳細について次に説明する。
- 1) ParticleGun
-   Geant4のG4ParticleGunを利用する。詳細は，Geant4のマニュアルを参照すること。ここでは，代表的なコマンドを幾つか紹介する。
-
-  粒子を設定する
-  /gun/particle   <particleName:s>
-   “particleName” : proton, e-, e+, gamma   etc.
-
-  Ion beamを設定する
-  /gun/particle  ion
-  /gun/ion     <Z:i>   <A:i>   <Charge:i>
-
-  運動量方向を設定する
-  /gun/direction   <dirX:d>  <dirY:d>  <dirZ:d>
-
-　発生位置を設定する
-/gun/position   <x:d>  <y:d>  <z:d>  {unit:s}
-2) GPS
-  Geant4のG4GeneralParticleSourceを利用する。詳細は，Geant4マニュアルを参照のこと。
-
-3) BeamGun
-  BeamGunは，G4ParticleGunを使って実装されており，G4ParticleGunのコマンドが利用可能である。加えて，スポットサイズとエネルギーの揺らぎを設定することができる。
-
-  Beam spotでの発生粒子数の分布関数を指定する
-  　(Gauss distribution またはFlat distribution )
-  /G4M/Beam/gaussSpot   <:b>
-
- スポットサイズ設定（Gauss分布であれば標準偏差値，Flatであればその範囲）
- /G4M/Beam/spotsize　　<dx:d>  <dy:d>  <dz:d>  <unit>
-  Default unit:   mm
-
- ビームエネルギーのゆらぎをエネルギーの単位で設定する
- /G4M/Beam/energyflac　　<dE:d>  <unit>
-  dE:  エネルギー揺らぎの値をガウス分布の標準偏差値で与える
-  Default unit:  MeV
-
-ビームエネルギーの揺らぎをビームエネルギーのパーセンテージで設定する
-G4M/Beam/energyflacPerc　　<dEPerc:d>  <unit>
- dE:  エネルギー揺らぎの値をビームエネルギー値に対する割合（%）で与える
- Default unit:  perCent
-
-Beam emittance (未実装)
-/G4M/Beam/emittance　　<EmitX:d> <EmitY:d> <EmitZ:d>
-
-ビームの初期角度方向の標準偏差値を与える。
-/G4M/Beam/angSigma　　<SigmaX:d> <SigmaY:d>  <unit:s>
- SigmaX, SigmaY:  初期角度の値をガウス分布の標準偏差値で与える
-  Default unit:  mrad
-  ビームパラメタの設定をASCIIファイルから読み込む。
-  /G4M/Beam/file　　<ifilename:s>
-
-ASCIIデータファイルの書式:
-./data/Sample/G4MBeamGun/150.dat	Description
-150
-proton 150 MeV
-2212
-150.0  0.00
-0.0  0.0
-3.0  3.0	Beam ID  [ not used. ]
-Description   [ not used]
-Particle ID
-Beam Energy [MeV],  Energy Spread [MeV]
-Angular variance, Spatial covariance [ not used]
-Spatial variance in X, and in Y [mm]
- イオンの場合の粒子識別番号（Particle ID）は、+-100ZZZAAAIで定義される。
-
-4) FocusGun
-  FocusGunは，G4ParticleGunを使って実装されており，G4ParticleGunのコマンドが利用できる。加えて，焦点を持った初期粒子を発生することができる。
-    ビームエネルギーのゆらぎをエネルギーの単位で設定する
-    /G4M/Beam/energyfluc　<dE:d>  <Unit:s>
-    dE:  エネルギー揺らぎの値をガウス分布の標準偏差値で与える
-    Default unit:  MeV
-
- 　X方向の焦点位置となるZ座標を設定する
- /G4M/Beam/FocusDistanceX　　<zX:d>　<unit:s>
-  zX:  X方向の焦点座標
-   Default unit:  mm
-
-   Y方向の焦点位置となるZ座用を設定する
-   /G4M/Beam/FocusDistanceY　　<zY:d>　<unit:s>
-   zY:  Y方向の焦点座標
-    Default unit:  mm
-
-  初期粒子発生座標と焦点位置が同じ場合は自動計算不能のため，発生する粒子の運動量方向を与える。
-  /G4M/Beam/SpatialExpanseX  <ExpanseX:d>  <unit:d>
-  /G4M/Beam/SpatialExpanseY  <ExpanseY:d>  <unit:d>
-  　Expanse X, Expanse Y:  角度の単位で値をガウス分布の標準偏差値で与える。
-   Default unit:  mrad
-
- ビームパラメタの設定をASCIIファイルから読み込む。
- /G4M/Beam/file　　<filename:s>
- 　ファイル形式は， G4MBeamGunと同様である。加えてG4MFocusGunに特有な設定は，コマンドで設定しなければならない。
-
-5) FocusGunEdist
- 　G4MFocusGunの機能に加えて, G4MFocusGunEdistでは，ビームのエネルギー分布を設定することが可能である。つまり，G4MFocusGunのエネルギー設定以外のコマンドが利用できる。更に，次に示すように，エネルギーと強度を入力して分布を設定することができる。
-
- エネルギー分布の設定をクリアする
- /G4M/Beam/clear
-
-エネルギー値とその強度を設定する
-/G4M/Beam/addEnergy　 <Energy(MeV unit):d>  <Intensity:d>
- Energy:  エネルギー値
-  Intensity:  強度
-
-*エネルギーは MeV単位で与えること。
-このコマンドを順次，エネルギーを変えて入力してエネルギーと強度分布のデータを設定する。
- 与えたエネルギーの中間値は，線形補間される。あらかじめ，線形補間を行った分布を用意することができる。下のコマンドは，補間するデータ点の数を指定する。
- /G4M/Beam/sample　　<n:i>
-   n:  Number of points
-   6) FanBeam
-     G4ParticleGunを利用して実装されており，G4ParticleGunのコマンドが利用可能である。加えて，扇型の方向に粒子を発生する機能がある。
-
-(0, r, 0)を生成点とすることを前提として，そのY座標rを設定する。
-/G4M/FanBeam/radius　　<r:d>  <unit:s>
- r:  生成点のY座標
-  unit:  mm etc.
-
- 扇形の空間分布関数を指定する。
- /G4M/FanBeam/gaussSpot　　<flag:b>
-   flag:  true	 ガウス分布
-   false   一様分布
-
- ビーム発生のZ座標を設定する。（未実装）
- /G4M/FanBeam/z　　<z:d> <unit:s>
-
-  生成する扇型の角度を設定する。（未実装）
-  /G4M/FanBeam/theta　　<theta:d>  <unit:s>
-
-　生成する扇型の角度を設定する。
-/G4M/FanBeam/phi  <pho:d>  <unit:s>
- phi:  角度値。ガウス分布の標準偏差。
-  unit:  deg, rad etc.
-
-  エネルギー揺らぎを設定する。
-  /G4M/Beam/energyfluc  <energyflac:d>  <unit:s>
-   energyflac:  エネルギー揺らぎ値をガウス分布の標準偏差で与える
-    unit:  MeV
-
- 
-7) IAEAphsp
-  IAEAphsp形式のデータの読み込み，初期粒子を発生するためのコマンド。
-
-IAEA phspのためのメンバ変数を初期化する
-/G4M/IAEAphsp/init
-
-  読み込むIAEA phspのデータファイルを設定する。
-  /G4M/IAEAphsp/file　　<fileBase:s>  <fileStopID:s>
-  　fileBase:  　Base file name
-  　fileStopID:  ID of the file name
-    fileStopIDは，同じRunで異なるZ座標で記録されたデータの場合の識別子である。
-
-  IAEA phsp データの読み込みを終了してファイルを閉じる。
-  /G4M/IAEAphsp/close
-
-  デバッグレベルを設定する。
-  /G4M/IAEAphsp/verbose　　<v:i>
-  v: debug level
-
-  リサイクルフラグ。１つの粒子データを指定した回数再利用する
-  /G4M/IAEAphsp/recycle  <nrecycle:i>
-  nrecycle: number of recycle times.
-
-  並列処理の場合に, データファイルを複数の論理的なセグメントに分割して，それぞれの並列処理に割り当てる。
-  /G4M/IAEAphsp/totalParaRun　　<npara:i>
-   npara:  Parallel runの個数を設定する　
-
-  並列処理でのRun識別番号を設定する。
-  /G4M/IAEAphsp/paraRunId <runid:i>
-   runid:  Runの識別番号
-
-ヒストリ情報を含まないデータの場合、１イベントで実行する粒子数を指定する。
-/G4M/IAEAphsp/nparticlesPerEvent <np:i>
- np:  Number of particles simulated in one event.
-  (Number of beamOn need to be estimated as Number of total particles in header file divided by np.)
-  　
-    記録された情報の発生座標を変更する。(mm)
-    /G4M/IAEAphsp/translate　<x:d>  <y:d>  <z:d>
-     x, y, z:  発生点の移動量
-      単位は，mmで固定。
-
-回転の座標変換を行うときの，各座標軸周りでの回転の順番を設定する。
-/G4M/IAEAphsp/rotateOrder　　<iorder:i>
-iorder:  123 (X->Y->Z),  213 (Y->X->Z)
-
-  回転角度を設定する。
-  /G4M/IAEAphsp/rotateX　　<angle:d>  <unit>
-  /G4M/IAEAphsp/rotateY　　<angle:d>  <unit>
-  /G4M/IAEAphsp/rotateZ　　<angle:d>  <unit>
-   angle:  角度
-    unit:  mrad etc.
-
-  等方的な放射線発生のデータにおいて，アイソセンターの位置を設定する。
-  /G4M/IAEAphsp/isoPos　<x:d>  <y:d>  <z:d>  <unit:s>
-   x, y, z:  アイソセンターの座標
-    unit:  mm etc.
-
- ガントリー角度とその回転軸を設定する。
- /G4M/IAEAphsp/gantryAxis　　<xdir:d> <ydir:d>  <zdir:d>
- /G4M/IAEAphsp/gantryAngle　　<angle>  <unit:s>
- xdir, ydir, zdir:  回転軸
- angle:  回転角
- unit:  deg etc.
- トリートメントヘッドの回転とその回転軸を設定する。
- /G4M/IAEAphsp/headAxis　<xdir:d> <ydir:d> <zdir:d>
- /G4M/IAEAphsp/headAngle　　<angle:d> <unit:s>
- xdir, ydir, zdir:  回転軸
- angle:  回転角
- unit:  deg etc.
-
-8) ScanBeam
-　スポットスキャニングを行う。３つのASCIIファイル入力が必要である。
- デバッグモードの設定
- /G4M/ScanBeam/verbose  {v:i}
-  v:  デバッグフラグ
-
-Scanning Magnetの登録と有効化
-事前にScanning Magnetがビームモジュールとして登録済みである必要がある。
-/G4M/ScanBeam/scanMagXY   {mnameX:s}   {mnameY:s}
- mnameX, mnameY:  ビームモジュール名
-
-ビームエネルギーとその揺らぎ，そしてスポットサイズを記載したASCIIファイル（eidファイルと呼ぶ）を読み込み，設定を行うためのコマンド。
-/G4M/ScanBeam/eidFile   {filename:s}
- eidFileName:  eidファイル名
-
- eidファイルの書式
- data/Sample/G4MScanBeam/EIDSample.dat	Description
- 3
- 0 100.  0.  0.  0.
- 1 200.  0.  0.  0.
- 2 250.  0.  0.  0.	Number of lines (e.g. number of beams)
- ID  E(MeV)  dE(MeV) SigX(mm)  SigY(mm)
- *ID must be given in Sequential.
-
-
-eidファイルを与えるもうひとつのコマンド。
-こちらのコマンドの場合には，エネルギー，エネルギー揺らぎ，スポットに加えて，初期角度を各BeamID毎に定義したASCIIデータファイルを読み込む。
-/G4M/ScanBeam/eidFile2   {filename:s}
- eid2FileName:  eid2ファイル名
-
-eidファイルの書式:
-data/Sample/G4MScanBeam/EIDSample2.dat	Description
-3
-0 100.  0.  0.  0.　0. 0.
-1 200.  0.  0.  0. 0. 0.
-2 250.  0.  0.  0. 0. 0.	Number of lines (e.g. number of beams)
-ID  E(MeV)  dE(MeV) SigX(mm)  SigY(mm) AngSigX(mrad) AngSigY(mrad)
-*ID must be given in Sequential.
-
-スポット座標と線量強度を与えるASCIIファイル(scanファイル)を指定する。スポット座標は，アイソセンター面でのx,y座標である。
-/G4M/ScanBeam/scanFile   {filename:s}
- scanFileName:  scanファイル名
-
-　scanファイルの書式
-data/Sample/G4MScanBeam/ScanSample.dat	Description
-5
-0  -100.  -30.  5.
-1     0.   30.  2.
-1    50.  -50.  2.
-2  -100. -100.  1.
-2    10. -100.  2.	Number of lines (e.g. Number of spots)
-ID  x(mm)  y(mm)  Gy
-
-
-異なるエネルギーでも，同じピーク線量値とするように初期粒子数を調節するための係数(weight)を記載したASCIIファイルを指定する。
-/G4M/ScanBeam/weightFile   {filename:s}
- weightFileName:  weightファイル名
-  weightファイルの書式
-  data/Sample/G4MScanBeam/WeightSample.dat	Description
-  3
-  90.    1.
-  200.   1.
-  300.   1.	Number of lines
-  E(MeV)  Weight
-  異なるエネルギーだが，同じ粒子数の計算を行ったときに得られた線量の相対値を表す。
-
-設定を表示する。
-/G4M/ScanBeam/show  {type:s}
-type: eid,  spot,  weight
-(*) 個々のスポットの粒子発生数を表す確率は/run/beamOnが実行されたときに，自動的に計算される。
-
-　デバッグの目的で，/run/beamOnの前に粒子発生数を計算する。
-/G4M/ScanBeam/calcProb
-
-9) EvtGun
-   G4MDiskDumperで保存されたトラック情報から粒子を発生する。beamOnで指定するイベント数は、トラック情報を保存した時と同じ数にすること。
-   トラック情報のファイルを開く。
-   /G4M/EvtIF/open    <filename:s>　<format:s>
-   format:  ASCII (defaut) or BINARY
-
-トラック情報のファイルを閉じる
-/G4M/EvtIF/close
-デバッグフラグ
-/G4M/EvtIF/verbose  <level:i>
-出力フォーマット
-/G4M/EvtIF/format  <ASCII or  Binary:s>
-
-10) Root3d
-   CERN ROOTのTH3形式で保存された３次元座標分布に従って粒子を発生する。粒子の位置座標が適用され、運動エネルギーはゼロに設定される。放射性同位体の発生分布を与えて崩壊後のシミュレーションを行うことを想定している。この機能を利用するためには、cmakeの際に -DPRIMROOT=ON を指定する必要がある。
-   デバッグフラグ
-   /G4M/Root3d/versbose    <lvl:i>　
-   ファイルとTH3の指定
-   /G4M/Root3d/file   <RootFileName:s>  <TH3Name:s>
-   ROOTのファイル名と記録されているTH3型３次元ヒストグラム名を指定する。ここで、TH3型ヒストグラムの各軸のスケールはミリメートルであるとする。また、粒子生成の際には、TH3::Random3を利用しているため、ビン内の座標値は一様乱数で決定される。頻度は自動的に規格化されて計算される。TH3の作成は、サンプルROOTマクロTH3OSample.Cが添付されているので参照のこと。
-   粒子を設定する
-   /G4M/Root3d/particle  <particleName:s>     // デバッグ用である
-   /G4M/Root3d/ion   <Z:i>  <A:i>  <Charge:i>
-   1イベントに発生する粒子数
-   /g4M/Root3d/nparticlesPerEvent   <n:i>
-   発生点の座標を移動する場合のオフセット値（この値が座標に足し算される）
-   /g4M/Root3d/vtxOffset  <ox:d>  <oy:d>  <oz:d>  <unit:s>
-
-(補足)
-　Geant4-v11.2より、デフォルト設定では、放射性同位体の崩壊時刻が長いものは発生させない設定になっている。これまで通り、崩壊時刻によらず壊変させたい場合には、次のコマンドを用いる。
-/process/had/rdm/thresholdForVeryLongDecayTime 　1.0e+60 year
-
- 
-II) Physics List
- 物理コンストラクタを登録する
- /My/physics/register　<physName:s>
- physName:  物理コンストラクタの名称
-
-指定された領域にsteplimiterを設定する
-/My/physics/stepLimitForRegion　<Region:s>  <stepsize:d>  <unit>
-Region:  リージョン名
-stepsize:  ステップリミットを行うステップ長
-default unit : mm
-
- パラレルワールド用のプロセスを定義する
- /My/physics/pwProcess　<pwname:s> <layered:b> <ProcessName:s> <verbose:d>
-  pwname:  パラレルワールド名
-   layered:   true (Layered geometry )
-    ProcessName: このプロセスに付けるプロセス名
-
- 
-III) System Geometry
-システムを選択する
-/G4M/System　　<system_name:s>
-Systemname:  “DynamicPort”とすること
-
-（システムを切り替える）
-/G4M/ChangeSystem　<system_name:s>
-
- PTS toolkit versionを表示する
- /G4M/PTS/TKVersion　<ofilename:s>
- 　　default ofilename:  stdout
-
-Gesnt4 versionを表示する
-/G4M/PTS/G4Version　<ofilename:s>
-　　default ofilename:  stdout
-
-PTS application version numberを表示する
-/G4M/PTS/AppVersion　<ofilename:s>
-　　default ofilename:  stdout
-
- Run summaryを表示する (未実装)
- /G4M/PTS/RunSummary　<ofilename:s>
- 　　default ofilename:  stdout
-
- 
-IV) Material Definition
-Elementデータファイルのパスを指定する
-/G4M/Element/path　　<path:s>
-
-物質データファイルのパスを指定する
-/G4M/Material/path　　<path:s>
-
-NIST databaseで定義されているElementを利用する
-/G4M/Element/useG4Element　　<flag:b>
- flag:  true (NISTのElementを用いる)
- 　　   false (ユーザー定義のElementを用いる)
-
-物質データファイルを読み込んで物質を作成する
-/G4M/Material/create  <ifilename:s>
- ifilename:  物質のパラメタファイル
-
-物質情報を表示する
-/G4M/Material/property  <matname:s>
- matname:  マテリアル名
-
-マテリアルファイル例
-　1)エレメントによる構成例：　　./data/common/material/H_2O.dat
-  2)物質による構成例: ./data/common/material/G10.dat
-
- 
-V) Beam module Registration
-ビーム機器の登録
-/Dynamic/Module/register　<mname:s>  <mtype:s>  <param:s>
-                         <x:d>  <y:d>  <z:d> <unit>
-			                          <rx:d>  <ry:d> <rz:d> <unit>
-						  mtype:  ビームモジュールのクラス名
-						   para:  形状データファイル名
-						    x, y, z: 配置座標と単位
-						     rx, ry, rz, unit:  回転角と単位
-
- ビーム機器の登録解除
- /Dynamic/Module/unregister <mname:s>
-
- 水ファントムの登録/解除
- /Dynamic/Module/WaterPhantom/register
+```
+**特に以下の３つの引数名については、以降では説明なく用いている場合があります。**
+
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s    |  Beam module name | 
+| ifilename:s | Input file name |  
+| ofilename:s  |Output file name  |
+| unit:s       |Unit  |
+
+---
+## Geant4/PTSIM version
+### Geant4のversionを表示する
+```
+/G4M/PTS/G4Version　{ofilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ofilename:s    |  出力ファイル名。標準出力は**stdout**を指定する。 |
+
+### PTStoolkitのversionを表示する
+```
+ /G4M/PTS/TKVersion　{ofilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ofilename:s    |  出力ファイル名。標準出力は**stdout**を指定する。 |
+
+### PTS application version numberを表示する
+```
+/G4M/PTS/AppVersion　{ofilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ofilename:s    |  出力ファイル名。標準出力は**stdout**を指定する。 |
+
+---
+
+## Primary Beam Generator
+Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンドです。
+### 選択コマンド
+```
+/My/PrimaryGenerator/select　　{gname:s}
+```
+
+| 値表記 |　説明 |
+|:---|:---|
+| gname:s    |  Beam generator name. 下記に示す初期粒子発生器のいずれか１つを選択します。|
+
+### Beam Generators
+ - ParticleGun
+ - [General Particle Source, GPS](./PrimGen/GPS.md)
+ - BeamGun
+ - ScanBeam
+ - FocusGun
+ - FocusGunEdist
+ - FanBeam
+ - IAEAphsp
+ - EvtGun
+ - Root3d
+
+---
+
+## Physics List
+物理過程を選択します。PTSIMでは、Geant4が提供する物理コンストラクタ単位で登録を行う仕組みになっています。
+### 登録コマンド
+```
+/My/physics/register　{physName:s}
+```
+
+| 値表記 |　説明 |
+|:---   |:---  |
+| physName:s    | Physics Constructor name |
+
+ {PhysName:s}は、PTSIMのデフォルトで読み込まれるphys.macを参照してください。  
+ 物理カテゴリごとに１つの物理コンストラクタを選択します。
+
+ ### Physics process options
+
+ #### 指定RegionにStepLimitterを設定する
+ ```
+ /My/physics/stepLimitForRegion　{Region:s}  {stepsize:d}  {unit:s}
+ ```
+
+|値表記|説明 |
+|:---|:---|  
+| Region:s    |  Region name |  
+| setpsize:d    |  ステップリミットの最大ステップ長 |  
+| unit:s    |  デフォルト　mm |  
+ 
+ PTSIMでは、各ビームモジュールごとにRegionを自動生成しています。原則的に{Region}と{mname}が同じになります。
+ 
+ #### パラレルワールドプロセスを定義する
+ ```
+ /My/physics/pwProcess　{pwname:s} {layered:b} {ProcessName:s} {verbose:i}
+ ``` 
+| 値表記 |　説明 |
+|:---|:---|
+| pwname:s    |  Parallel World name |
+| layered:b    |  Layered mass geometry用の場合はtrue, スコアのみはfalse |
+| ProcessName:s   |  このプロセスの固有名 |
+| verbose:i    |  verbose level |
+ 
+パラレルワールド {pwname}を別途作成する必要があります。ジオメトリセクションを参照してください。  
+
+#### 手動で物理過程を更新する
+```
+/G4M/Module/physicsModified
+```
+ 
+---
+ ## System Selection
+
+ PTSIMは、粒子線施設のシミュレーション体系を切り替えられるように設計してあります。これは施設特有の実装を、一般的な用途と切り離すためです。  
+ そのため、一般的な利用に際しては、以下の説明の通り、選択するシステム名は**DynamicPort**を選択してください。
+ 
+ ### システムを選択する。
+ ```
+ /G4M/System　　{system_name:s}
+ ```
+
+| 値表記 |　説明 |
+|:---|:---|
+| system_name:s  |  System name, **DynamicPort**を選択する。 |
+
+#### システムを切り替える
+一度選択したシステムを別のシステムに切り替える。
+```
+/G4M/ChangeSystem　{system_name:s}
+```
+
+---
+## Material Definition
+ 物質を定義して作成します。  Geant4 NIST materialを用いる方法のほかに、ユーザ定義の物質を作成することもできます。
+
+ ### Elementデータの指定
+ 　Element(元素)については、一般的にNISTが定義した元素を用いることを推奨します。これには自然混合比の同位体も含まれています。
+
+ #### NIST database定義のElementを利用する
+```
+/G4M/Element/useG4Element　{flag:b}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| flag:b    |  NIST Element = true,  Userdefined = false. |
+
+ #### ユーザ定義のElementデータファイルを利用する
+ ##### Elementデータファイルのパスを指定する 
+ ```
+ /G4M/Element/path　　{path:s}
+ ```
+| 値表記 |　説明 |
+|:---|:---|
+| path:s    |  実行場所からの相対パス. Default: ./data/commom/element |
+
+Elementファイルの書式はこちら。 　
+
+### Materialデータの指定と作成
+　物質(Material)を作成します。
+#### 　物質データファイルのパスを指定する
+ ```
+ /G4M/Material/path　　{path:s}
+ ```
+| 値表記 |　説明 |
+|:--- |:--- |
+| path:s | 実行場所からの相対パス. Default: ./data/commom/material/ |
+ 
+ Materialファイルの書式はこちら。 　
+ 
+ #### 物質を作成する
+  ```
+ /G4M/Material/create  {ifilename:s}
+ ```
+| 値表記 |　説明 |
+ |:--- |:--- |
+ | ifilename:s | 物質のパラメタファイル名、またはNISTの物質名 e.g/ G4_WATER |
+NISTの物質を利用する場合には、パラメタファイル名の代わりに、G4_WATERのように物質名を指定します。  
+例)  /G4M/Material  G4_WATER    
+ユーザ定義の物質パラメタファイルを利用して物質を作成する場合は、データファイル名の拡張子は、.dat とします。作成コマンドでは、ファイル名の拡張子を除いた物質名を指定します。例えば、パラメタファイル名が、Water.datの場合は、Waterを指定します。
+例) /G4M/Material  Water  
+
+ #### 物質情報を表示する
+ ```
+ /G4M/Material/property  {matname:s}
+ ```
+| 値表記 |　説明 |
+|:---|:---|
+| matname:s    |  物質名. 原則、上記の{ifilename}と同じです。 |
+ 
+ #### マテリアルファイル例
+ * エレメントによる構成例：　./data/common/material/H_2O.dat
+ * 物質による構成例: ./data/common/material/G10.dat
+
+ ## Beam Module Registration
+ シミュレーションで利用するビーム機器を登録します。後で登録したビーム機器を実体化してビームラインを構成して行きます。
+
+ ### ビーム機器を登録する
+ ```
+ /Dynamic/Module/register　{mname:s}  {mtype:s}  {param:s} {x:d} {y:d}  {z:d} {lunit:s} {rx:d}  {ry:d} {rz:d} {runit:s}
+ ```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | ビームモジュールにつける固有名 |
+| mtype:s | ビームモジュールのクラス名 |
+| param:s  | 形状データファイルパス　|
+| x:d, y:d, z:d lunit:s|  配置座標(x,y,z)と単位 |
+| rx:d, ry:d, rz:d, runit:s |  回転角と単位. rx->ry->rz順で回転される.|
+
+### ビーム機器の登録を解除する
+```
+ /Dynamic/Module/unregister {mname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s |  ビームモジュール名 |
+
+### スコアリング付きビーム機器の登録
+　水ファントムなどの特別なビーム機器の登録には、専用の登録コマンドが用意されています。
+#### 水ファントムの登録と解除
+```
+ /Dynamic/Module/WaterPhantom/register　　
  /Dynamic/Module/WaterPhantom/unregister
+```
 
-DICOMジオメトリの登録/解除
+#### DICOMジオメトリの登録と解除
+```
 /Dynamic/Module/DICOM/register
 /Dynamic/Module/DICOM/unregister
+```
 
-ワブラー電磁石を有効にする
-/Dynamic/Module/updateEvent/wobbling <wnamex:s> <wnamey:s>  <flag:b>
- wnamex, wnamey:  ビームモジュール名
-  flag:  true=有効，false=無効
+### 動的なビーム機器の設定
 
-回転モジュレータを有効にする
-/Dynamic/Module/updateEvent/rotating <mname:s>  <flag:b>
-flag:  true=有効，false=無効
+#### ワブラー電磁石を有効化する
+```
+/Dynamic/Module/updateEvent/wobbling {wnamex:s} {wnamey:s}  {flag:b}
+```
 
-回転モジュレータ / ワブラー電磁石の更新を，イベント番号毎に順次更新するか乱数による更新を行うか設定する。
-/Dynamic/Module/updateEvent/sequential <flag:b>
-flag:  true=順次，false=乱数
+| 値表記 |　説明 |
+|:---|:---|
+| wnamex:s, wnamey:s | ワブラー電磁石のビームモジュール名 |
+| flag:b | 有効化=true, 無効化=false |
 
-イベントに従う順次更新の場合の，回転モジュレータの初期角度と更新角度を設定
-/Dynamic/Module/updateEvent/rotatingAngle <init:d> <step:d> <unit>
-init:  初期角度
- step:  追加する角度
-  unit:  rad etc.
 
- 
-VI) Beam module Operation
-ビームモジュールの実体化・治療室への配置
-/G4M/Module/install　<mname:s>  <pwname:s>  <layered:b>
-　　pwname:  デフォルト値　none  (マスジオメトリへの配置)
-    layered : デフォルト値　false (Layeredジオメトリではない)
+#### 回転モジュレータ有効化にする
+```
+/Dynamic/Module/updateEvent/rotating {mname:s}  {flag:b}
+```
 
-既にインストールされているビームモジュールの場合には，引数の設定を基づいて再インストールする。インストールされていないビームモジュールであれば、インストールは行わない。
-このコマンドは，mass worldにインストールされたモジュールを，パラレルワールドに再配置するために用意されている。
-/G4M/Module/installIfExist <mname:s>  <pwName:s>  <layered:b>
-　　pwname:  デフォルト値　none  (マスジオメトリへの配置)
-    layered : デフォルト値　false (Layeredジオメトリではない)
+| 値表記 |　説明 |
+|:---|:---|
+| mnamex:s | 回転対称のビームモジュール名 |
+| flag:b | 有効化=true, 無効化=false |
 
-  既にインストールされているビームモジュールがあるとき、引数の設定に基づいてコピーを作成してインストールする。
-  　このコマンドは、ビームモジュールのエンベロープにコピー番号を付けて複数配置するために用意されている。
-  /G4M/Module/cloneIfExist  <mnameFrom:s> <mnameTo:s> <copyid:i>
-                                 <x:d> <y:d> <z:d> <unit:s>
-				                                 <rx:d> <ry:d> <rz:d> <unit:s>
-								   mnameFrom: コピー元の実体化されているビームモジュール名
-								   　mnameTo:   コピー先のビームモジュール名
-								   　copyid:    コピー先のビームモジュールのエンベロープのコピー番号
-								   　x, y, z, unit: コピー先の座標位置
-								   　rx.ry.rz unit: コピー先での回転
+#### ワブラー電磁石や回転モジュレータの更新モード
+　設定値の更新をイベント番号に従って順次更新する方法と、乱数によって更新する方法が選択可能です。
+```
+/Dynamic/Module/updateEvent/sequential {flag:b}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| flag:b | sequential = true, random = false |
 
-ビームモジュールの実体削除（ジオメトリの削除）
-/G4M/Module/uninstall　<mname:s>
+#### 回転モジュレータの初期角度と更新角度を設定
+```
+/Dynamic/Module/updateEvent/rotatingAngle {init:d} {step:d} {unit}
+```
 
-登録されたビーム機器すべてのインストール/アンインストール
+| 値表記 |　説明 |
+|:---|:---|
+| init:d | 初期角度 |
+| step:d  | 追加する角度 |
+| unit:s   |  rad, degree |
+
+## Beam Module Installation
+ 登録されたビームモジュールの実体化・治療室への配置に関するコマンドです。
+
+### ビームモジュールの実体化
+```
+/G4M/Module/install　{mname:s}  {pwname:s}  {layered:b}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | ビームモジュール名 |
+| pwname:s | パラレルワールド名。デフォルト値 **none** (マスジオメトリに配置する場合) |
+| layered:b  | Layered mass geometryである場合は**true**. デフォルト値は**false** |
+
+### ビームモジュールを再度実体化
+　既にインストールされているビームモジュールの場合には，引数の設定を基づいて再インストールします。インストールされていないビームモジュールの場合には、インストールは行われません。  
+  このコマンドは，mass worldにインストールされたビームモジュールを，パラレルワールドに再配置するために用意されます。
+  ```
+  /G4M/Module/installIfExist {mname:s}  {pwName:s}  {layered:b}
+  ```
+
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | ビームモジュール名 |
+| pwname:s | パラレルワールド名。デフォルト値 **none** (マスジオメトリに配置する場合) |
+| layered:b  | Layered mass geometryである場合は**true**. デフォルト値は**false** |
+
+### ビームモジュールの複製を配置す
+  既にインストールされているビームモジュールがあるとき、引数の設定に基づいて論理ボリュームのコピーを作成してインストールします。
+  　このコマンドは、ビームモジュールのエンベロープにコピー番号を付けて複数配置するために用意されます。
+```
+/G4M/Module/cloneIfExist  {mnameFrom:s} {mnameTo:s} {copyid:i} {x:d} {y:d} {z:d} {unit:s} {rx:d} {ry:d} {rz:d} {unit:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mnameFrom:s |  コピー元の実体化されているビームモジュール名 |
+| mnameTo:s |   　コピーで複製されたビームモジュールにつけられる固有名 |
+| copyid:i |   コピー先のビームモジュールのエンベロープのコピー番号 |
+| x:d, y:d, z:d, unit:s |  コピー先の座標と単位　|
+| rx:d, ry:d, rz:d,  unit:s |  コピー先での回転と単位 |
+
+### ビームモジュールの実体を削除
+```
+/G4M/Module/uninstall　{mname:s}
+```
+
+### 全ビーム機器をインストール/アンインストール
+登録済みのビームモジュール全てが対象に実体化や実体削除を行います。
+```
 /G4M/Module/installAll
 /G4M/Module/uninstallAll
+```
 
-水ファントムとDICOMを除いた登録されたビーム機器すべてのインストール/アンインストール
+### 全ビームライン機器のインストール/アンインストール
+水ファントムとDICOMを除くビームモジュールの実体化や実体削除を行います。
+```
 /G4M/Module/installBM
 /G4M/Module/uninstallBM
+```
 
-ビーム機器を再構築する（ジオメトリが存在する場合、まずジオメトリを削除して作り直す。ジオメトリが存在しない場合、カタログパラメタだけを更新する）
-/G4M/Module/rebuild　　<mname:s>
+### ビームモジュールの再構築
+ビーム機器が既に実体化されている場合は、実体を削除して再構築し直します。ビーム機器のパラメタを更新した後の適用に用いられます。ビーム機器が実体化されていない場合は、ビーム機器のカタログパラメタに沿って、パラメタの更新のみが行われます。
+```
+/G4M/Module/rebuild　　{mname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s |  ビームモジュール名 |
 
-ビーム機器の一覧と状態を表示する
-/G4M/Module/list  <lvl:i>  <ofilename:s>
-  lvl:  1 (default)
-    ofilename: stdout 又は，ファイル名
+### 登録ビームモジュールの状態を一覧表示
+```
+/G4M/Module/list  {lvl:i}  {ofilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| lvl:i | 表示レベル　|
+| ofilename:s | 出力ファイル名。デフォルト stdout (標準出力) |
 
-World Volumeに配置されたビーム機器の一覧を表示する
+### 実体化されているビーム機器の一覧を表示
+```
 /G4M/Module/listInWorld
+```
 
-dump commandでの表示モードを設定する
-/G4M/Module/lang   <type:i>
-   Default type: 0  (Comments in Japanese)
-               type: 1  (Comments in English)
-	                   type: 10 (dcmodify command shell script)
+### ビームモジュールを選択して操作する
+ビームモジュールを選択して、選択した特定のビームモジュールに対して操作するコマンドを説明します。
+#### ビーム機器を選択する
+```
+/G4M/Module/select  {mname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s |  ビームモジュール名 |
 
-ビーム機器を選択するためのコマンド。
-/G4M/Module/select  <mname:s>
- 選択されたビームモジュールに対して，次に紹介するコマンドが適用される。
+ 選択されたビームモジュールに対して，次に紹介するコマンドが利用可能となる。
 
-ビーム機器情報を表示する
+ #### ビーム機器情報の情報表示
+```
+/G4M/Module/lang   {type:i}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| type:i |  表示タイプ。機器によって表示内容は異なる。 <br> DICOMモジュールの例 <br> Default=0 Comments in Japanese, <br> type=1 Comments in English, <br> type=10 dcmodify command shell script. |
+
+#### ビーム機器情報の表示と保存
+```
 /G4M/Module/dump
-/G4M/Module/dumpToFile   <ofilename:s>
-ofilename:  stdout またはファイル名
-
-選択されたビーム機器の形式パラメタを更新する
-/G4M/Module/typeid　　　<ifilename:s>
- ifilename:  形状ファイル
-
-ビーム機器の中心で位置設定をする
-/G4M/Module/translate  <X:d>  <Y:d>  <Z:d>  <unit>
-X, Y, Z:  x, y, z座標
-default unit: mm
-
-ビーム機器の下流z面で位置設定する
-/G4M/Module/downEdgeZ   <z:d>  <unit>
-  z:  z座標
-  unit: mm etc.
-
-ビーム機器の上流z面で位置設定する
-/G4M/Module/upEdgeZ   <z:d>  <unit>
-  z:  z座標
-  unit: mm etc.
-
-ビーム機器のX軸、Y軸、Z軸周りの回転角を指定する
-/G4M/Module/rotate  <Rx:d>  <Ry:d>  <Rz:d>  <unit>
-Rx, Ry, Rz:  回転角度
-default unit :  deg.
-
-DICOMジオメトリの下流側に指定したモジュールを取り付ける。
-このコマンドは、カウチジオメトリをDICOMジオメトリに取り付けるためのコマンドとして用いられる。
-/G4M/Module/attachZ　　<mname:s>
-
-選択されたビーム機器でのデバックフラグ
-/G4M/Module/verbose  <lvl:i>
- lvl:  デバッグフラグ
-
-ビーム機器のLogical Volume名の一覧を表示する。
-/G4M/Module/dumpLV <mname:s>
- 論理ボリュームごとに順序番号(lvid)が付けられて表示される。
-
-Logical Volume名とモジュール内での順序番号を指定して、論理ボリュームを選択する。
-/G4M/Module/selectLV　 <mname:s>   <lvid:i>
-lvid:　論理ボリュームの順序番号。dumpLVコマンドで表示される。
-
-*WaterPhantom、CylinderPhantom、 DICOM、PCTTubeDetector, PCTBoxDetectorジオメトリでは、SDは自動的に取り付けられている。下記のコマンドcreateSDやattachSDは、それら以外のジオメトリでのスコアリングを想定して用意されている。
-
-SensitiveDetector(DetectorSD)を作成する。
-/G4M/Module/createSD <sdname:s> <colname:s> <edepFlag:b>
-                          <depx:i> <depy:i> <depz:i> <depm:i> <deps:i>
-			   sdname:  SD name
-			     colname: collection name
-			        edepFlag: trueのときは付与エネルギーがある場合のみ記録する。ガンマなどは、反応時のみ記録される。
-				　　depx, depy, depz, depm, deps: ジオメトリ識別番号を取得する階層
-
-selectLVコマンドで選択中の論理ボリュームに、SensitiveDetectorを取り付ける。
-/G4M/Module/attachSD  <sdname:s>
-selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り付ける。
-
-/G4M/Module/attachTrgID    {tirgid:i}  {sdname:s}
-trigid: 選択中の論理ボリュームに割り振るトリガー識別番号
-sdname:  TriggerSDの固有名(デフォルト”TreiggerSD”)
-SD名での登録の有無でTriggerSDの存在を識別し、未作成の場合には自動的に生成される。原則としてTriggerSDは、１つしか作ってはいけないので注意。
-
-selectLVコマンドで選択中の論理ボリュームの物質を変更する。
-/G4M/Module/setMaterial    {matname:s}
-matname: 選択中の論理ボリュームに割り当てる物質名。既に定義されている必要がある。パラレルワールドでのレイヤジオメトリでは、”null”または”NULL”で物質をヌルに設定することができる。
-
-物理に関する更新を手動で行う。
-/G4M/Module/physicsModified
-
-GDMLの利用
-　GDMLジオメトリを利用する場合には、XML用のライブラリ(xercesなど)がインストールされており、Geant4ライブライも-DGEANT4_USE_GDML=ONのオプションの元でコンパイルされていなければならない。更に、GDMLPTSToolkitならびにDynamicPortの双方を-DUSEGDMLのオプションをつけてビルドしていなければならない。
-
-ビームモジュールをGDML形式のジオメトリファイルに書き出す。ファイル名はモジュール名となる。
-/Dynamic/Module/gdml/write  {mname:s}  {bSD:b}  {bRefPointer:b}
-                                 {filepath:s} {schemaLocation:s}
-				 bSD: SDをGDMLに記載する。 (Default=true)
-				 bRefPointer: 各部品に重複を避けるハッシュコードをつける。(Default=true)
-				 filepath: GDMLの出力ファイルパス (Default = ./ )
-				 shemaLocation: (Default = ./data/schema/gdml.xsd)
-
-GDML形式のジオメトリファイルからビームモジュールを構築する。
-G4MBMGdmlビームモジュールとして登録する。
-/Dynamic/Module/register  {mname:s}  G4MBMGdml  {gdmlFile:s}
-                               {x:d} {y:d} {z:d} {unit:s}
-			                                      {rx:d} {ry:d} {rz:d} {unit:s}
-							      gdmlFile: GDML形式のジオメトリファイル
-							      x,y,z, unit:  中心位置とその単位
-							      rx,ry,rz, unit: 回転角とその単位
-
-GDMLジオメトリ構築時に、GDMLファイルに記載されている物質定義をスキップし、既存の物質定義を適用する。
-/Dynamic/Module/gdml/reader/skipMaterials   {flag:b}
-flag:  true=スキップして無視する,  false=読み込んで物質を作成する。
-
-ジオメトリスキャン
-ジオメトリのボクセル化/ParaView可視化用VTK Legacy formatでの出力する。
-指定するビームモジュールまたは、指定する空間領域を分割して、各点の質量密度を取得してボクセルジオメトリデータとして出力する。出力データ形式は、VTK Legacy formatである。
-
-ビームモジュール名を指定して空間領域をボクセルデータで出力する。
-/Dynamic/Module/geomScan   {mname:s}  {nx:i} {ny:i} {nz:i}
-                                {binaryFlag:b}
-				nx, ny, nz: 分割数
-				binaryFlag: 出力データ型（Default = false, ASCII形式）
-				出力ファイルは、mname.vtk
-
-空間領域を指定してボクセル化する場合
-(a)空間領域を指定する。
-/Dynamic/GeomScan/setVolume  {nx:i} {xlow:d} {xup:d}
-                                   {ny:i} {ylow:d}  {yup:d}
-				                                      {nz:i} {zlow:d} {zup:d}
-								                                         {unit:s}
-													 nx, ny, nz:  分割数
-													 xlow, ylow, zlow: 座標値
-													 xup, yup, zup: 座標値
-													 unit: 座標値の単位
-													 (b)設定した空間領域をスキャンしてファイル出力する。
-													 /Dynamic/GeomScan/voxelScan   {filename:s}
-													 {binaryFlag:b}
-													 {byteswap:b}
-													 filename:  出力ファイル名
-													 binaryFlag: default=false
-													 byteswap:   default=false
-
- 
-VII) 特殊機能を持つビーム機器
-
-1)G4MBoxField, G4DiskField
-空間磁場を設定するためのモジュールとなっており、サイズはG4MBoxやG4MDiskと同じ方法で設定する。
-磁場設定コマンド
-以下<module_name>は、空間磁場のビームモジュール名を表す。
-/G4M/Module/<module_name>/field  <Bx:d> <By:d> <Bz:d>  <unit:s>
-Bx, By, Bz:  磁場値
- unit:  T etc.
-
-2)G4ScanningMagnet
-電磁石のモジュールへの磁場値を設定する。
-＊磁場値は、デフォルトでは電磁石の位置と磁場の長さ、粒子エネルギーと指定されたアイソセンター面での座標から、近似式で計算されて用いられる。近似式の補正を行うために、(1)手動で磁場値を設定するコマンド、(2)磁場計算の近似式に補正係数を設定するコマンドが用意されている。これらのコマンドは、各電磁石において用いる。
-
-(2-1)手動で磁場値を設定するコマンド
-以下<module_name>は、電磁石のビームモジュール名を表す。
-/G4M/Module/<module_name>/fiedvalue  <field_value:d>  <unit:s>
-field_value:  磁場値
- unit:  T etc.
-
-アイソセンターから電磁石モジュールまでの距離を設定する。この距離がスキャニングのための磁場値を計算する際に用いられる。
-/G4M/Module/<module_name>/distance  <dist:d>  <unit:s>
- dist: 距離
-  unit:  m etc.
-
-次の2つのコマンドで、スポットの位置とビームの運動エネルギーの入力データ点を手動で指定する
-アイソセンター面でのスポット位置を与える
-/G4M/Module/<module_name>/putXFieldMap <idx:i>  <xval:d> <unit:s>
-idx:  インデックス番号
-xval:  スポットの位置（座標）
-unit:  mm etc.
-
-ビームの運動エネルギーを与える
-/G4M/Module/<module_name>/putYFieldMap <idy:i>  <yval:d> <unit:s>
-idy:  インデックス番号
-yval:  ビームの運動エネルギー
-unit:  MeV etc.
-
-idx, idyで指定したスポット位置とビーム運動エネルギーでの磁場値を指定する
-/G4M/Module/<module_name>/putVaueFieldMap <idx:i> <idy:i> <value:d> <unit:s>
-idx:  スポット位置のインデックス番号
-idy:  ビームの運動エネルギーのインデックス番号
-value:  磁場値
-unit:  T etc.
-
-磁場の極性を設定する。
-/G4M/Module/<module_name>/sign  <sign:i>
- sign:  +1 又は -1
-
-アイソセンター面でのスポットの位置とビームの運動エネルギーで関連付けされる磁場値の表を作成する
-/G4M/Module/<module_name>/createFieldMap  <interpolation:b>
-interpolation:  データ間を補間（true）
-
-磁場値の対応表を削除する
-/G4M/Module/<module_name>/deleteFieldMap
-
-磁場値をASCIIファイルに保存する
-/G4M/Module/<module_name>/storeFieldMap  <file_name:s>
-file_name:  出力ファイル名
-
-ASCIIファイルから磁場値の表を読み込む
-/G4M/Module/<module_name>/retrieveFieldMap  <file_name:s>
-
-(2-2)磁場計算の近似式に補正係数を設定するコマンド
-磁場の補正係数表のスポット位置を与える
-/G4M/Module/<module_name>/putXFieldCoeff <idx:i>  <xval:d> <unit:s>
-idx:  インデックス番号,　　xval:  スポット位置
-unit:  mm etc.
-
-磁場補正係数表のビームの運動エネルギー値を与える
-/G4M/Module/<module_name>/putYFieldCoeff <idy:i>  <yval:d> <unit:s>
-idy:  インデックス番号
-yval:  ビームの運動エネルギー
-unit:  MeV etc.
-
-磁場補正係数表のidx, idyに対応する補正係数を与える
-/G4M/Module/<module_name>/putVaueFieldCoeff <idx:i> <idy:i> <value:d>
-idx:  スポット位置のインデックス番号
-idy:  ビームの運動エネルギーのインデックス番号
-value:  補正係数値
-
-スポット位置とビームの運動エネルギーに対応する磁場値への補正係数表を作成する
-/G4M/Module/<module_name>/createFieldCoeff  <interpolation:b>
-interpolation:  true 補間
-
-磁場値の補正係数表を削除する
-/G4M/Module/<module_name>/deleteFieldCoeff
-
-
-ASCIIファイルに磁場補正係数表を保存する
-/G4M/Module/<module_name>/storeFieldCoeff  <file_name:s>
-file_name:  出力ファイル名
-
-ASCIIファイルから磁場補正係数表を読み込む。
-/G4M/Module/<module_name>/retrieveFieldCoeff  <file_name:s>
-file_name:  ファイル名
-
-3)WaterPhantom
- 　WaterPhantomの次に示すコマンド群においては、<module_name>の部分は、ビームモジュール名をWaterPhantomと指定した場合、次のようにPhantomと置き換えたコマンド・パスとなる。一方、ビームモジュール登録時に、異なるビームモジュール名を付けた場合には、登録時のビームモジュール名が使われる。(104-002-000以降)
- 　例）　モジュール名　WaterPhantomの場合
- 　　　　/G4M/Module/Phantom/size  ....
-   例）　モジュール名　WPの場合
-   　　　　/G4M/Module/WP/size  ....
-
-水ファントムのハーフサイズを指定する
-/G4M/Module/<module_name>/size　 <dX:d>  <dY:d> <dZ:d> <unit>
-　　dX, dY, dZ:  ハーフサイズ
-default unit : mm
-
-水ファントム内のスコアリング領域のハーフサイズを指定する
-/G4M/Module/<module_name>/sdsize <dxSD:d> <dySD:d> <dzSD:d> <unit>
-　　dxSD, dySD, dzSD:  ハーフサイズ
-default unit : mm
-
-水ファントム内のスコアリング領域の配置を設定する
-/G4M/Module/<module_name>/sdoffset　 <x:d>  <y:d> <z:d> <unit>
-　　x, y, z:  水ファントム内座標での位置
-default unit : mm
-スコアリング領域のセグメント数
-/G4M/Module/<module_name>/dim　 <Nx:d>  <Ny:d> <Nz:d>
- Nx, Ny, Nz:  セグメント数
-
-ファントムの物質を指定する
-/G4M/Module/<module_name>/material  <matname:s>
-matname:  物質名
-
-エネルギー付与を与えたトラックのみスコアリングするか、全てのトラックをスコアするかを設定
-/G4M/Module/<module_name>/edep  <flag:b>
-    flag = true: エネルギー付与があるときのみ記録
-        flag = false: エネルギー付与がなしでの記録
-
-4)CylinderPhantom
- <module_name>部分は、登録時のビームモジュール名が使われる。
- 　例）　モジュール名　CYLの場合
- 　　　　/G4M/Module/SYL/size  ....
-   例）　モジュール名　WPの場合
-   　　　　/G4M/Module/WP/size  ....
-
-ファントムのハーフサイズを指定する
-/G4M/Module/<module_name>/size　 <R:d>  <Phi:d> <dZ:d>
-                                       <R_unit> <Phi_unit> <dZ_unit>
-				       　　R, Phi, dZ:  半径、角度範囲、長さ（dZはハーフサイズ）
-				       default: R_unit (mm), Phi_unit (degree), dZ_unit (mm).
-
-ファントム内のスコアリング領域のハーフサイズを指定する
-/G4M/Module/<module_name>/sdsize <RSD:d> <PhiSD:d> <dzSD:d>
-                                       <R_unit> <Phi_unit> <dZ_unit>
-				       　　RSD, PhiSD, dzSD:
-				       default unit : R_unit (mm), Phi_unit (degree), dZ_unit (mm).
-				       ファントム内のスコアリング領域の配置を設定する
-				       /G4M/Module/<module_name>/sdoffset　 <r:d>  <phi:d> <z:d>
-				                                                  <R_unit> <Phi_unit> <dZ_unit>
-										  　　r, phi, z:  ファントム内座標でのオフセット位置
-										  default unit : R_unit (mm), Phi_unit (degree), dZ_unit (mm).
-
-スコアリング領域のセグメント数
-/G4M/Module/Phantom/dim　 <Nx:d>  <Ny:d> <Nz:d>
- Nr, Nphi, Nz:  セグメント数
-
-ファントムの物質を指定する
-/G4M/Module/<module_name>/material  <matname:s>
-matname:  物質名
-
-エネルギー付与を与えたトラックのみスコアリングするか、全てのトラックをスコアするかを設定
-/G4M/Module/<module_name>/edep  <flag:b>
-    flag = true: エネルギー付与があるときのみ記録
-        flag = false: エネルギー付与がなしでの記録
-
-5)DICOM geometry
-DICOMジオメトリを選択する
-/G4M/DICOM/select   <mname:s>
-mname:   DICOM
-
-/G4M/DICOM/file 　<ifilename:s>
- ifilename:  CT画像ファイルの一覧を記述したASCIIファイル
-
-CT座標系でのアイソセンターを指定する
-/G4M/DICOM/isocente　　<x:d>  <y:d>  <z:d>  <unit>
- x, y, z:  座標値， unit:  mm etc.
-
-CTデータで欠けているスライスを補償する
-/G4M/DICOM/complement　 <flag:b>
- flag:  true（補間する）
-
-ボクセルサイズを設定する
-/G4M/DICOM/mesh  <size:d>  <unit>
-   size:  立方体の辺の長さ
-   default unit :  mm
-
-CTのピクセルをxy方向で結合する。
-G4M/DICOM/mesh/bin  <n:i>
-n:  結合ピクセル数
-
-有効な画像領域を設定し、画像領域外のボクセルの物質を空気に置き換える
-（トリミングの追加コマンドがあれば、設定した外側は削除される。）
-/G4M/DICOM/winXmin　　<min:d>  <unit>
-/G4M/DICOM/winXmax　　<max:d>  <unit>
-/G4M/DICOM/winYmin　　<min:d>  <unit>
-/G4M/DICOM/winYmax　　<max:d>  <unit>
-/G4M/DICOM/winZmin　　<min:d>  <unit>
-/G4M/DICOM/winZmax　　<max:d>  <unit>
-min, max:  最小値、最大値,    unit:  mm etc.
-
-空気のHU値を設定する。このHU値は有効な画像領域が指定されたとき、その領域の外側のHU値として利用される。
-/G4M/DICOM/ctair <ct:double>
- ct:  空気のHU値
-
-有効な画像領域をトリミングするためのフラグを設定する
-/G4M/DICOM/trim　　<flag:b>
- flag:  true　トリミング実効
-
- HU値の範囲を設定する。
- 範囲外のHU値は指定された最小値または最大値に値が丸められる
- /G4M/DICOM/minvalue　　<minvalue:d>
- /G4M/DICOM/maxvalue　　<maxvalue:d>
- minvalue, maxvalue:  最小、最大のHU値
-
-ラベリングアルゴリズムによって患者ジオメトリの輪郭抽出をするためのフラグ
-/G4M/DICOM/label　　<flag:b>
-flag: true　輪郭抽出を実行
-
-輪郭抽出を実行する際のHU値の閾値
-/G4M/DICOM/cutoff　<ct:d>
- ct:  HU値の閾値
-
-HU-密度変換表ファイルを指定する
-/G4M/DICOM/ct2density 　<ifilename:s>
-
-CT2Densityファイルの書式:
-data/Sample/Dicom/CT2Density.dat	Description
-10
--5000   0.0
--1000   1.21e-3
--98     0.93
--97     0.930486
-14      1.03
-23      1.031
-100     1.119900
-101     1.076200
-1600    1.964200
-3000    2.8	Number of lines
-{HU}   {Density in g/cm3}
-...
-
-
-
-HU値の範囲と物質との対応表ファイルを指定する
-/G4M/DICOM/paramtype   <paramtype_ifile:s>
-
-paramtypeファイルの書式:
-data/Sample/Dicom/CT2Water.dat	Description
-1
--2048   4096    H_2O    1.00	Number of lines
-{HU_L}  {HU_H} {Mat} {Corr.}
-
-data/Sample/Dicom/CT2Tissue.dat	Description
-27
--2048	-951	Group01	1.051
--950	-121	Group02	0.977
--120	-83	Group03	0.948
--82	-53	Group04	0.958
--52	-23	Group05	0.968
--22	7	Group06	0.976
-8	18	Group07	0.983
-19	79	Group08	0.993
-80	119	Group09	0.971
-120	199	Group10	1.002
-200	299	Group11	1.005
-300	399	Group12	1.010
-400	499	Group13	1.014
-500	599	Group14	1.018
-600	699	Group15	1.021
-700	799	Group16	1.025
-800	899	Group17	1.030
-900	999	Group18	1.033
-1000	1099	Group19	1.035
-1100	1199	Group20	1.038
-1200	1299	Group21	1.041
-1300	1399	Group22	1.043
-1400	1499	Group23	1.046
-1500	1599	Group24	1.048
-1600	1999	Group25	1.042
-2000	3060	Group26	1.049
-3061	4096	Group27	1.000	Number of lines
-{HU_L} {HU_H} {Mat} {Corr.}
-
-物質を低減するためのHU値のサンプリングを設定する
-/G4M/DICOM/ctsamp  <bit:i>
-bit:  HU値の間引き数
-
-HU値と密度g/cm3の対応表での密度の分解能を決定する
-/G4M/DICOM/densityResol  <reso:d>
- reso:  密度の分解能（例　0.01）
-
-ガントリー角を指定する
-/G4M/DICOM/gantry  <angle:d>  <unit>
-   angle:  ガントリー角度
-   default unit:  deg
-
-カウチ角を指定する
-/G4M/DICOM/couchAngle  <angle:d>  <unit>
-  angle:  角度
-  default unit: deg
-
-CTデータのデータオリエンテーションを設定する
-/G4M/DICOM/dataOrientation　 <type:s>
-    type:  NONE.  HFS,   FSS, HFP, FFP
-
-DICOMジオメトリのためのパラメタを更新する
-/G4M/DICOM/update
-
-
-ボクセルの可視化フラグを設定する
-/G4M/DICOM/vis   <flag:b>
-flag: true = ボクセルが可視化される.  false = エンベロープのみ可視化
-
-物質名を変更する
-/G4M/DICOM/renameMaterial　<str1:s>   <str2:s>
- str1:  元の物質名
-  str2:  新しい物質名
-
-DICOMジオメトリに使用される物質の一覧を表示する
-/G4M/DICOM/showMatList　　<ofilename:s>  <level:i>
-　　　default ofilename:  stdout　出力ファイル名
-      defaule level: 1　出力レベル
-
-RT-Structureの処理を有効化する。
-/G4M/DICOM/rts  <flag:b>
-
-RT-Structureを読む（実験）
-/G4M/DICOM/RTS/file  <filename:s>
-filename:  RT-Structureデータのファイル名を記述したASCIIファイル名
-
-デバック用フラグ
-/G4M/DICOM/RTS/verbose   <level:i>
-lvl:  デバックレベル
-
-それぞれのROI-IDに優先順位を設定する。
-ROI-IDは、PTSIMでのROI領域をラベリングしたときのラベル番号に使われる。
-/G4M/DICOM/RTS/setROIPriority  roi0  roi1 .... roiN
-roi0-roiN:  優先順位低→高（上書き）
-
-
-
-CTでの患者台の削除やデバッグ目的のために指定ROI番号の領域のHU値を指定のHU値に置き換える。rtsコマンドがtrueの場合、このコマンドが適用される。
-/G4M/DICOM/roiCtValReplacer　<ifile:s>
-ifile:  ROI番号と置き換えるHU値の対応表が記述されたファイル
-
-6)DICOM geometry and Couch geometry
-DICOMモジュール直下流にカウチモジュールを配置する手順
-/G4M/Module/install Couch
-/G4M/Module/select  Couch
-/G4M/Module/attachZ DICOM
-
-7)G4MDiskDumper
- このモジュールには、円盤形状でG4MDumpInfoSDが取り付けられており、この形状に入射したトラックの情報を記録する。記録したトラック番号はイベント実行中は保持されており、同じトラック番号のトラックが再度入射しても記録されることはない。
-  トラック情報の記録ファイルは、beamOnの前後でファイルのオープンとクローズを手動で行う必要がある。
-
-　Dumperのトラック情報を記録するファイルをオープンする
-/G4M/DumpInfo/open   <filename:s> <format:s>
-/G4M/DumpInfo/{mname}/open <filename:s> <format:s>
- format:  ASCII,  BINARY, IAEAPHSP.  (Default = ASCII)
-
-  Dumperのトラック情報を記録するファイルをクローズする
-  /G4M/DumpInfo/close
-  /G4M/DumpInfo/{mname}/close
-    出力ファイル形式は、以下の通り。イベント毎にトラック数とそのトラック情報が保存される。トラック情報は、スペースで区切られている。アスキー形式である。
-    　/mmは単位を表す。
-    <Number of track>　(改行)
-    <x/mm>  <y/mm> <z/mm> <time/ns> <mass/MeV> <PDG> <Charge>　<Px/MeV>　<Py/MeV> <Pz/MeV> <Polarx> <Polary> <Polarz>
-    出力フォーマット
-    /g4M/DumpInfo/format  <ASCII or  Binary:s>
-    但し、Binary形式の場合には、Polarは保存していない。
-    VIII) Parallel World geometry (MyDetectorConstruction)
-    パラレルワールドジオメトリ(Parallel world geometry)を作成する
-    /My/DetConstruction/createPW　　<pwname:s>
-
-パラレルワールドの一覧を表示する
-/My/DetConstruction/listPW
-
-シミュレーション空間のデバック出力
+/G4M/Module/dumpToFile   {ofilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+|ofilename:s |  デフォルト=stdout, またはファイル名 |
+
+#### ビーム機器の形式パラメタを更新する
+```
+/G4M/Module/typeid　　　{ifilename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+|ifilename:s|  機器形状パラメタファイル |
+
+#### ビーム機器の中心座標を設定をする
+```
+/G4M/Module/translate  {X:d}  {Y:d}  {Z:d}  {unit}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| X:d, Y:d, Z:d, unit:s |   x, y, z座標と単位 |
+
+#### ビーム機器の下流z面で位置あわせする
+```
+/G4M/Module/downEdgeZ   {z:d}  {unit}
+```
+| 値表記 |　説明 |
+|:---|:---|
+|  z:d, unit:d |  z座標と単位　|
+
+#### ビーム機器の上流z面で位置合わせする
+```
+/G4M/Module/upEdgeZ   {z:d}  {unit}
+```
+| 値表記 |　説明 |
+|:---|:---|
+|  z:d, unit:d |  z座標と単位　|
+
+#### ビーム機器のX軸、Y軸、Z軸周りに回転する
+```
+/G4M/Module/rotate  {Rx:d}  {Ry:d}  {Rz:d}  {unit}
+```
+| 値表記 |　説明 |
+|:---|:---|
+|Rx:d, Ry:d, Rz:d, unit:s |  回転角度と単位 |
+
+#### ビーム機器の-Z面に別のビーム機器を接して配置する
+　このコマンドは、DICOMビームモジュールに、カウチとなるを別のビーム機器を接して配置するために用いられる。
+```
+/G4M/Module/attachZ　　{mname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | 設置させるビーム機器の固有名　|
+
+### デバッグフラグ
+```
+/G4M/Module/verbose  {lvl:i}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| lvl:i | デバッグレベル |
+
+---
+## Special Beam Modules 
+### [WaterPhantom commands](BeamModules/WaterPhantom.md)
+### [DICOM commands](BeamModules/DICOM.md)
+### [DICOM-RT commands](BeamModules/DICOMRT.md)
+### [GDML commands](BeamModules/GDML.md)
+### [VTK commands](BeamModules/VTK.md)
+### [Dumper commands](BeamModules/Dumper.md)
+### [BMField commands](BeamModules/BMField.md)
+
+---
+
+## Mass and Parallel World Geometry
+
+### シミュレーション空間のデバック出力
+```
 /My/DetConstruction/verbose
+```
 
- 
-IX) Event and Tracking (UserAction)
-1)MyEventActForMonitor
-イベント番号を出力するためのファイルを指定する
-/My/<name>/eventMonitor   <nevent:i>   <filename:s>
-nevent:  出力するイベント数のくりかえし数
-filename:  出力ファイル
+### パラレルワールドジオメトリ
+#### パラレルワールドジオメトリを作成する
+```
+/My/DetConstruction/createPW　　{pwname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| pwname:s | パラレルワールドの固有名 |
 
-2)MyTrackingActForKillTrkMessenger
-(<name>は、tracking1, tracking2の２つをデフォルトで用意)
-以下のコマンドにより、粒子生成を抑制するz領域を設定する
-/My/<name>/killZUpStream　　<z:d> <unit>
-  z:  z座標
-  defaule unit: mm
+#### パラレルワールドの一覧を表示する
+```
+/My/DetConstruction/listPW
+```
 
-中性子の生成をしない
-/My/<name>/killNeutral  <flag:b>
-flag:  true 生成しない
+## Scoring and Histgraming 
+ スコアリングにより粒子情報を記録するためには、論理ボリューム(LV)を選択してSD(SensitiveDetector)を有効化し、SDが蓄積している情報からNtupleファイルに出力する設定の２段階からなります。  
+ WatarPhantomやDICOMなどの特別なビーム機器は、スコアリング機能が内包されているので、それぞれのセクションを参照してください。  
+ ここでは一般的なスコアリング設定のコマンドを解説しています。
 
-軽粒子の生成をしない
-/My/<name>/killLepton  <flag:b>
-flag:  true 生成しない
+### Choosing Logical Volume for scoring
 
-二次粒子の生成をしない
-/My/<name>/killSecondary  <flag:b>
-flag:  true 生成しない
+#### ビーム機器のLogical Volume名の一覧表示
+```
+/G4M/Module/dumpLV {mname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | ビームモジュール名 |
 
- 
-X) DICOM-RT (MyDynamicPortRTPSetting )
-現在、DICOM-RTに関するコマンドは、タグの解釈が装置によって異なる場合があるため、完全にはサポートされていません。
+ コマンド出力には、ビームモジュールを構成している論理ボリュームと、そのシリアル番号(lvid)が付けられて表示される。
 
-RT-Planデータファイルを読む
-/My/Dynamic/Module/RTPFile  <filename:s>
-filename:  RT-Planデータ名を記述したASCIIファイル名
+#### ビームモジュール名とモジュール内での順序番号を指定して、論理ボリュームを選択する
+```
+/G4M/Module/selectLV　 {mname:s}   {lvid:i}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| mname:s | ビームモジュール名 |
+| lvid:i | 論理ボリュームのシリアル番号 |
 
-モジュールにRT-Planデータのパラメタを適用する
-/My/Dynamic/Module/RTPApply
+* WaterPhantom、CylinderPhantom、 DICOM、PCTTubeDetector, PCTBoxDetectorジオメトリでは、SDは自動的に取り付けられている。下記のコマンドcreateSDやattachSDは、それら以外のジオメトリでのスコアリングを想定して用意されている。
 
-RT-Planに従って治療室（Room）にビーム機器をインストールする
-/My/Dynamic/Module/RTPInstall
+### SensitiveDetector(DetectorSD)を作成
+```
+/G4M/Module/createSD {sdname:s} {colname:s} {edepFlag:b} {depx:i} {depy:i} {depz:i} {depm:i} {deps:i}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| sdname:s | SD name |
+| colname:s | HistCollection name (Default: HitsCollection )  |
+| edepFlag:b |  true=付与エネルギーがある場合のみ記録する。ガンマ線などでは、反応時のみ記録される。<br> false=ガンマ線などは、反応が起きなくてもLVに入った時点で記録される。|
+| depx:i, depy:i, depz:i, depm:i, deps:i | ジオメトリ識別番号を取得するレイヤ番号 |
 
-ビームIDを選択する
-/My/Dynamic/DICOM/beamid  <id:i>
-id:  ビームID
+### 論理ボリュームにSensitiveDetectorを取付
+#### 論理ボリュームの選択
+```
+/G4M/Module/select  {mname:s}
+```
+####　SensitiveDetectorの取付け
+選択中の論理ボリュームが取り付け対象になります。
+```
+/G4M/Module/attachSD  {sdname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| sdname:s | SD name |
 
-RT-Planに記録されている参照ビーム一覧を表示する
-/My/Dynamic/DICOM/printRefBeam
+### Geometric Trigger
+selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り付ける。TriggerSDは、粒子が論理ボリュームに入るとあらかじめ設定したビットが粒子飛跡情報として記録されます。
+#### TriggerSDの取り付け
+選択中の論理ボリュームが取り付け対象になります。
+```
+/G4M/Module/attachTrgID    {tirgid:i}  {sdname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| trigid:i |  選択中の論理ボリュームに割り振るトリガー識別番号 |
+|sdname:s |  TriggerSDの固有名, デフォルト”TreiggerSD” |
+SD名で登録の有無を確認し、TriggerSDの存在を識別し、未作成の場合には自動的に生成される。原則としてTriggerSDは、１つしか作ってはいけないので注意。
 
-RT-Plan情報（タグや値）を表示する
-/My/Dynamic/DICOM/printRTPInfo
+#### 選択中の論理ボリュームの物質を変更
+```
+/G4M/Module/setMaterial    {matname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| matname:s | 選択中の論理ボリュームに割り当てる作成済みの物質名。<br> 
+パラレルワールドでのレイヤジオメトリでは、”null”または”NULL”で不要なボリュームの物質をnullに設定することができる。|
+* 関連コマンド: /G4M/Module/dump, /G4M/Module/selectLV
 
-参照点での線量値を出力する
-/My/Dynamic/DICOM/printRefDose  <ofilename:s>
-　ofilename:  出力ファイル名
+## Ntuples/Histgrams for output 
 
-デバック用出力
-/My/Dynamic/DICOM/RTPVerbose <lvl:i>
-lvl:  デバックレベル
+### 出力するファイル名を指定
+```
+/My/runaction/dumpfile {filename:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| filename:s | 出力ファイル名（拡張子要）, .root,  .xml,  .csv |
 
-XI) Histograms
-ヒストグラムを出力するファイル名を指定する
-/My/runaction/dumpfile  <filename:s>
-filename:  出力ファイル名（拡張子不要）
+### WaterPhantom/DICOMでのヒストグラムの有効化
+```
+/My/runaction/hist/enable {hname:s} {flag:b} {mname:s}
+```
 
-ヒストグラムを有効にする
-/My/runaction/hist/enable {hname:s} {flag:b}  {mname:s}
-hname:  TTree:  DICOMCT, DICOM
-TH3: JSTEdep, JSTDose
-flag:  true/false　有効化/無効化
- mname: モジュール名(SD名に同じ) 省略可：WaterPhantomまたはDICOMとなる。
-  これは、複数の検出器をインストールした場合に、TH3型のJSTEdep、JSTDoseをどちらの検出器で有効化するかを指定するための引数である。TTree型の場合には、次に示すコマンドでビームモジュールとTTreeの対応付けを行う。
+| 値表記 |　説明 |
+|:---|:---|
+| hname:s |  `TTree`: `DICOMCT`, `DICOM`　<br> `TH3`: `JSTEdep`, `JSTDose` |
+| flag:b |   `true` / `false`（有効化 / 無効化）|
+| mname:s |  モジュール名　<br>  省略可：`WaterPhantom` または `DICOM` <br> `TH3` 型で複数検出器がある場合、対象の検出器を指定 <br>`TTree` 型では、以下のコマンドでビームモジュールとの対応付けを行う |
 
-ヒストグラム(多次元)を作成し、SensitiveDetectorと対応付けする。
-/My/runaction/ntuple/create  {ntname:s} {colname:s}
-  ntname: 多次元ヒストグラム(ntuple)の固有名
-  　colname:  記録するデータ元となるコレクションの名前
-               (SDname/HitsCollection) （補足）SDnameはmnameと同じ。
+### Ntuple作成とSensitive Detectorの対応付け
+```
+/My/runaction/ntuple/create {ntname:s} {colname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ntname:s |  多次元ヒストグラム（ntuple）の固有名 | 
+| colname:s |  記録するデータ元のヒットコレクション名（形式： `SDname/HitsCollection`） |
 
-　(補足)colnameとsdnameの対応表
-BeamModule	colname
-WaterPhantom	WaterPhantom/HitsCollection
-DICOM		DICOM/HitsCollection
-TubeDetector	TubeDetector/HitsCollection
-BoxDetector	BoxDetector/HitsCollection
+> **スコア付きビーム機器の場合の対応表：**
 
-ヒストグラムの設定の状態を表示する
+| BeamModule     | colname                     |
+|----------------|-----------------------------|
+| WaterPhantom   | WaterPhantom/HitsCollection |
+| DICOM          | DICOM/HitsCollection        |
+| TubeDetector   | TubeDetector/HitsCollection |
+| BoxDetector    | BoxDetector/HitsCollection  |
+
+### ヒストグラムの設定状態を表示
+```
 /My/runnaction/histList
+```
 
-
-Hitスコアリング可能な物理量を表示する
+### スコアリング物理量の候補を一覧表示
+```
 /My/runaction/ntuple/showScName
+```
 
-HitのNtupleに保存する情報を登録する
-/My/runaction/ntuple/addScColumn  {nname:s}  {qname:s} {type:s} {unit:s}
-name:  ntuple 名で指定する
-qname: スコアリングする量の名称を指定する
-type:  I（整数）, D（実数），F（実数）
-unit:  物理量の単位  (arbitral unit = “none”)
+### Ntupleに保存する物理量を追加
+```
+/My/runaction/ntuple/addScColumn {nname:s} {qname:s} {type:s} {unit:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ntname:s |  Ntuple 名 |
+| qname:s | スコアリング対象の物理量名 |
+| type:s | `I`（整数）, `D`（実数）, `F`（実数） |
+| unit:s |  単位（例: `MeV`, `mm`, 単位なし: `none`） |
 
-HitのNtupleに設定された登録情報を表示する
-/My/runaction/ntuple/showScColumn   {nname:s}
-nname:  ntuple名
+### Ntupleに登録済みの物理量を一覧表示
+```
+/My/runaction/ntuple/showScColumn {ntname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| ntname:s |  Ntuple 名 |
 
-Digiヒストグラム(多次元)を作成する。
+---
+## Event and Tracking
+
+### MyEventActForMonitor
+#### イベント番号をファイルに出力する
+```
+/My/{name}/eventMonitor   {nevent:i}   {filename:s}
+```
+- nevent:  イベントを出力する間隔
+- filename:  出力ファイル名
+
+### MyTrackingActForKillTrkMessenger
+コマンドの{name}部分は、tracking1, tracking2の２つがデフォルトで使用可能。
+#### 粒子生成を抑制するz領域を設定する
+```
+/My/{name}/killZUpStream　　{z:d} {unit}
+```
+- z:  z座標
+- defaule unit: mm
+
+#### 中性子の生成をしない
+```
+/My/{name}/killNeutral  {flag:b}
+```
+- flag:  true 生成しない
+
+#### 軽粒子の生成をしない
+```
+/My/{name}/killLepton  {flag:b}
+```
+- flag:  true 生成しない
+
+#### 二次粒子の生成をしない
+```
+/My/{name}/killSecondary  {flag:b}
+```
+- flag:  true 生成しない
+
+---
+## Digi ヒストグラム設定(試験運用)
+### Digi Ntuple 作成
+```
 /My/runaction/ntuple/dc/create {ntname:s} {colname:s}
-  ntname: 多次元ヒストグラム(ntuple)の固有名
-  　colname:  記録するデータ元となるコレクションの名前
+```
 
-Digiでスコアリング可能な物理量を表示する
+### Digiスコアリング可能な物理量を表示
+```
 /My/runaction/ntuple/showDcName
+```
 
-DigiのNtupleに保存する情報を登録する
-/My/runaction/ntuple/addDcColumn  {nname:s}  {qname:s} {type:s} {unit:s}
-name:  ntuple 名で指定する
-qname: スコアリングする量の名称を指定する
-type:  I（整数）, D（実数），F（実数）
-unit:  物理量の単位  (arbitral unit = “none”)
+### Digi 保存情報を追加
+```
+/My/runaction/ntuple/addDcColumn {nname:s} {qname:s} {type:s} {unit:s}
+```
 
-DigiのNtupleに設定された登録情報を表示する
-/My/runaction/ntuple/showDcSetColumn   {nname:s}
-nname:  ntuple名
-DigiSetヒストグラム(多次元)を作成する。
+### Digi 登録済み情報を表示
+```
+/My/runaction/ntuple/showDcSetColumn {nname:s}
+```
+
+### DigiSet Ntuple 作成
+```
 /My/runaction/ntuple/dcset/create {ntname:s} {colname:s}
-  ntname: 多次元ヒストグラム(ntuple)の固有名
-  　colname:  記録するデータ元となるコレクションの名前
+```
 
-DigiSetでスコアリング可能な物理量を表示する
+### DigiSetスコアリング可能な物理量を表示
+```
 /My/runaction/ntuple/showDcSetName
+```
 
-DigiSetのNtupleに保存する情報を登録する
-/My/runaction/ntuple/addDcSetColumn  {nname:s}  {qname:s} {type:s} {unit:s}
-name:  ntuple 名で指定する
-qname: スコアリングする量の名称を指定する
-type:  I（整数）, D（実数），F（実数）
-unit:  物理量の単位  (arbitral unit = “none”)
+### DigiSet 保存情報を追加
+```
+/My/runaction/ntuple/addDcSetColumn {nname:s} {qname:s} {type:s} {unit:s}
+```
 
-DigiSetのNtupleに設定された登録情報を表示する
-/My/runaction/ntuple/showDcSetColumn   {nname:s}
-nname:  ntuple名
+### DigiSet 登録済み情報を表示
+```
+/My/runaction/ntuple/showDcSetColumn {nname:s}
+```
 
- 
-XII) Digitizer　（試験運用）
-元データとなるコレクションから、デジタイズタイプに応じた処理を行い、処理後のデータコレクションを作成する。
-/My/eventaction/digi/create  {name:s}  {DigiType:s}
-                             {ColFrom:s} {ColTo:s} {sdname:s}
-			     name: Digitizerの固有名
-			     DigiType: Digitizer処理を指定する。
-			     ColFrame: 元となるコレクション名
-			     ColTo: 処理後のコレクション
-			     sdname: Hitコレクションが元データとなる場合は、コレクション名の重複を区別するためにHitコレクションのSD名を指定する。
+---
 
-DigiTypeについて:
-・DigiVolMerger (Hit->Digi)
-Hitから同じジオメトリのコピー番号をもつHitをグループ化する。ジオメトリ単位ごとに信号量としてエネルギー付与値を積算する。
-・DigiCoincidence  (Digi->DigiSet)
-PETでの時間コインシデンスをとり、設定時間幅のDigiデータをグループ化する。
+## Digitizer　（試験運用）
+### 元データからデジタイズしたデータを作成する
+元データのコレクションからデジタイズタイプに応じた処理を行い、処理後のデータコレクションを作成する。
+```
+/My/eventaction/digi/create  {name:s}  {DigiType:s} {ColFrom:s} {ColTo:s} {sdname:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| name:s |  Digitizerの固有名 |
+| DigiType:s | Digitizer処理を指定する |
+| ColFrome:s | 元となるコレクション名 |
+| ColTo:s | 処理後のコレクション名 |
+| sdname:s | コレクション名の重複を区別するためにHitコレクションのSD名を指定する|
 
-Digitizerモジュールを選択する。
+DigiTypeの選択肢  
+* DigiVolMerger (Hit->Digi)|  
+  * Hitから同じジオメトリのコピー番号をもつHitをグループ化する。ジオメトリ単位ごとに信号量としてエネルギー付与値を積算する。
+* DigiCoincidence  (Digi->DigiSet)
+  * PETでの時間コインシデンスをとり、設定時間幅のDigiデータをグループ化する。
+
+### Digitizerモジュール選択
+```
 /My/eventaction/digi/select  {name:s}
-name: デジタイザーの固有名
+```
+| 値表記 |　説明 |
+|:---|:---|
+| name:s |  デジタイザーの固有名 |
 
+### Digitizerモジュールの時間ウインドウ設定
 selectで選択したdigitizerモジュールに時間ウインドウを設定する
-ただし、DigiCoincidenceのときのみ有効。
-時間ウインドウを設定
+ただし、DigiCoincidenceのときのみ有効となる。
+#### 時間/エネルギーウインドウを定
+```
 /My/eventaction/coincidence/twin  {tw:d}  {toff:d} {unit:s}
-/My/eventaction/coincidence/twin  {emean:d}  {ew:d} {unit:s}
-tw : 時間ウインドウ
-toff: 信号から時間ウインド開始までの時間オフセット
-unit: 単位
-emean: エネルギー中心値
-ew: エネルギー幅　（emean+-ew）
-unit: 単位
+/My/eventaction/coincidence/ewin  {emean:d}  {ew:d} {unit:s}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| tw:d  | 時間ウインドウ |
+| toff:d | 信号から時間ウインド開始までの時間オフセット |
+| unit:s | 単位 |
+| emean:d | エネルギー中心値 |
+| ew:d | エネルギー幅　（emean+-ew） |
+| unit:s |  単位 |
 
-
-以上
--->
