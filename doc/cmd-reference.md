@@ -585,6 +585,24 @@ SD名で登録の有無を確認し、TriggerSDの存在を識別し、未作成
 |:---|:---|
 | filename:s | 出力ファイル名（拡張子要）, .root,  .xml,  .csv |
 
+
+### スレッドのNtupleをマスターにマージする 
+```
+/My/runaction/ntuple/merge  {flag:b}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| flag:b |  true = merge |
+
+### PrimaryVtxのNtupleを有効化
+```
+/My/runaction/ntuple/primary {flag:b}
+```
+| 値表記 |　説明 |
+|:---|:---|
+| flag:b | true = score primary vertex info.|
+The ntuple name is "PRIM".
+
 ### WaterPhantom/DICOMでのヒストグラムの有効化
 ```
 /My/runaction/hist/enable {hname:s} {flag:b} {mname:s}
