@@ -244,7 +244,7 @@ NISTの物質を利用する場合には、パラメタファイル名の代わ�
 　水ファントムなどの特別なビーム機器の登録には、専用の登録コマンドが用意されています。
 #### 水ファントムの登録と解除
 ```
- /Dynamic/Module/WaterPhantom/register　　
+ /Dynamic/Module/WaterPhantom/register　 　
  /Dynamic/Module/WaterPhantom/unregister
 ```
 
@@ -466,7 +466,8 @@ NISTの物質を利用する場合には、パラメタファイル名の代わ�
 | lvl:i | デバッグレベル |
 
 ---
-## Special Beam Modules 
+## Special Beam Modules
+### [G4Room commands](BeamModules/Room.md) 
 ### [WaterPhantom commands](BeamModules/WaterPhantom.md)
 ### [DICOM commands](BeamModules/DICOM.md)
 ### [DICOM-RT commands](BeamModules/DICOMRT.md)
