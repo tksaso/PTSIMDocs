@@ -11,6 +11,5 @@ Tutorial
    :caption: Contents:
 
    overview.md
-   cmd-reference.md
    faq.md
 

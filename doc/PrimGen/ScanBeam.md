@@ -1,86 +1,98 @@
-2)G4ScanningMagnet
-電磁石のモジュールへの磁場値を設定する。
-＊磁場値は、デフォルトでは電磁石の位置と磁場の長さ、粒子エネルギーと指定されたアイソセンター面での座標から、近似式で計算されて用いられる。近似式の補正を行うために、(1)手動で磁場値を設定するコマンド、(2)磁場計算の近似式に補正係数を設定するコマンドが用意されている。これらのコマンドは、各電磁石において用いる。
+## ScanBeam
+スポットスキャニングを行う。３つのASCIIファイル入力が必要である。
 
-(2-1)手動で磁場値を設定するコマンド
-以下{module_name}は、電磁石のビームモジュール名を表す。
-/G4M/Module/{module_name}/fiedvalue  {field_value:d}  {unit:s}
-field_value:  磁場値
- unit:  T etc.
+### デバッグモードの設定
+```
+ /G4M/ScanBeam/verbose  {v:i}
+```
+  v:  デバッグフラグ
 
-アイソセンターから電磁石モジュールまでの距離を設定する。この距離がスキャニングのための磁場値を計算する際に用いられる。
-/G4M/Module/{module_name}/distance  {dist:d}  {unit:s}
- dist: 距離
-  unit:  m etc.
+### Scanning Magnetの登録と有効化
+事前にScanning Magnetがビームモジュールとして登録済みである必要がある。
+```
+/G4M/ScanBeam/scanMagXY   {mnameX:s}   {mnameY:s}
+```			 
+ mnameX, mnameY:  ビームモジュール名
 
-次の2つのコマンドで、スポットの位置とビームの運動エネルギーの入力データ点を手動で指定する
-アイソセンター面でのスポット位置を与える
-/G4M/Module/{module_name}/putXFieldMap {idx:i}  {xval:d} {unit:s}
-idx:  インデックス番号
-xval:  スポットの位置（座標）
-unit:  mm etc.
+### ビームエネルギーとその揺らぎ，そしてスポットサイズを記載したASCIIファイル（eidファイルと呼ぶ）を読み込み，設定を行うためのコマンド。
+```
+/G4M/ScanBeam/eidFile   {filename:s}
+```
+ eidFileName:  eidファイル名
 
-ビームの運動エネルギーを与える
-/G4M/Module/{module_name}/putYFieldMap {idy:i}  {yval:d} {unit:s}
-idy:  インデックス番号
-yval:  ビームの運動エネルギー
-unit:  MeV etc.
+ eidファイルの書式
+```text
+ data/Sample/G4MScanBeam/EIDSample.dat	Description
+ 3
+ 0 100.  0.  0.  0.
+ 1 200.  0.  0.  0.
+ 2 250.  0.  0.  0.	Number of lines (e.g. number of beams)
+ ID  E(MeV)  dE(MeV) SigX(mm)  SigY(mm)
+ *ID must be given in Sequential.
+```
 
-idx, idyで指定したスポット位置とビーム運動エネルギーでの磁場値を指定する
-/G4M/Module/{module_name}/putVaueFieldMap {idx:i} {idy:i} {value:d} {unit:s}
-idx:  スポット位置のインデックス番号
-idy:  ビームの運動エネルギーのインデックス番号
-value:  磁場値
-unit:  T etc.
+### eidファイルを与えるもうひとつのコマンド。
+こちらのコマンドの場合には，エネルギー，エネルギー揺らぎ，スポットに加えて，初期角度を各BeamID毎に定義したASCIIデータファイルを読み込む。
+```
+/G4M/ScanBeam/eidFile2   {filename:s}
+```
+ eid2FileName:  eid2ファイル名
 
-磁場の極性を設定する。
-/G4M/Module/{module_name}/sign  {sign:i}
- sign:  +1 又は -1
+eidファイルの書式:
+data/Sample/G4MScanBeam/EIDSample2.dat
+```
+3
+0 100.  0.  0.  0. 0. 0.
+1 200.  0.  0.  0. 0. 0.
+2 250.  0.  0.  0. 0. 0.	Number of lines (e.g. number of beams)
+ID  E(MeV)  dE(MeV) SigX(mm)  SigY(mm) AngSigX(mrad) AngSigY(mrad)
+*ID must be given in Sequential.
+```
 
-アイソセンター面でのスポットの位置とビームの運動エネルギーで関連付けされる磁場値の表を作成する
-/G4M/Module/{module_name}/createFieldMap  {interpolation:b}
-interpolation:  データ間を補間（true）
+### スポット座標と線量強度を与えるASCIIファイル(scanファイル)を指定する。
+スポット座標は，アイソセンター面でのx,y座標である。
+```
+/G4M/ScanBeam/scanFile   {filename:s}
+```
+ scanFileName:  scanファイル名
 
-磁場値の対応表を削除する
-/G4M/Module/{module_name}/deleteFieldMap
+scanファイルの書式
+data/Sample/G4MScanBeam/ScanSample.dat
+```text
+5
+0  -100.  -30.  5.
+1     0.   30.  2.
+1    50.  -50.  2.
+2  -100. -100.  1.
+2    10. -100.  2.	Number of lines (e.g. Number of spots)
+ID  x(mm)  y(mm)  Gy
+```
 
-磁場値をASCIIファイルに保存する
-/G4M/Module/{module_name}/storeFieldMap  {file_name:s}
-file_name:  出力ファイル名
+### wieght係数を記載したASCIIファイルを指定
+異なるエネルギーでも同じピーク線量値となるように初期粒子数を調節する係数(weight)を指定する。
+```
+/G4M/ScanBeam/weightFile   {filename:s}
+```
+ weightFileName:  weightファイル名
+ weightファイルの書式
+ data/Sample/G4MScanBeam/WeightSample.dat
+```text 
+  3
+  90.    1.
+  200.   1.
+  300.   1.	Number of lines
+  E(MeV)  Weight
+```
+  異なるエネルギーだが，同じ粒子数の計算を行ったときに得られた線量の相対値を表す。
 
-ASCIIファイルから磁場値の表を読み込む
-/G4M/Module/{module_name}/retrieveFieldMap  {file_name:s}
+### 設定を表示
+```
+/G4M/ScanBeam/show  {type:s}
+```
+type: eid,  spot,  weight
+(*) 個々のスポットの粒子発生数を表す確率は/run/beamOnが実行されたときに，自動的に計算される。
 
-(2-2)磁場計算の近似式に補正係数を設定するコマンド
-磁場の補正係数表のスポット位置を与える
-/G4M/Module/{module_name}/putXFieldCoeff {idx:i}  {xval:d} {unit:s}
-idx:  インデックス番号,　　xval:  スポット位置
-unit:  mm etc.
-
-磁場補正係数表のビームの運動エネルギー値を与える
-/G4M/Module/{module_name}/putYFieldCoeff {idy:i}  {yval:d} {unit:s}
-idy:  インデックス番号
-yval:  ビームの運動エネルギー
-unit:  MeV etc.
-
-磁場補正係数表のidx, idyに対応する補正係数を与える
-/G4M/Module/{module_name}/putVaueFieldCoeff {idx:i} {idy:i} {value:d}
-idx:  スポット位置のインデックス番号
-idy:  ビームの運動エネルギーのインデックス番号
-value:  補正係数値
-
-スポット位置とビームの運動エネルギーに対応する磁場値への補正係数表を作成する
-/G4M/Module/{module_name}/createFieldCoeff  {interpolation:b}
-interpolation:  true 補間
-
-磁場値の補正係数表を削除する
-/G4M/Module/{module_name}/deleteFieldCoeff
-
-
-ASCIIファイルに磁場補正係数表を保存する
-/G4M/Module/{module_name}/storeFieldCoeff  {file_name:s}
-file_name:  出力ファイル名
-
-ASCIIファイルから磁場補正係数表を読み込む。
-/G4M/Module/{module_name}/retrieveFieldCoeff  {file_name:s}
-file_name:  ファイル名
+### /run/beamOnの前に粒子発生数を計算(デバッグ用）
+```
+/G4M/ScanBeam/calcProb
+```
