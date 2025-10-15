@@ -1,8 +1,24 @@
 
 ## GDMLの利用
 
-　GDMLジオメトリを利用する場合には、XML用のライブラリ(xercesなど)がインストールされており、Geant4ライブライも-DGEANT4_USE_GDML=ONのオプションの元でコンパイルされていなければならない。更に,
+GDMLジオメトリを利用する場合には、XML用のライブラリ(xercesなど)がインストールされており、Geant4ライブライも-DGEANT4_USE_GDML=ONのオプションの元でコンパイルされていなければならない。更に,
 GDMLPTSToolkitならびにDynamicPortの双方を`-DUSEGDML`のオプションを付けてビルドしていなければならない。
+
+### GDMLファイルのスキーマ指定
+```
+/Dynamic/Module/gdml/reader/schema   {pathtofile:s}
+```
+| 値表記 | 説明 |
+|:---|:---|
+| pathtofile:s | スキーマ(gdml.xsd)のファイルパス |
+
+
+### GDMLファイルの物質定義をスキップする
+GDMLジオメトリ構築時に、GDMLファイルに記載されている物質定義をスキップし、既存の物質定義を適用する。
+```
+/Dynamic/Module/gdml/reader/skipMaterials   {flag:b}
+```
+- flag:  true=スキップして無視する,  false=読み込んで物質を作成する。
 
 ### GDMLジオメトリファイルビームモジュールの登録
 ```
@@ -13,13 +29,6 @@ GDMLPTSToolkitならびにDynamicPortの双方を`-DUSEGDML`のオプション�
 - gdmlFile: GDML形式のジオメトリファイル
 - x,y,z, unit:  中心位置とその単位
 - rx,ry,rz, unit: 回転角とその単位
-
-### GDMLファイルの物質定義をスキップする
-　GDMLジオメトリ構築時に、GDMLファイルに記載されている物質定義をスキップし、既存の物質定義を適用する。
-```
-/Dynamic/Module/gdml/reader/skipMaterials   {flag:b}
-```
-- flag:  true=スキップして無視する,  false=読み込んで物質を作成する。
 
 #### 既存ビームモジュールをGDMLジオメトリファイルに書き出す
 ```
