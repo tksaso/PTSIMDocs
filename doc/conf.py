@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'TksASO'
+project = 'PTSIM project'
 copyright = '2025-2030, Tsukasa Aso'
 author = 'Tsukasa Aso'
 release = '0.1'
@@ -48,4 +48,5 @@ html_last_updated_fmt = "%Y-%m-%d %H:%M:%S"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_rtd_theme'
-##html_static_path = ['_static']
+html_static_path = ['_static']
+html_css_files = ['custom.css']

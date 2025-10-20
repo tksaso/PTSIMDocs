@@ -74,6 +74,8 @@
 |:---|:---|
 | flag:b    |  NIST Element = true,  Userdefined = false. |
 
+*デフォルト設定でNIST-Elementが使用されことになっています。
+
  #### ユーザ定義のElementデータファイルを利用する
  ##### Elementデータファイルのパスを指定する 
  ```
@@ -86,19 +88,27 @@
 [Elementファイル書式](./Mat/Eledef.md)
 
 ### Materialデータの指定と作成
- 物質(Material)を作成します。
+物質(Material)を作成します。
 
 #### 物質データファイルのパスを指定する
+ユーザ独自の物質構成を必要とする場合は、その構成要素を記述したファイルのパスを指定します。
  ```
  /G4M/Material/path {path:s}
  ```
 | 値表記 | 説明 |
 |:--- |:--- |
 | path:s | 実行場所からの相対パス. Default: ./data/commom/material/ |
- 
-[ Materialファイル書式](./Mat/Matdef.md)
- 
- #### 物質を作成する
+
+#### マテリアルファイル例
+このパスに物質の構成要素を記述するファイルを作成しておきます。
+物質構成書は、以下のリンクを参照してください。
+[ Materialファイルの書式 ](./Mat/Matdef.md)
+* 元素数による構成例: [./data/common/material/H_2O.dat](./Mat/H_2O.md)
+* 元素重量比による構成例: [./data/common/material/Air.dat](./Mat/Air.md)
+* 物質の混合比による構成例: [./data/common/material/G10.dat](./Mat/G10.md)
+
+#### 物質を作成する
+ ユーザ定義の物質、またはNISTデータベースの物質ともに、次のコマンドで物質を作成します。
   ```
  /G4M/Material/create  {ifilename:s}
  ```
@@ -110,6 +120,8 @@ NISTの物質を利用する場合には、パラメタファイル名の代わ�
 ```
 例)  /G4M/Material  G4_WATER    
 ```
+NISTデータベースの物質は、[こちら](https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html?highlight=nist%20material)で確認してください。
+
 ユーザ定義の物質パラメタファイルを利用して物質を作成する場合は、データファイル名の拡張子は、.dat とします。作成コマンドでは、ファイル名の拡張子を除いた物質名を指定します。例えば、パラメタファイル名が、Water.datの場合は、Waterを指定します。
 ```
 例) /G4M/Material  Water  
@@ -123,9 +135,6 @@ NISTの物質を利用する場合には、パラメタファイル名の代わ�
 |:---|:---|
 | matname:s    |  物質名. 原則、上記の{ifilename}と同じです。 |
  
- #### マテリアルファイル例
- * エレメントによる構成例: [./data/common/material/H_2O.dat](./Mat/H_2O.md)
- * 物質による構成例: [./data/common/material/G10.dat](./Mat/G10.md)
 ----------------------------------------------------------------------------------
 ## Primary Beam Generator
 
@@ -266,7 +275,7 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 
 ワールドボリュームに当たる治療室やスコアリング機能付き水ファントムなど、特別なビーム機器の登録には、専用の登録コマンドが用意されています。
 
-#### 水ファントムの登録
+#### 治療室(Room)の登録
 ```
  /Dynamic/Module/Room/register {dx:d} {dy:d} {dz:d} {unit:s}
 ```
@@ -582,12 +591,9 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 | edepFlag:b |  true=付与エネルギーがある場合のみ記録する。ガンマ線などでは、反応時のみ記録される。<br> false=ガンマ線などは、反応が起きなくてもLVに入った時点で記録される。|
 | depx:i, depy:i, depz:i, depm:i, deps:i | ジオメトリ識別番号を取得するレイヤ番号 |
 
-### 論理ボリュームにSensitiveDetectorを取付
-#### 論理ボリュームの選択
-```
-/G4M/Module/select  {mname:s}
-```
-#### SensitiveDetectorの取付け
+### 論理ボリュームを指定してのスコア利用
+
+#### SensitiveDetectorを取付ける
 選択中の論理ボリュームが取り付け対象になります。
 ```
 /G4M/Module/attachSD  {sdname:s}
@@ -596,8 +602,12 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 |:---|:---|
 | sdname:s | SD name |
 
-### Geometric Trigger
-selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り付ける。TriggerSDは、粒子が論理ボリュームに入るとあらかじめ設定したビットが粒子飛跡情報として記録されます。
+### TriggerSDを取り付ける
+selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り付ける。
+TiggerSDは、初回の取り付け時に自動的に作成されます。上記のcreateSDコマンドは不要です。
+TriggerSDは、粒子が論理ボリュームに入るとあらかじめ設定したビットが粒子飛跡情報として記録されます。
+これによりスコア結果のビット列を確認することにより、通過したジオメトリを確認することができます。
+
 #### TriggerSDの取り付け
 選択中の論理ボリュームが取り付け対象になります。
 ```
@@ -609,7 +619,9 @@ selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り
 |sdname:s |  TriggerSDの固有名, デフォルト”TreiggerSD” |
 SD名で登録の有無を確認し、TriggerSDの存在を識別し、未作成の場合には自動的に生成される。原則としてTriggerSDは、１つしか作ってはいけないので注意。
 
-#### 選択中の論理ボリュームの物質を変更
+#### 論理ボリュームの物質を変更
+指定した論理ボリュームの物質を変更することが可能です。物質はあらかじめ作成しておく必要があります。  
+
 ```
 /G4M/Module/setMaterial    {matname:s}
 ```
@@ -617,6 +629,8 @@ SD名で登録の有無を確認し、TriggerSDの存在を識別し、未作成
 |:---|:---|
 | matname:s | 選択中の論理ボリュームに割り当てる作成済みの物質名。<br> 
 パラレルワールドでのレイヤジオメトリでは、”null”または”NULL”で不要なボリュームの物質をnullに設定することができる。|
+
+スコアの説明で、物質の変更機能を上げているのは、パラレルワールドのジオメトリでスコアリングを利用する場合や、同じくパラレルワールドでレイヤードマスジオメトリを用いる場合、パラレルワールドに配置するジオメトリで、物質を無視する領域は、物質をnullに設定することが必要だからです。
 * 関連コマンド: /G4M/Module/dump, /G4M/Module/selectLV
 
 ----------------------------------------------------------------------------------

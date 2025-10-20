@@ -1,51 +1,79 @@
 # Installation and Build
 
 
-## Some text
+## 必要な環境
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+PTSIMの実行は、Linux環境またはMac環境を前提としています。ウインドウズの場合はWSL環境を用意してください。
+また、gccなどの開発環境やGeant4に加えて、次のライブラリ等のインストールを推奨しています。
 
+- 可視化やGUI環境: QtやOpenGLのインストール
+- 独自のビーム機器をGDMLで記述: XMLパーサ
+- データ解析：CERN Analysis ROOT
 
-## Table
+これらのインストールについては、以下の手引きを参考にしてください。
 
-| No.  |  Prime |
-| ---- | ------ |
-| 1    |  No    |
-| 2    |  Yes   |
-| 3    |  Yes   |
-| 4    |  No    |
+但し、OSバージョン等により手順が変わる場合があります。  
+[WSLでのインストール Geant4-v11.3](./Geant4/installWSL_Geant4_113.pdf)  
+[Macでのインストール Geant4-v11.3](./Geant4/installMac_Geant4_113.pdf)  
 
+## PTSIMソースコード
 
+PTSIMのソースコードをKEKのWikiサイトからダウンロードしてください。
 
-## Code blocks
+[KEK Wikiサイト eant4医学応用](https://wiki.kek.jp/spaces/g4med/pages/5343876/PTSIM)
 
-The following is a Python code block:
-```python
-  def hello():
-      print("Hello world")
+## ソースコードの展開とビルド
+
+### 展開
+ソースコードが、ホームディレクトリの下にあるDownloadsディレクトリにあり、ホームディレクトリに展開するものとして説明します。下記、xxxの部分は、PTSIMのバージョンによって読み替えてください。
+```
+$ cd
+$ tar  zxvf  ~/Downloads/PTSproject-11x-xxx-xxx.tar.gz
 ```
 
-And this is a C code block:
-```c
-#include <stdio.h>
-int main()
-{
-    printf("Hello, World!");
-    return 0;
-}
+### ビルド
+はじめにライブラリをビルドします。
+```
+$ cd
+$ cd PTSproject-11x-xxx-xxx
+$ ./buildToolkitIAEAGDML.sh
 ```
 
-
-## Math
-
-This creates an equation:
-```{math}
-a^2 + b^2 = c^2
+次にアプリケーションをビルドします。
+```
+$ ./buildDynamicIAEAGDML.sh
 ```
 
-This is an in-line equation, {math}`a^2 + b^2 = c^2`, embedded in text.
+実行ディレクトリに移ります
+```
+$ cd  ~/PTSproject-install/PTSapps/DynamicPort
+$ ls bin/
+```
+lsコマンドで次の表示があればインストールが完了しています。
+```
+PTSdemo
+```
+
+### 例題実行
+
+例題のマクロファイルをコピーして実行してみましょう
+```
+$ cp  ./macros/DynamicPort/Sample0.mac  .
+$ ./bin/PTSdemo  -i  Sample0.mac
+```
+
+Qtウインドウが起動して、OpenGLで例題の粒子線治療装置のモデルが表示されます。
+![実行画面](./img/ptsim1.png)
+
+ウインドウの下にある「Session:」に次のように入力します。
+```
+Session:  /run/beamOn 10
+```
+陽子線治療のシミュレーションが実行されます。
+![実行画面](./img/ptsim2.png)
+
+終了します。
+```
+Session:  exit
+```
+
