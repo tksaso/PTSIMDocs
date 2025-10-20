@@ -51,18 +51,27 @@ Session: exit
 # Primary particle
 /My/PrimaryGenerator/select GPS
 #
+# GPS commands
 /gps/particle proton
-/gps/energy   190. MeV
-/gps/direction 0 0 -1 
+/gps/ene/type  Gauss
+/gps/ene/mono   190. MeV
+/gps/ene/sigma   0.3 MeV
 /gps/pos/centre  0. 0. 3500. mm
 /gps/pos/type Beam
 /gps/pos/sigma_x   10.0  mm
 /gps/pos/sigma_y   20.0  mm
 /gps/pos/centre  0. 0. 3500. mm
+/gps/direction 0 0 -1 
 /gps/ang/type  beam2d
 /gps/ang/sigma_x   3.0  mrad
 /gps/ang/sigma_y   6.0  mrad
 #
+# 
+/My/runaction/dumpfile      A2.root
+/My/runaction/ntuple/merge  true
+#
+# Check the primary particle generator#
+/My/runaction/ntuple/primary  true
 #
 #/run/beamOn 10
 #
@@ -81,7 +90,70 @@ GPSコマンドについての詳細は、Geant4のドキュメント[GPS](https
 
 発生位置や方向に関しては、`type`指定があり、その選択によって有効なコマンドも変わりますので注意してください。
 
-
- 
-
-
+#### 初期粒子の分布確認
+通常、Qtウインドウでの可視化で発生点や方向などを確認で来ますが、`/My/runaction/ntuple/primary ture`コマンドで初期発生粒子の情報をNtupleデータで確認することができます。保存されるNtupleの名称は、`PRIM`となります。
+```
+ root -l A2.root 
+root [0] 
+Attaching file A2.root as _file0...
+(TFile *) 0x13565e850
+root [1] .ls
+TFile**		A2.root	
+ TFile*		A2.root	
+  KEY: TTree	PRIM;1	Primary Particle Info.
+root [2] PRIM->Print()
+******************************************************************************
+*Tree    :PRIM      : Primary Particle Info.                                 *
+*Entries :     1000 : Total =          104133 bytes  File  Size =      44194 *
+*        :          : Tree compression factor =   2.28                       *
+******************************************************************************
+*Br    0 :evno      : Int_t PRIM                                             *
+*Entries :     1000 : Total  Size=       8649 bytes  File Size  =       3385 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   2.41     *
+*............................................................................*
+*Br    1 :vtxid     : Int_t PRIM                                             *
+*Entries :     1000 : Total  Size=       8654 bytes  File Size  =       1548 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   5.27     *
+*............................................................................*
+*Br    2 :np        : Int_t PRIM                                             *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       1546 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   5.27     *
+*............................................................................*
+*Br    3 :x0        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       5634 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.45     *
+*............................................................................*
+*Br    4 :y0        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       5648 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.44     *
+*............................................................................*
+*Br    5 :z0        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       1561 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   5.22     *
+*............................................................................*
+*Br    6 :t0        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       1543 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   5.28     *
+*............................................................................*
+*Br    7 :pid       : Int_t PRIM                                             *
+*Entries :     1000 : Total  Size=       8644 bytes  File Size  =       1564 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   5.21     *
+*............................................................................*
+*Br    8 :ke        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       4707 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.73     *
+*............................................................................*
+*Br    9 :px        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       5661 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.44     *
+*............................................................................*
+*Br   10 :py        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       5634 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.45     *
+*............................................................................*
+*Br   11 :pz        : Float_t PRIM                                           *
+*Entries :     1000 : Total  Size=       8639 bytes  File Size  =       4481 *
+*Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.82     *
+*............................................................................*
+root [3] PRIM->Draw("ke")
+```

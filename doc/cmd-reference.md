@@ -160,7 +160,7 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
  - [FanBeam](./PrimGen/FanBeam.md)
  - [IAEAphsp](./PrimGen/IAEAphsp.md)
  - [EvtGun](./PrimGen/EvtGun.md)
- - [Root3d](./PrimGen/Rooted.md)
+ - [Root3d](./PrimGen/Root3d.md)
 
 ----------------------------------------------------------------------------------
 
@@ -180,7 +180,7 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
  {PhysName:s}は、PTSIMのデフォルトで読み込まれるphys.macを参照してください。  
  物理カテゴリごとに１つの物理コンストラクタを選択します。
 
-[マクロファイルPhy.mac](./Phys/physics.md)
+[マクロファイルPhy.mac](./Phys/Physics.md)
 
 #### 物理過程を手動で更新する
 ビームモジュールの変更や物質を変更した際に、手動で物理過程を更新する場合に用います。
@@ -262,6 +262,11 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 | x:d, y:d, z:d lunit:s|  配置座標(x,y,z)と単位 |
 | rx:d, ry:d, rz:d, runit:s |  回転角と単位. rx->ry->rz順で回転される.|
 
+#### ビームモジュールのクラスとパラメタファイルの書式
+- ビーム機器で指定可能なクラス名とそのパラメタファイル書式は、[こちら](./BeamModules/20240327Parameter_Files_for_Beam_Modules.pdf)を参照してください。
+- C++コードで独自のビーム機器を実装したい場合は、PTSprojectのソースコード`PTSproject/PTStoolkit/source/G4Mmodules/src`に、`G4MBMTemplate.cc`, `G4MBMTemplat1.cc`, `G4MTemplate2.cc`の空のファイルにジオメトリを実装して利用してください。
+- GDMLで独自のビーム機器を実装したい場合は、G4MBMGdmlクラスを指定してください。このときのパラメタファイルはGDMLファイルとなります。
+ 
 ### ビーム機器の登録を解除する
 ```
  /Dynamic/Module/unregister {mname:s}
@@ -526,7 +531,6 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 ### [BMField commands](BeamModules/BMField.md)
 
 ----------------------------------------------------------------------------------
-
 ## Mass and Parallel World Geometry
 
 ### シミュレーション空間のデバック出力
@@ -891,6 +895,6 @@ PETでの時間コインシデンスをとり、設定時間幅のDigiデータ�
 |:---|:---|
 | name:s |  デジタイザーの固有名 |
 
-```{PET用デジタイザー}
+<!-- {PET用デジタイザー} -->
 ```{include} ./PET/PETDigitizer.md
 

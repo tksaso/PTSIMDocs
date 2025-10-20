@@ -13,4 +13,11 @@ Tutorial
    ./Tutorial/launchOpt.md	     
    ./Tutorial/exampleA0.md
    ./Tutorial/exampleA1.md
-
+   ./Tutorial/exampleA2.md
+   ./Tutorial/exampleA3.md      
+   ./Tutorial/exampleA4.md
+   ./Tutorial/exampleA5.md
+   ./Tutorial/exampleA6.md
+   ./Tutorial/exampleA7.md
+   ./Tutorial/exampleA8.md
+   ./Tutorial/exampleA9.md

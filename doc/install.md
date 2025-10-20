@@ -63,14 +63,14 @@ $ ./bin/PTSdemo  -i  Sample0.mac
 ```
 
 Qtウインドウが起動して、OpenGLで例題の粒子線治療装置のモデルが表示されます。
-![実行画面](./img/ptsim1.png)
+<!-- ![実行画面](./img/ptsim1.png) -->
 
 ウインドウの下にある「Session:」に次のように入力します。
 ```
 Session:  /run/beamOn 10
 ```
 陽子線治療のシミュレーションが実行されます。
-![実行画面](./img/ptsim2.png)
+<!-- ![実行画面](./img/ptsim2.png)  -->
 
 終了します。
 ```
