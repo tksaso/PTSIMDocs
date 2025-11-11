@@ -21,3 +21,5 @@ Tutorial
    ./Tutorial/exampleA7.md
    ./Tutorial/exampleA8.md
    ./Tutorial/exampleA9.md
+   ./Tutorial/exampleA10.md
+   ./Tutorial/exampleA11.md   

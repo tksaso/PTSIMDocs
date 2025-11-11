@@ -17,7 +17,13 @@ $ cp  ./macros/tut/exampleA2.mac  .
 ```
 $ ./bin/PTSdemo  -i  exampleA2.mac
 ```
-治療室の原点\(アイソセンター\)に水ファントムが配置されたシミュレーション空間です。
+治療室のみが配置されたシミュレーション空間です。
+
+ビームを打ってみます。
+```
+Session: /run/beamOn 1000
+```
+![exampleA2](../images/exampleA2.png)
 
 終了
 ```
@@ -78,7 +84,7 @@ Session: exit
 ```
 
 #### 初期粒子発生器の選択
- 初期粒子発生器(Primary Particle Generator)は、`/My/PrimaryGenerator/select`[解説](../cmd-reference.md#primary-beam-generator)コマンドで引数に使用する初期粒子発生器の名称を与えます。選択可能な初期粒子発生器は、前述の解説を参照してください。このマクロファイルでは、`GPS`, General Particle Sourceを選択しています。
+ 初期粒子発生器(Primary Particle Generator)は、`/My/PrimaryGenerator/select`コマンドで引数に使用する初期粒子発生器の名称を与えます。選択可能な初期粒子発生器は、前述の解説を参照してください。このマクロファイルでは、`GPS`(General Particle Source)を選択しています。
 
 #### GPSコマンド
 GPSコマンドについての詳細は、Geant4のドキュメント[GPS](https://geant4.web.cern.ch/documentation/dev/bfad_html/ForApplicationDevelopers/GettingStarted/generalParticleSource.html)を参照してください。
@@ -155,5 +161,16 @@ root [2] PRIM->Print()
 *Entries :     1000 : Total  Size=       8639 bytes  File Size  =       4481 *
 *Baskets :        2 : Basket Size=      32000 bytes  Compression=   1.82     *
 *............................................................................*
-root [3] PRIM->Draw("ke")
 ```
+
+初期値の運動エネルギー`ke`を確認してみましょう。
+```
+root[] PRIM->Draw("ke")
+```
+![exampleA2ke](../images/exampleA2ke.png)
+
+発生点の位置座標分布`x0`と`y0`を確認してみましょう。
+```
+root[] PRIM->Draw("y0:x0","","surf3")
+```
+![exampleA2xy](../images/exampleA2xy.png)

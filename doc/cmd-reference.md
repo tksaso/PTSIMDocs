@@ -584,6 +584,17 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 
 * WaterPhantom、CylinderPhantom、 DICOM、PCTTubeDetector, PCTBoxDetectorジオメトリでは、SDは自動的に取り付けられている。下記のコマンドcreateSDやattachSDは、それら以外のジオメトリでのスコアリングを想定して用意されている。
 
+#### ビームモジュール名とモジュール内の論理ボリューム名を指定して、論理ボリュームを選択する
+モジュール内での論理ボリューム名を指定します。論理ボリューム名が複数ある場合は、`/G4M/Module/selectLV`コマンドを使ってください。
+```
+/G4M/Module/selectLVByName  {mname:s}   {lvname:s}
+```
+| 値表記 | 説明 |
+|:---|:---|
+| mname:s | ビームモジュール名 |
+| lvname:s | 論理ボリューム名 |
+
+
 ### SensitiveDetector(DetectorSD)を作成
 ```
 /G4M/Module/createSD {sdname:s} {colname:s} {edepFlag:b} {depx:i} {depy:i} {depz:i} {depm:i} {deps:i}

@@ -16,6 +16,7 @@ $ cp  ./macros/tut/exampleA3.mac  .
 ```
 $ ./bin/PTSdemo  -i  exampleA3.mac
 ```
+![exampleA3](../images/exampleA3.png)
 
 終了
 ```
@@ -55,6 +56,8 @@ Session: exit
 #
 # Beam-module settings
 #
+/G4M/Module/list  2
+#
 /G4M/Module/select BMT
 /G4M/Module/translate 0. 0. -100 mm
 /G4M/Module/install BMT
@@ -75,15 +78,40 @@ Session: exit
 PreInit> /Dynamic/Module/register  {mname} {mtype} {param}  {x} {y} {z} {lunit} {rx} {ry} {rz} {runit}
 ```
 配置座標や回転角の設定を省略した場合は、原点に回転なしの配置になります。
-モジュールタイプ{mtype}は、モジュールのクラス名で、パラメタファイル{param}と対応します。利用可能なモジュールタイプとパラメタの書式については[解説](../cmd-reference.md#Beam-Module-Registration)を参照してください。
-
+モジュールタイプ{mtype}は、モジュールのクラス名で、パラメタファイル{param}と対応します。利用可能なモジュールタイプとパラメタの書式については[解説](../cmd-reference.md#beam-module-registration)を参照してください。
 
 
 #### ビーム機器の選択と配置条件の再設定
- ビーム機器の配置座標や回転は、ビーム機器名を引数に`/G4M/Module/select`コマンドで選択した後に、`/G4M/Module/translate｀コマンド及び`/G4M/Module/rotate`コマンドで変更することができます。
-
+ ビーム機器の配置座標や回転は、ビーム機器名を引数に`/G4M/Module/select`コマンドで選択した後に、`/G4M/Module/translate`コマンド及び`/G4M/Module/rotate`コマンドで変更することができます。
+  
 #### ビーム機器の実体化
- 設定したビーム機器を治療室に実体化して配置するには、ビーム機器名を引数に`/G4M/Module/install`コマンドを実行します。
+ 設定したビーム機器を治療室に実体化して配置するには、ビーム機器名を引数に`/G4M/Module/install`コマンドを実行します。先に示したビーム機器の選択と配置条件の再設定は、実体化した後でも可能です。   
+(注）可視化で確認するには描画し直しが必要です。`/vis/drawVolume`.  
+```
+Idle> /G4M/Module/select MLC
+Idle> /G4M/Module/rotate 0. 0. 0. degree
+Idle> /vis/drawVolume
+```
+
+#### ビーム機器の登録状況の確認
+上記マクロファイルにはありませんが、登録されているビーム機器の一覧表示が可能です。
+`PreInit>`でも`Idle>`でも確認可能です。
+```
+Idle> /G4M/Module/list
+ +++ G4MParticleTherapySystemMessenger  List +++
+* Module BMT                 Active    Mass-Geom 
+* Module MLC                 Active    Mass-Geom 
+* Module Room                Active    Mass-Geom
+```
+
+表示レベル2を指定すると、配置座標情報を確認できます。
+```
+Idle> /G4M/Module/list  2
++++ G4MParticleTherapySystemMessenger  List +++
+* Module BMT                 Active    Center: 0     0     0         width: 50    50    30        mm
+* Module MLC                 Active    Center: 0     0     1000      width: 500   125   70        mm
+* Module Room                Active    Center: 0     0     0         width: 525   525   3550      mm
+```
 
 
 
