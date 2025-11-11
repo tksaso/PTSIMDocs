@@ -22,6 +22,16 @@ $ cp  ./macros/tut/exampleA10.mac  .
 $ ./bin/PTSdemo  -i  exampleA10.mac
 ```
 
+![exampleA101](../images/exampleA101.png)
+
+陽子線を照射
+```
+Session: /run/beamOn 100
+```
+
+![exampleA102](../images/exampleA102.png)
+
+
 終了
 ```
 Session: exit
@@ -46,9 +56,9 @@ Session: exit
 # System and module registration
 /G4M/System DynamicPort
 /Dynamic/Module/Room/register 525.  525.  3550. mm
+#
+/Dynamic/Module/gdml/schema  ./data/schema/gdml.xsd
 /Dynamic/Module/register Scatter G4MBMGdml ./data/Sample/G4MBMGdml/Scatter.gdml 0. 0. 2700. mm
-#
-#
 #
 # Run Initialize
 /run/initialize
@@ -60,18 +70,15 @@ Session: exit
 /control/execute ./macros/common/gps.mac
 #
 # Beam-module installation
-/G4M/Module/install Scantter
-#
-# Enable Scoring
-/G4M/Module/selectLVByName  Scatter
+/G4M/Module/install Scatter
 #
 # Create SD
 /G4M/Module/createSD   ScatterSD HitsCollection
 #
-# Attach SD
-/G4M/Module/attachSD   ScatterSD
-#
 # Scoring
+/My/runaction/dumpfile      A10.root
+/My/runaction/ntuple/merge  true
+#
 /My/runaction/ntuple/create SCT ScatterSD/HitsCollection
 /My/runaction/ntuple/addColumn SCT evno I
 /My/runaction/ntuple/addColumn SCT pid  I
@@ -83,17 +90,17 @@ Session: exit
 #
 ```
 
-#### 論理ボリュームの選択
-スコアリング機能を有効にする論理ボリュームを選択し、SDを取付ます。
-はじめに論理ボリュームを選択します。モジュール内で論理ボリューム名が重複していない場合、`/G4M/Module/selectLVByName`コマンドで論理ボリューム名を指定することで論理ボリュームを選択します。
-```
-Idle> /G4M/Module/dumpLVByName   Scatter
-```
-
 #### SDを作成
 SDの固有名とヒットコレクション名を指定して、SDを作成します。
 ```
 Idle> /G4M/Module/createSD   ScatterSD HitsCollection
+```
+
+#### 論理ボリュームの選択
+スコアリング機能を有効にする論理ボリュームを選択し、SDを取付ます。
+はじめに論理ボリュームを選択します。モジュール内で論理ボリューム名が重複していない場合、`/G4M/Module/selectLVByName`コマンドでモジュール名と論理ボリューム名を指定することで特定の論理ボリュームを選択します。
+```
+Idle> /G4M/Module/dumpLVByName   Scatter  ScatterL1
 ```
 
 #### SDを選択した論理ボリュームに取付ける
@@ -110,6 +117,15 @@ Idle> /G4M/Module/attachSD   ScatterSD
 /My/runaction/ntuple/addColumn SCT de   F keV
 /My/runaction/ntuple/addColumn SCT x    F mm
 /My/runaction/ntuple/addColumn SCT y    F mm
+```
+
+#### スコアリング結果例
+```
+$ root A10.root
+root[] .ls
+root[] SCT->Print()
+root[] SCT->Draw("x:y","de","colz")
+root[] .q
 ```
 
 #### Tips: SDの設定について

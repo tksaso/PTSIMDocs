@@ -3,14 +3,10 @@
 シミュレーション空間に配置したジオメトリとオーバラップして物体を置きたい場合にLayered-Massジオメトリを用います。
 例えばBranchyTherapyのように体内に線量カプセルを配置する場合などです。基本的には、パラレルワールドでのスコアリングと同様ですが、パラレルジオメトリの物質を有効化する点において違いがあります。
 
-パラレルワールド・レイヤードマスジオメトリ
+**パラレルワールド・レイヤードマスジオメトリ**
  - パラレルワールドの作成
  - パラレルワールド用プロセスの有効化
  - パラレルワールドへのジオメトリ構築
- - 
-
- - ファイルの作成
- - Lビームモジュール登録と実体化
 
 以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。
 
@@ -24,6 +20,16 @@ $ cp  ./macros/tut/exampleA7.mac  .
 ```
 $ ./bin/PTSdemo  -i  exampleA7.mac
 ```
+![exampleA71](../images/exampleA71.png)
+
+この状態ではパラレルワールドのボリュームが見えていない状態です。
+パラレルワールドを可視化します。
+```
+Session: /vis/drawVolume  worlds
+```
+![exampleA72](../images/exampleA72.png)
+
+実体のワールドボリュームにある水ファントムと重なるように、パラレルワールドにコリメータが置かれています。
 
 終了
 ```
@@ -95,7 +101,7 @@ Session: exit
 /My/runaction/ntuple/showScColumn NT
 #
 # BeamOn
-/run/beamOn 100
+#/run/beamOn 100
 #
 ```
 
@@ -132,7 +138,7 @@ Idle> /G4M/Module/install  Collimator  paraWorld0  true
 `/G4M/Module/install`コマンドを使って実体化します。１番目の引数はモジュール名、２番目の引数はパラレルワールドの固有名、３番目のフラグがLayered-Massのジオメトリとして実体化することを表します。
 
 - コリメータビームモジュールの空気部分の物質を変更
-コリメータはアルミニウム製で、中心部分に穴があいた形状をしています。水ファントムにコリメータを埋め込む想定をする場合、この中心の穴は、空気ではなく水ファントムの物質になるべきです。Mass-Worldの物質を参照するには、パラレルワールドの物質は`null`としなければなりません。
+コリメータはアルミニウム製で、中心部分に穴があいた形状をしています。水ファントムにコリメータを埋め込む想定をする場合、この中心の穴は、空気ではなく水ファントムの物質にしたいとします。Mass-Worldの物質を参照するには、パラレルワールドの物質は`null`としなければなりません。
 
 コリメータのGDMLファイルは、次のようになっており、空気部分の論理ボリューム名が`CollimatorL1`であることがわかります。
 ```{xml}
@@ -190,3 +196,15 @@ Idle> /G4M/Module/selectLV Collimator  1
 Idle> /G4M/Module/setMaterial  null
 ```
 
+この状態でビームを照射すると、中心部分の物質は水になります。
+下図のように陽子線は、水ファントムの浅いところで止まります。
+```
+Idle> /vis/scene/add/trajectories
+Idle> /vis/scene/endOfEventAction accumulate
+Idle> /run/beamOn 10
+```
+![exampleA73](../images/exampleA73.png)
+
+試しにマクロファイルの`/G4M/Module/setMaterial  null`をコメントにして実行すると、次のようになります。水ファントムの中にコリメータの空気の領域があるので、陽子線の飛程が長くなっているのがわかります。
+
+![exampleA74](../images/exampleA74.png)

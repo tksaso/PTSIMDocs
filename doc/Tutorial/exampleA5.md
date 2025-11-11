@@ -28,9 +28,8 @@ PTSIMの実行デイレクトりに移動して、サンプルのDICOMデータ�
 ```
 $ cd  ~/PTSproject-install/PTSapps/DynamicPort
 $ ls ~/DICOM_WP_Dist/_CT/2.16.840.1.114337.2011372676.19146.1340864202.0.1/*  >  DICOM.dat
-$ less DICOM.dat
 ```
-`less`コマンドは、`q`キーで終了します。`DICOM.dat`ファイルの中に、CTデータ以外のファイル名がないか確認してください。
+`DICOM.dat`ファイルの中に、CTデータ以外のファイル名がないか確認してください。
 
 ## 例題マクロファイル
 PTSIMコードに付属するマクロファイル`exampleA5.mac`をコピーして用います。
@@ -42,6 +41,9 @@ $ cp  ./macros/tut/exampleA5.mac  .
 ```
 $ ./bin/PTSdemo  -i  exampleA5.mac
 ```
+ボクセル数が非常に多いため可視化の警告が出ますが、無視してください。
+
+![exampleA5](../images/exampleA5.png)
 
 終了
 ```
@@ -97,7 +99,7 @@ Session: exit
 /G4M/DICOM/ct2density  ./data/Sample/Dicom/CT2Density.dat
 /G4M/DICOM/paramtype   ./data/Sample/Dicom/CT2G4WATER.dat
 /G4M/DICOM/gantry  0. deg
-/G4M/DICOM/isocenter  0. 0. 10. cm
+/G4M/DICOM/isocenter  0. 0. -150. cm
 /G4M/Module/install DICOM
 #
 #/run/beamOn 10
@@ -131,8 +133,7 @@ Idle> /G4M/Module/file  ./DICOM.dat
 Idle> /G4M/Module/mesh  5. mm
 ```
 #### 患者空間領域の指定\(Option\)
-例えばCT撮像時の固定具のサポートなどの不要な外側の領域については、あらかじめ空気のCT値\(`/G4M/DICOM/ctair`コマンドで指定)で書き換えてしまうことが可能です。
-患者座標系の各軸において患者領域となる空間の最小値と最大値を指定します。
+例えばCT撮像時の固定具のサポートなどの不要な外側の領域については、あらかじめ空気のCT値を`/G4M/DICOM/ctair`コマンドで指定しておき、そのCT値で書き換えてしまうことが可能です。患者周辺の不要な領域の指定は、患者座標系の各軸において患者領域となる空間の最小値と最大値を指定します。下記のコマンド例を参照してください。
 また、指定した領域外をジオメトリ構築時にトリミングして削除することも可能です。  
 マクロファイルでは、これらのコマンドはコメント\(#\)になっています。
 ```
@@ -243,7 +244,7 @@ CT値の範囲によって想定される組織物質を割り当てることが
 ガントリ角とアイソセンターの指定は次のようになります。
 ```
 Idle> /G4M/DICOM/gantry  0. deg
-Idle> /G4M/DICOM/isocenter  0. 0. 10. cm
+Idle> /G4M/DICOM/isocenter  0. 0. -150. cm
 ```
 カウチ角設定に次のコマンドも用意されています。
 ```

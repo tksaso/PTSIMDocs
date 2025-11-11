@@ -3,7 +3,7 @@
 静的な磁場モジュールの利用法を紹介します。例えば、MR-Linacのように照射対象に対して磁場を印加したい場合があります。
 磁場モジュールとして`G4MBoxField`クラスと`G4MDiskField`クラスが用意されています。磁場はマスワールドに配置する必要があるので、磁場領域にかかる対象物はパラレルワールドのレイヤードマスジオメトリをして配置することになります。
 
-ここでは、磁場モジュールの導入と水ファントムの領域に磁場をかける例を紹介します。
+ここでは、磁場モジュールを導入し、水ファントムが配置されている領域に磁場をかける例を紹介します。
  - 磁場モジュールの配置と設定
  - パラレルワールドの作成とレイヤードマスジオメトリの設定
 
@@ -19,6 +19,20 @@ $ cp  ./macros/tut/exampleA11.mac  .
 ```
 $ ./bin/PTSdemo  -i  exampleA11.mac
 ```
+![exampleA111](../images/exampleA111.png)
+
+パラレルワールドも表示します。
+```
+Session: /vis/drawVolume worlds
+```
+
+![exampleA112](../images/exampleA112.png)
+
+陽子線を照射します。
+```
+Session: /run/beamOn 100
+```
+![exampleA113](../images/exampleA113.png)
 
 終了
 ```
@@ -69,7 +83,7 @@ Session: exit
 /G4M/Module/install  Phantom paraWorld0 true
 #
 # (Mass-World) Magnetic Field
-/G4M/Module/select  FiledDisk
+/G4M/Module/select  FieldDisk
 /G4M/Module/rotate  90. 0. 0. degree
 /G4M/Module/install FieldDisk
 # B-field value 
@@ -90,7 +104,7 @@ Session: exit
 /My/runaction/ntuple/showScColumn NT
 #
 # BeamOn
-/run/beamOn 100
+#/run/beamOn 100
 #
 ```
 

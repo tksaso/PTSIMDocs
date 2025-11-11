@@ -19,6 +19,11 @@ $ cp  ./macros/tut/exampleA9.mac  .
 $ ./bin/PTSdemo  -i  exampleA9.mac
 ```
 
+![exampleA91](../images/exampleA91.png)
+
+陽子線を照射してみます。
+![exampleA92](../images/exampleA92.png)
+
 終了
 ```
 Session: exit
@@ -26,7 +31,7 @@ Session: exit
 
 ### マクロファイルの解説
 解説するコマンド部分のみを抜粋して説明します。
-マクロファイルでは、治療室にMLCと水ファントムを設置して、MLCにTriggerSDを取付ることにより、水ファントムの線量分布にMLCで散乱された粒子がどのように寄与しているかを確認する例を想定しています。
+マクロファイルでは、治療室にMLCと水ファントムを設置して、MLCにTriggerSDを取付ることにより、水ファントムの線量分布にMLCで散乱された粒子がどのように寄与しているかを確認する例を想定しています。MLCにかかるようにGPSの初期設定で、陽子線の拡がって照射されるような設定となっています。
 
 ```{code-block}
 :linenos:
@@ -54,10 +59,15 @@ Session: exit
 # Primary particle
 /My/PrimaryGenerator/select GPS
 /control/execute ./macros/common/gps.mac
+/gps/ang/type  beam2d
+/gps/ang/sigma_x   30.0  mrad
+/gps/ang/sigma_y   20.0  mrad
 #
 # WaterPhantom
 /G4M/Module/Phantom/size 150. 150. 250.0 mm
 /G4M/Module/Phantom/dim 300. 300. 500.
+/G4M/Module/select Phantom
+/G4M/Module/rotate 0. 180. 0. degree
 /G4M/Module/install Phantom
 #
 # MLC
@@ -87,7 +97,7 @@ Session: exit
 /My/runaction/ntuple/showScColumn NT
 #
 # BeamOn
-/run/beamOn 100
+#/run/beamOn 100
 #
 ```
 
@@ -130,4 +140,12 @@ Idle> /G4M/Module/attachTrgID  1
 /My/runaction/ntuple/showScColumn NT
 ```
 
+#### 実行と解析例
+照射数を10000にして実行してみましょう。マクロファイルの`/run/beamOn`を有効にして照射数を10000に修正した後に実行してみましょう。
+```
+$ ./bin/PTSdemo  -m  exampleA9.mac
+```
 
+実行後に、`A9.root`が作成されているので、解析してみましょう。
+```
+$ root A9.root
