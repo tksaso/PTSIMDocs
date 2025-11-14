@@ -213,14 +213,12 @@ Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンド�
 
 ### パラレルワールドプロセスを定義する
  ```
- /My/physics/pwProcess {pwname:s} {layered:b} {ProcessName:s} {verbose:i}
+ /My/physics/pwProcess {pwname:s} {layered:b} 
  ``` 
 | 値表記 | 説明 |
 |:---|:---|
 | pwname:s    |  Parallel World name |
 | layered:b    |  Layered mass geometry用の場合はtrue, スコアのみはfalse |
-| ProcessName:s   |  このプロセスの固有名 |
-| verbose:i    |  verbose level |
  
 パラレルワールド {pwname}を別途作成する必要があります。ジオメトリセクションを参照してください。  
  

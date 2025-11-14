@@ -13,7 +13,7 @@ DICOM-CTジオメトリは、ボクセルジオメトリとして構築されま
 CT画像のHUから物質への変換には、いくつかの選択オプションがあります。  
 はじめにCT値から水等価患者モデルを構築するマクロファイルを示し、その中で使用されている入力ファイルを例を上げて説明します。また、オプションとしての選択肢について解説していきます。
 
-サンプルDICOM-CTデータとして、水ファントムのデータを用います。（こちらからダウンロード）
+サンプルDICOM-CTデータとして、水ファントムのデータを用います。[こちらからダウンロード](http://wiki.kek.jp/download/attachments/82912951/DICOM_WP_Dist.zip?version=1&modificationDate=1536196171147&api=v2)
 ダウンロードしたファイルを展開してください。ここでは、ホームディレクトリにデータを展開する想定で解説します。
 ```
 $ cd
@@ -58,6 +58,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /control/execute ./macros/common/materials.mac

@@ -37,6 +37,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /G4M/Material/create G4_AIR

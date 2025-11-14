@@ -7,6 +7,13 @@
 /G4M/Module/{module_name}/field  {Bx:d} {By:d} {Bz:d}  {unit:s}
 ```
 - Bx, By, Bz:  磁場値
-- unit:  T etc.
+- unit:  tesla etc.
+
+## ジオメトリ下部構造への磁場適用の有無
+ 以下{module_name}は、空間磁場のビームモジュール名を表す。
+```
+/G4M/Module/{module_name}/forceToAllDaughters {flag:b}
+```
+- flag: true or false
 
 

@@ -33,6 +33,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /control/execute ./macros/common/materials.mac

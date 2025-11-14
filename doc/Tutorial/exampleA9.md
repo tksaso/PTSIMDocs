@@ -22,6 +22,9 @@ $ ./bin/PTSdemo  -i  exampleA9.mac
 ![exampleA91](../images/exampleA91.png)
 
 陽子線を照射してみます。
+```
+Session: /run/beamOn 100
+```
 ![exampleA92](../images/exampleA92.png)
 
 終了
@@ -37,6 +40,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /control/execute ./macros/common/materials.mac
@@ -58,7 +62,13 @@ Session: exit
 #
 # Primary particle
 /My/PrimaryGenerator/select GPS
-/control/execute ./macros/common/gps.mac
+/gps/particle proton
+/gps/energy   190. MeV
+/gps/direction 0 0 -1
+/gps/pos/type Beam
+/gps/pos/sigma_x   30.0  mm
+/gps/pos/sigma_y   40.0  mm
+/gps/pos/centre  0. 0. 3500. mm
 /gps/ang/type  beam2d
 /gps/ang/sigma_x   30.0  mrad
 /gps/ang/sigma_y   20.0  mrad
@@ -83,7 +93,7 @@ Session: exit
 /My/runaction/ntuple/merge  true
 #
 # Track analysis
-/My/runaction/ntuple/create    NT Phantom/HitsCollection 
+/My/runaction/ntuple/create    NT Phantom/HitsCollection
 /My/runaction/ntuple/addColumn NT evno       I
 /My/runaction/ntuple/addColumn NT pid        I
 /My/runaction/ntuple/addColumn NT ix         I
@@ -97,7 +107,7 @@ Session: exit
 /My/runaction/ntuple/showScColumn NT
 #
 # BeamOn
-#/run/beamOn 100
+#/run/beamOn 10000
 #
 ```
 
@@ -105,10 +115,23 @@ Session: exit
 TriggerSDを有効にする論理ボリュームを選択し、TriggerSDを取付ます。
 はじめに論理ボリュームを選択します。モジュール内で論理ボリューム名が重複している場合、はじめにインタラクティブモードで実行して`/G4M/Module/dumpLV`コマンドを用いてモジュール内の論理ボリュームを調べて識別番号を確認し、`/G4M/Module/selectLV`コマンドでモジュール名と識別番号を指定して当該の論理ボリュームを選択する。
 
+(補足)  
+はじめに`/G4M/Module/dumpLV`コマンでで論理ボリュームを調べるときには、`/G4M/Module/selectLV`コマンドと`/G4M/Module/attachTrgID`コマンドは、コメントにして実行します。
+標準出力の表示を確認して、論理ボリュームの識別番号を確認します。
+
+その後に、`/G4M/Module/selectLV`コマンドと`/G4M/Module/attachTrgID`コマンドを有効化して、論理ボリュームやトリガービットを指定して実行することになります。
+
 - MLCモジュールの内部構造を調べる。
 ```
 Idle> /G4M/Module/dumpLV     MLC
 ```
+`/G4M/Module/dumpLV MLC`の表示は次のようになります。
+```
+/G4M/Module/dumpLV MLC
+0 MLC : Air(1)
+1  Iron : Iron(0)
+```
+上記の表示は、最初が論理ボリュームの識別番号、２番目が論理ボリューム名、コロンの後は物質名と括弧書きで子論理ボリュームの個数です。
 
 - モジュール名と識別番号により論理ボリュームを選択する。
 ```
@@ -147,5 +170,28 @@ $ ./bin/PTSdemo  -m  exampleA9.mac
 ```
 
 実行後に、`A9.root`が作成されているので、解析してみましょう。
+MLCでの散乱放射線による深度エネルギー付与分布を見て見ましょう。
+
 ```
 $ root A9.root
+root[] .ls
+root[] NT->Print()
+root[] NT->Draw("iz","de*(triggerid==2)")
+root[] NT->Draw("iz","de")
+root[] NT->Draw("iz","de*(triggerid==2)","same")
+root[] NT->Draw("trigerx:triggery:triggerz","triggerid==2")
+```
+
+MLCで散乱された粒子による水ファントム内の深度エネルギー付与分布  
+`NT->Draw("iz","de*(triggerid==2)")`
+![exampleA9iztrig2](../images/exampleA9iztrig2.png)
+
+水ファントム内の全深度エネルギー付与分布とMLC散乱粒子の分布の重ね書き
+`NT->Draw("iz","de")`及び`NT->Draw("iz","de*(triggerid==2)","same")`の描画
+![exampleA9iztrig2cmp](../images/exampleA9iztrig2cmp.png)
+
+MLCでの散乱位置
+`NT->Draw("trigerx:triggery:triggerz","triggerid==2")`の描画
+![exampleA9iztrig2MLC](../images/exampleA9iztrig2MLC.png)
+
+以上

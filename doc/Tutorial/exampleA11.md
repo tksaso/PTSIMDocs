@@ -30,8 +30,11 @@ Session: /vis/drawVolume worlds
 
 陽子線を照射します。
 ```
+Session: /vis/scene/add/trajectories
+Session: /vis/scene/endOfEventAction accumulate
 Session: /run/beamOn 100
 ```
+
 ![exampleA113](../images/exampleA113.png)
 
 終了
@@ -48,6 +51,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /control/execute ./macros/common/materials.mac
@@ -59,12 +63,12 @@ Session: exit
 /G4M/System DynamicPort
 /Dynamic/Module/Room/register 525.  525.  3550. mm
 /Dynamic/Module/WaterPhantom/register Phantom
-/Dynamic/Module/register FieldDisk G4MDiskField ./data/Sample/G4MDisk/fielddisk.dat
+/Dynamic/Module/register FieldDisk G4MDiskField ./data/Sample/G4MDisk/fielddisk.dat 0. 0. 0. mm
 #
 # Create Parallel World
 /My/DetConstruction/createPW  paraWorld0
 #
-# Activate Parallel World Process
+# Activate Parallel World Process w/ Layered Mass
 /My/physics/pwProcess     paraWorld0  true
 #
 #
@@ -86,16 +90,17 @@ Session: exit
 /G4M/Module/select  FieldDisk
 /G4M/Module/rotate  90. 0. 0. degree
 /G4M/Module/install FieldDisk
-# B-field value 
-/G4M/Module/FieldDisk/field 0 0 2 tesla
+# B-field value (Given in the world coordinate)
+/G4M/Module/FieldDisk/field 0 1.5 0 tesla
 #
 #
 # Scoring
 /My/runaction/dumpfile      A11.root
 /My/runaction/ntuple/merge  true
 #
+#
 # Track analysis
-/My/runaction/ntuple/create    NT Phantom/HitsCollection 
+/My/runaction/ntuple/create    NT Phantom/HitsCollection
 /My/runaction/ntuple/addColumn NT pid  I
 /My/runaction/ntuple/addColumn NT ix   I
 /My/runaction/ntuple/addColumn NT iy   I
@@ -148,12 +153,11 @@ G4_AIR
 /G4M/Module/rotate  90. 0. 0. degree
 /G4M/Module/install FieldDisk
 ```
-また、磁場をワールド座標系のY軸方向に印加します。円筒形の空間座標系ではZ軸方向に対応します。
+また、磁場を**ワールド座標系**のY軸方向に印加します。
 ```
-/G4M/Module/FieldDisk/field 0 0 2 tesla
+/G4M/Module/FieldDisk/field 0 1.5 0 tesla
 ```
 これで磁場が印加されます。
-
 
 ### 水ファントムをParallel Worldに配置する
 先のチュートリアルで解説した内容と同じ手順ですが、水ファントムの場合を改めて手順を説明します。
@@ -187,9 +191,19 @@ PreInit> /Dynamic/Module/WaterPhantom/register  Phantom
 ```
 Idle> /G4M/Module/install  Phantom  paraWorld0  true
 ```
+
 `/G4M/Module/install`コマンドを使って実体化します。１番目の引数はモジュール名、２番目の引数はパラレルワールドの固有名、３番目のフラグがLayered-Massのジオメトリとして実体化することを表します。
 
+#### スコアリング結果例
 ```
+$ root A11.root
+root[] .ls
+root[] NT->Print()
+root[] NT->Draw("ix:iz","de","colz")
+root[] .q
+```
+
+![exampleA11ixizde](../images/exampleA11ixizde.png)
 
 以上
 

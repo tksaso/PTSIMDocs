@@ -46,6 +46,7 @@ Session: exit
 :linenos:
 #
 # (PreInit State)
+/control/verbose 1
 #
 # Material
 /control/execute ./macros/common/materials.mac
@@ -127,6 +128,9 @@ root[] SCT->Print()
 root[] SCT->Draw("x:y","de","colz")
 root[] .q
 ```
+
+図は、`/run/beamOn 1000`の場合です。
+![exampleA10xyde](../images/exampleA10xyde.png)
 
 #### Tips: SDの設定について
 `/G4M/Module/createSD`で作成されるSDは、`G4MDetectorSD`クラスが用いられています。こちらは水ファントムやDICOMモジュールの組み込み型SDと異なり、コマンドを用いて設定を変更できるようになっています。詳細は、[コマンドリファレンス](../cmd-reference.md#sensitivedetector-detectorsd)を参照してください。
