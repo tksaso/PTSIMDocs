@@ -14,6 +14,7 @@ PTSIM Documentation
    install.md
    tutorial.rst
    cmd-reference.md
-   how-to.rst
+   how_to.md
+   lecture.rst   
    faq.md
 

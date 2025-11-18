@@ -1,0 +1,15 @@
+# SampleGDMLwobbling.mac
+
+-  GDMLファイルのワブラー電磁石を利用する例題マクロファイルです。
+
+ 
+```
+$ ./bin/PTSdemo -i  SampleGDMLwobbling.mac
+Session: /run/beamOn 50
+```
+
+- SampleGDMLwobbling_t0.root, SampleGDMLwobbling_t1.rootを出力します。
+
+```{code-block} bash
+
+```

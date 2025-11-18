@@ -3,14 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-How to use, Practical guide
+Lecure Slides
 ===================================
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
-   overview.md
-   cmd-reference.md
-   faq.md
-
+   Lectures/G4_PTSIM2025_Kobe.md

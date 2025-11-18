@@ -18,6 +18,9 @@ PTSIM, Particle Therapy System Simultor Frameworkは、[Geant4](https://www.gean
 
 PTSIM開発の原点は、粒子線治療における精密線量計算ですが、一般的な放射線取扱の広範囲な分野に適用可能なソフトウェアです。
 
-![PTSIM-logo](./images/PTSIMlogo.png)
+PTSIMの情報は、下記のリンクを参照してください。
+[KEK Wiki PTSIM page](https://wiki.kek.jp/spaces/g4med/pages/5343876/PTSIM)
+
+![logo](../images/PTSIMlogo2.png)   
 
 

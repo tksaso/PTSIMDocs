@@ -12,7 +12,7 @@ PTSIMの実行は、Linux環境またはMac環境を前提としています。W
 
 これらのインストールについては、以下の手引きを参考にしてください。
 
-但し、OSバージョン等により手順が変わることがあります。
+但し、OSバージョン等により手順が変わることがあります。  
 [WSLでのインストール Geant4-v11.3](./Geant4/installWSL_Geant4_113.pdf)  
 [Macでのインストール Geant4-v11.3](./Geant4/installMac_Geant4_113.pdf)  
 
