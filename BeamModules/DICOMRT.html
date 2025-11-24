@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DICOM-RT (MyDynamicPortRTPSetting ) &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DICOM-RT (MyDynamicPortRTPSetting )</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/BeamModules/DICOMRT.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dicom-rt-mydynamicportrtpsetting">
+<h1>DICOM-RT (MyDynamicPortRTPSetting )<a class="headerlink" href="#dicom-rt-mydynamicportrtpsetting" title="Link to this heading"></a></h1>
+<p>現在、DICOM-RTに関するコマンドは、タグの解釈が装置によって異なる場合があるため、完全にはサポートされていません。PTSIMには、粒子線施設によってコードを開発して実装できるように、以下のコマンドを用意しています。</p>
+<section id="rt-plan">
+<h2>RT-Planデータファイルを読む<a class="headerlink" href="#rt-plan" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">RTPFile</span>  <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>filename:  RT-Planデータ名を記述したASCIIファイル名</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>モジュールにRT-Planデータのパラメタを適用する<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">RTPApply</span>
+</pre></div>
+</div>
+</section>
+<section id="rt-plan-room">
+<h2>RT-Planに従って治療室（Room）にビーム機器をインストールする<a class="headerlink" href="#rt-plan-room" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">RTPInstall</span>
+</pre></div>
+</div>
+</section>
+<section id="id">
+<h2>ビームIDを選択する<a class="headerlink" href="#id" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">beamid</span>  <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>id:  ビームID</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>RT-Planに記録されている参照ビーム一覧を表示する<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">printRefBeam</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>RT-Plan情報（タグや値）を表示する<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">printRTPInfo</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>参照点での線量値を出力する<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">printRefDose</span>  <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ofilename:  出力ファイル名</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>デバック用出力<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">RTPVerbose</span> <span class="p">{</span><span class="n">lvl</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>lvl:  デバックレベル</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

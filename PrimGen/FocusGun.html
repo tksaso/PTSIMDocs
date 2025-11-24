@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusGun &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">FocusGun</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/PrimGen/FocusGun.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="focusgun">
+<h1>FocusGun<a class="headerlink" href="#focusgun" title="Link to this heading"></a></h1>
+<p>FocusGunは，G4ParticleGunを使って実装されており，G4ParticleGunのコマンドが利用できる。加えて，焦点を持った初期粒子を発生することができる。</p>
+<section id="id1">
+<h2>ビームエネルギーのゆらぎをエネルギーの単位で設定する<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">energyfluc</span> <span class="o">&lt;</span><span class="n">dE</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">Unit</span><span class="p">:</span><span class="n">s</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>dE:  エネルギー揺らぎの値をガウス分布の標準偏差値で与える
+Default unit:  MeV</p>
+</section>
+<section id="xz">
+<h2>X方向の焦点位置となるZ座標を設定する<a class="headerlink" href="#xz" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">FocusDistanceX</span>  <span class="o">&lt;</span><span class="n">zX</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>zX:  X方向の焦点座標
+Default unit:  mm</p>
+</section>
+<section id="yz">
+<h2>Y方向の焦点位置となるZ座用を設定する<a class="headerlink" href="#yz" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">FocusDistanceY</span>  <span class="o">&lt;</span><span class="n">zY</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>zY:  Y方向の焦点座標
+Default unit:  mm</p>
+</section>
+<section id="id2">
+<h2>初期粒子発生座標と焦点位置が同じ場合は自動計算不能のため，発生する粒子の運動量方向を与える。<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">SpatialExpanseX</span>  <span class="o">&lt;</span><span class="n">ExpanseX</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">unit</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span>
+  <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">SpatialExpanseY</span>  <span class="o">&lt;</span><span class="n">ExpanseY</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">unit</span><span class="p">:</span><span class="n">d</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Expanse X, Expanse Y:  角度の単位で値をガウス分布の標準偏差値で与える。
+Default unit:  mrad</p>
+</section>
+<section id="ascii">
+<h2>ビームパラメタの設定をASCIIファイルから読み込む。<a class="headerlink" href="#ascii" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Beam</span><span class="o">/</span><span class="n">file</span>  <span class="o">&lt;</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>ファイル形式はG4MBeamGunと同様である。
+加えてG4MFocusGunに特有な設定は，コマンドで設定しなければならない。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

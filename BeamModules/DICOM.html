@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DICOM geometry &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DICOM geometry</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/BeamModules/DICOM.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dicom-geometry">
+<h1>DICOM geometry<a class="headerlink" href="#dicom-geometry" title="Link to this heading"></a></h1>
+<section id="dicom">
+<h2>DICOMジオメトリを選択する<a class="headerlink" href="#dicom" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">select</span>   <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>mname:   DICOM</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>DICOMデータのファイルリストを指定する<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">file</span> 　<span class="p">{</span><span class="n">ifilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ifilename:  CT画像ファイルの一覧を記述したASCIIファイル</p></li>
+</ul>
+</section>
+<section id="ct">
+<h2>CT座標系でのアイソセンターを指定する<a class="headerlink" href="#ct" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">isocente</span>　　<span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>x, y, z:  座標値， unit:  mm etc.</p></li>
+</ul>
+</section>
+<section id="t">
+<h2>Tデータで欠けているスライスを補償する<a class="headerlink" href="#t" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">complement</span>　 <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag:  true（補間する）</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>ボクセルサイズを設定する<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">mesh</span>  <span class="p">{</span><span class="n">size</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>size:  立方体の辺の長さ</p></li>
+<li><p>default unit :  mm</p></li>
+</ul>
+</section>
+<section id="ctxy">
+<h2>CTのピクセルをxy方向で結合する。<a class="headerlink" href="#ctxy" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">mesh</span><span class="o">/</span><span class="nb">bin</span>  <span class="p">{</span><span class="n">n</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>n:  結合ピクセル数</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>有効な画像領域を設定する。<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>有効な画像領域外のボクセルの物質は空気に置き換えられる。
+（トリミングするコマンドが追加実行されれば、設定した外側は削除される。）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winXmin</span>　　<span class="p">{</span><span class="nb">min</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winXmax</span>　　<span class="p">{</span><span class="nb">max</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winYmin</span>　　<span class="p">{</span><span class="nb">min</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winYmax</span>　　<span class="p">{</span><span class="nb">max</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winZmin</span>　　<span class="p">{</span><span class="nb">min</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">winZmax</span>　　<span class="p">{</span><span class="nb">max</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>min, max:  最小値、最大値,    unit:  mm etc.</p></li>
+</ul>
+</section>
+<section id="hu">
+<h2>空気のHU値を設定する。<a class="headerlink" href="#hu" title="Link to this heading"></a></h2>
+<p>このHU値は有効な画像領域が指定されたとき、その領域の外側のHU値として利用される。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">ctair</span> <span class="p">{</span><span class="n">ct</span><span class="p">:</span><span class="n">double</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ct:  空気のHU値</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>有効な画像領域をトリミングするためのフラグを設定する<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">trim</span>　　<span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag:  true　トリミング実効</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>HU値の範囲を設定する。<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>範囲外のHU値は指定された最小値または最大値に値が丸められる</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">minvalue</span>　　<span class="p">{</span><span class="n">minvalue</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>
+ <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">maxvalue</span>　　<span class="p">{</span><span class="n">maxvalue</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>minvalue, maxvalue:  最小、最大のHU値</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>患者ジオメトリの輪郭抽出をするためのフラグ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>ラベリングアルゴリズムによって、輪郭を判断しています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">label</span>　　<span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag: true　輪郭抽出を実行</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>輪郭抽出を実行する際のHU値の閾値<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">cutoff</span>　<span class="p">{</span><span class="n">ct</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ct:  HU値の閾値</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>HU-密度変換表ファイルを指定する<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">ct2density</span> 　<span class="p">{</span><span class="n">ifilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>CT2Densityファイルの書式:　data/Sample/Dicom/CT2Density.dat　　
+| {HU} |  {Density in g/cm3} |
+|—:| :—|
+|10   |  (データ点数)   |
+|-5000 |   0.0 |
+|-1000 |  1.21e-3 |
+|-98   |  0.93 |
+|-97   |  0.930486 |
+|14    |  1.03 |
+|23    |  1.031 |
+|100   |  1.119900 |
+|101   |  1.076200 |
+|1600  |  1.964200 |
+|3000  |  2.8	 |</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>HU値の範囲と物質との対応表ファイルを指定する<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">paramtype</span>   <span class="p">{</span><span class="n">paramtype_ifile</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>paramtypeファイルの書式:</p>
+<ul>
+<li><p>data/Sample/Dicom/CT2Water.dat</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="n">HU_L</span><span class="p">}</span>  <span class="p">{</span><span class="n">HU_H</span><span class="p">}</span>  <span class="p">{</span><span class="n">Mat</span><span class="p">}</span> <span class="p">{</span><span class="n">Corr</span><span class="o">.</span><span class="p">}</span>
+ <span class="mi">1</span> <span class="p">(</span><span class="n">データ点数</span><span class="p">)</span>
+ <span class="o">-</span><span class="mi">2048</span>   <span class="mi">4096</span>     <span class="n">H_2O</span>     <span class="mf">1.00</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>data/Sample/Dicom/CT2Tissue.dat</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> 27 (データ点数）
+ -2048	-951	Group01	1.051
+-950	-121	Group02	0.977
+-120	-83	Group03	0.948
+-82	-53	Group04	0.958
+-52	-23	Group05	0.968
+-22	7	Group06	0.976
+8	18	Group07	0.983
+19	79	Group08	0.993
+80	119	Group09	0.971
+120	199	Group10	1.002
+200	299	Group11	1.005
+300	399	Group12	1.010
+400	499	Group13	1.014
+500	599	Group14	1.018
+600	699	Group15	1.021
+700	799	Group16	1.025
+800	899	Group17	1.030
+900	999	Group18	1.033
+1000	1099	Group19	1.035
+1100	1199	Group20	1.038
+1200	1299	Group21	1.041
+1300	1399	Group22	1.043
+1400	1499	Group23	1.046
+1500	1599	Group24	1.048
+1600	1999	Group25	1.042
+2000	3060	Group26	1.049
+3061	4096	Group27	1.000	Number of lines
+{HU_L} {HU_H} {Mat} {Corr.}
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2>物質を低減するためのHU値のサンプリングを設定する<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">ctsamp</span>  <span class="p">{</span><span class="n">bit</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>bit:  HU値の間引き数</p></li>
+</ul>
+</section>
+<section id="hug-cm3">
+<h2>HU値と密度g/cm3の対応表での密度の分解能を決定する<a class="headerlink" href="#hug-cm3" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">densityResol</span>  <span class="p">{</span><span class="n">reso</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>reso:  密度の分解能（例　0.01）</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>ガントリー角を指定する<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">gantry</span>  <span class="p">{</span><span class="n">angle</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>angle:  ガントリー角度</p></li>
+<li><p>default unit:  deg</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>カウチ角を指定する<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">couchAngle</span>  <span class="p">{</span><span class="n">angle</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>angle:  角度</p></li>
+<li><p>default unit: deg</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>CTデータのデータオリエンテーションを設定する<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">dataOrientation</span>　 <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>type:  NONE.  HFS,   FSS, HFP, FFP</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>DICOMジオメトリのためのパラメタを更新する<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">update</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h2>ボクセルの可視化フラグを設定する<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">vis</span>   <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag: true = ボクセルが可視化される.  false = エンベロープのみ可視化</p></li>
+</ul>
+</section>
+<section id="id16">
+<h2>物質名を変更する<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">renameMaterial</span>　<span class="p">{</span><span class="n">str1</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>   <span class="p">{</span><span class="n">str2</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>str1:  元の物質名</p></li>
+<li><p>str2:  新しい物質名</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2>DICOMジオメトリに使用される物質の一覧を表示する<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">showMatList</span>　　<span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">level</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>default ofilename:  stdout　出力ファイル名</p></li>
+<li><p>default level: 1　出力レベル</p></li>
+</ul>
+</section>
+<section id="rt-structure">
+<h2>RT-Structureの処理を有効化する。<a class="headerlink" href="#rt-structure" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">rts</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id18">
+<h2>RT-Structureを読む（実験）<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">RTS</span><span class="o">/</span><span class="n">file</span>  <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>filename:  RT-Structureデータのファイル名を記述したASCIIファイル名</p></li>
+</ul>
+</section>
+<section id="id19">
+<h2>デバック用フラグ<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">RTS</span><span class="o">/</span><span class="n">verbose</span>   <span class="p">{</span><span class="n">level</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>lvl:  デバックレベル</p></li>
+</ul>
+</section>
+<section id="roi-id">
+<h2>それぞれのROI-IDに優先順位を設定する。<a class="headerlink" href="#roi-id" title="Link to this heading"></a></h2>
+<p>ROI-IDは、PTSIMでのROI領域をラベリングしたときのラベル番号に使われる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">RTS</span><span class="o">/</span><span class="n">setROIPriority</span>  <span class="n">roi0</span>  <span class="n">roi1</span> <span class="o">....</span> <span class="n">roiN</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>roi0-roiN:  優先順位低→高（上書き）</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>CT値の置き換え<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<p>CTでの患者台の削除やデバッグ目的のために指定ROI番号の領域のHU値を指定のHU値に置き換える。rtsコマンドがtrueの場合、このコマンドが適用される。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">roiCtValReplacer</span>　<span class="p">{</span><span class="n">ifile</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>ifile:  ROI番号と置き換えるHU値の対応表が記述されたファイル</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+<section id="dicom-geometry-and-couch-geometry">
+<h1>DICOM geometry and Couch geometry<a class="headerlink" href="#dicom-geometry-and-couch-geometry" title="Link to this heading"></a></h1>
+<section id="id21">
+<h2>DICOMモジュール直下流にカウチモジュールを配置する手順<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">Couch</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span>  <span class="n">Couch</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">attachZ</span> <span class="n">DICOM</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

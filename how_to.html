@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How-to : Example macros &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Lecure Slides" href="lecture.html" />
+    <link rel="prev" title="Beam-Module-file format" href="geometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to : Example macros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">実行方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">例題マクロファイル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-modeling">Beam modeling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spot-scan-beam">Spot Scan beam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#line-scan-beam">Line Scan beam</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-line-and-patient-modeling">Beam line and patient modeling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#beam-module-geometry">Beam-module geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdml-beam-module-geometry">GDML Beam-module geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dicom-ct">DICOM-CT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icrp145-mesh-phantom">ICRP145 mesh phantom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parallel-world">Parallel World</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#field-in-paralell-world">Field in Paralell World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#layered-mass-geometry">Layered Mass Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scoring-in-parallel-world">Scoring in Parallel World</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flexible-scoring">Flexible Scoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sd-attachment">SD Attachment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggersd">TriggerSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ri-bit">RI bit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#phsp-beam">PHSP beam</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iaea-phsp-data">IAEA Phsp data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-house-phsp-data">In house Phsp data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How-to : Example macros</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/how_to.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="how-to-example-macros">
+<h1>How-to : Example macros<a class="headerlink" href="#how-to-example-macros" title="Link to this heading"></a></h1>
+<p>PTSIM付属のマクロファイルを紹介します。</p>
+<section id="id1">
+<h2>実行方法<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。</p>
+</section>
+<section id="id2">
+<h2>例題マクロファイル<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>PTSIMコードに付属するマクロファイルをコピーして用います。例えば、マクロファイルが、<code class="docutils literal notranslate"><span class="pre">Sample0.mac</span></code>である場合は、以下のようにマクロファイルを実行ディレクトリにコピーして実行します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp  ./macros/DynamicPort/Sample0.mac  .
+</pre></div>
+</div>
+<p>実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -m  Sample0.mac
+Or
+$ ./bin/PTSdemo  -i  Sample0.mac
+</pre></div>
+</div>
+<p><em>補足</em></p>
+<ol class="arabic simple">
+<li><p>例題によっては、設定用の他のファイルが必要となる場合があります。</p></li>
+<li><p>例題マクロファイル内で、別のマクロファイルを呼び出す場合があります。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="beam-modeling">
+<h2>Beam modeling<a class="headerlink" href="#beam-modeling" title="Link to this heading"></a></h2>
+<section id="spot-scan-beam">
+<h3>Spot Scan beam<a class="headerlink" href="#spot-scan-beam" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleScan.html"><span class="std std-doc">SampleScan.mac</span></a><br>
+スポットスキャニングの例題マクロファイルです。</p></li>
+</ul>
+</section>
+<section id="line-scan-beam">
+<h3>Line Scan beam<a class="headerlink" href="#line-scan-beam" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleLineScan.html"><span class="std std-doc">SampleLineScan.mac</span></a><br>
+ラスターキャニングの例題マクロファイルです。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="beam-line-and-patient-modeling">
+<h2>Beam line and patient modeling<a class="headerlink" href="#beam-line-and-patient-modeling" title="Link to this heading"></a></h2>
+<section id="beam-module-geometry">
+<h3>Beam-module geometry<a class="headerlink" href="#beam-module-geometry" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/Sample0.html"><span class="std std-doc">Sample0.mac</span></a><br>
+Passive-Wobblingのビームラインの例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/Sample1.html"><span class="std std-doc">Sample1.mac</span></a><br>
+Passive-Wobblingのビームラインの例題マクロファイルですが、最初は治療室(G4Room)のみ実体化されています。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleWobbler.html"><span class="std std-doc">SampleWobbler.mac</span></a><br>
+Wobbler-Magnetの例題マクロファイルです。</p></li>
+</ul>
+<!--
+ - [SampleRotating.mac](./HowTo/SampleRotating.md)<br>
+  回転モジュレータの例題マクロファイルです。
+-->
+</section>
+<section id="gdml-beam-module-geometry">
+<h3>GDML Beam-module geometry<a class="headerlink" href="#gdml-beam-module-geometry" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleGDMLr.html"><span class="std std-doc">SampleGDMLr.mac</span></a><br>
+GDMLファイルのジオメトリを構築する例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleGDMLw.html"><span class="std std-doc">SampleGDMLw.mac</span></a><br>
+実体化したビームモジュールのオメトリをGDMLファイルに出力する例題マクロファイルです。</p></li>
+</ul>
+<!--
+ - [SampleGDMLwobbling.mac](./HowTo/SampleGDMLwobbling.md)<br>
+ GDMLファイルのワブラー電磁石を利用する例題マクロファイルです。  
+-->
+<!--
+#### VTK Legacy format(Voxel geometry)
+ - [SampleGeomScan.mac](./HowTo/SampleGeomScan.md)<br>
+ ジオメトリをVTK Legacy形式のボクセルデータで出力する例題マクロファイルです。
+
+ - [SampleScoreVTK.mac](./HowTo/SampleScoreVTK.md)<br>
+-->
+</section>
+<section id="dicom-ct">
+<h3>DICOM-CT<a class="headerlink" href="#dicom-ct" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/Sample2.html"><span class="std std-doc">Sample2.mac</span></a><br>
+DICOM-CTジオメトリの例題マクロファイルです。DICOM-CTデータが必要です。<br>
+<a class="reference internal" href="#../Tutorial/exampleA1.md"><span class="xref myst">ExampleA5</span></a>の解説を参照してください。</p></li>
+</ul>
+<!--
+#### DICOM-CT w/ RTS
+ - [Sample4.mac](./HowTo/Sample4.md)<br>
+  DICOM-RTS
+
+ - [SampleRoIDICOM.mac](./HowTo/SampleRoIDICOM.md)<br>
+DICOM, RTS, RoI-material assignment
+
+ - [SampleRoIRepl.mac](./HowTo/SampleRoIRepl.md)<br>
+DICOM, RTS, RoI-CTvalue replacement
+
+#### DICOM-CT and RTDose
+ - [SampleRTDose.mac](./HowTo/SampleRTDose.md)<br>
+ SampleRTDose.mac: GridInfo for RTDose
+-->
+</section>
+<section id="icrp145-mesh-phantom">
+<h3>ICRP145 mesh phantom<a class="headerlink" href="#icrp145-mesh-phantom" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleICRP145.html"><span class="std std-doc">SampleICRP145.mac</span></a><br>
+ICRP145メッシュファントムジオメトリの例題マクロファイルです。ICRP145dataが必要です。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="parallel-world">
+<h2>Parallel World<a class="headerlink" href="#parallel-world" title="Link to this heading"></a></h2>
+<section id="field-in-paralell-world">
+<h3>Field in Paralell World<a class="headerlink" href="#field-in-paralell-world" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SamplePWField.html"><span class="std std-doc">SamplePWField.mac</span></a><br>
+水ファントムをパラレルワールドに配置して、その領域に磁場を印加する例題マクロファイルです。<a class="reference internal" href="#../Tutorial/exampleA11.md"><span class="xref myst">exampleA11</span></a>と基本的に同じです。</p></li>
+</ul>
+</section>
+<section id="layered-mass-geometry">
+<h3>Layered Mass Geometry<a class="headerlink" href="#layered-mass-geometry" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SamplePWLayer.html"><span class="std std-doc">SamplePWLayer.mac</span></a><br>
+水ファントムをマスワールドに配置して、パラレルワールドに物体を配置して水ファントムに物体を埋め込む例題マクロです。基本的に<a class="reference internal" href="#../Tutorial/exampleA7.md"><span class="xref myst">exampleA7</span></a>と同じです。</p></li>
+</ul>
+</section>
+<section id="scoring-in-parallel-world">
+<h3>Scoring in Parallel World<a class="headerlink" href="#scoring-in-parallel-world" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="#./HowTo/SamplePWScore.md"><span class="xref myst">SamplePWScore.mac</span></a><br></p></li>
+<li><p><a class="reference internal" href="#./HowTo/SamplePWScore2.md"><span class="xref myst">SamplePWScore2.mac</span></a><br></p></li>
+<li><p><a class="reference internal" href="#./HowTo/SamplePWScore3.md"><span class="xref myst">SamplePWScore3.mac</span></a><br></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="flexible-scoring">
+<h2>Flexible Scoring<a class="headerlink" href="#flexible-scoring" title="Link to this heading"></a></h2>
+<section id="sd-attachment">
+<h3>SD Attachment<a class="headerlink" href="#sd-attachment" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleAttachSD.html"><span class="std std-doc">SampleAttachSD.mac</span></a><br>
+基本的に<a class="reference internal" href="#../Tutorial/exampleA10.md"><span class="xref myst">exampleA10</span></a>と同じです。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleMultiDet.html"><span class="std std-doc">SampleMultiDet.mac</span></a><br>
+複数スコアボリュームの例題マクロファイル</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleMultiDet2.html"><span class="std std-doc">SampleMultiDet2.mac</span></a>
+複数スコアボリュームの例題マクロファイル</p></li>
+</ul>
+</section>
+<section id="triggersd">
+<h3>TriggerSD<a class="headerlink" href="#triggersd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleTriggerSD.html"><span class="std std-doc">SampleTriggerSD.mac</span></a><br>
+基本的に<a class="reference internal" href="#../Tutorial/exampleA9.md"><span class="xref myst">exampleA10</span></a>と同じです。</p></li>
+</ul>
+</section>
+<section id="ri-bit">
+<h3>RI bit<a class="headerlink" href="#ri-bit" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleRIbit.html"><span class="std std-doc">SampleRIbit.mac</span></a><br>
+RIをTrackInformationで記録します。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="phsp-beam">
+<h2>PHSP beam<a class="headerlink" href="#phsp-beam" title="Link to this heading"></a></h2>
+<section id="iaea-phsp-data">
+<h3>IAEA Phsp data<a class="headerlink" href="#iaea-phsp-data" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/Sample6w.html"><span class="std std-doc">Sample6w.mac</span></a><br>
+IAEAphspデータ出力の例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/Sample6r.html"><span class="std std-doc">Sample6r.mac</span></a><br>
+Sample6w.macのIAEAphsp出力データを読み込む例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleIAEArw.html"><span class="std std-doc">SampleIAEArw.mac</span></a><br>
+IAEAphspを読み込みとIAEAphsp出力を繰り返す例題マクロファイルです。</p></li>
+</ul>
+</section>
+<section id="in-house-phsp-data">
+<h3>In house Phsp data<a class="headerlink" href="#in-house-phsp-data" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="HowTo/SampleEvtDumper.html"><span class="std std-doc">SampleEvtDumper.mac</span></a><br>
+独自フォーマットのPHSPファイル出力の例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleEvtDumper2.html"><span class="std std-doc">SampleEvtDumper2.mac</span></a><br>
+独自フォーマットのPHSPファイル出力の例題マクロファイルです。</p></li>
+<li><p><a class="reference internal" href="HowTo/SampleEvtFile.html"><span class="std std-doc">SampleEvtFile.mac</span></a><br>
+独自フォーマットのPHSPファイルを読み込む例題マクロファイルです。</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="geometry.html" class="btn btn-neutral float-left" title="Beam-Module-file format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lecture.html" class="btn btn-neutral float-right" title="Lecure Slides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

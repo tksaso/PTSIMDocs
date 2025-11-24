@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SampleAttachSD.mac &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SampleAttachSD.mac</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/HowTo/SampleAttachSD.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="sampleattachsd-mac">
+<h1>SampleAttachSD.mac<a class="headerlink" href="#sampleattachsd-mac" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>基本的に<a class="reference internal" href="../Tutorial/exampleA10.html"><span class="std std-doc">exampleA10</span></a>と同じです。</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#======================================================================================</span>
+<span class="c1"># SampleAttachSD.mac</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  (PreInit State)</span>
+<span class="c1">#</span>
+<span class="c1"># -------------------------------------------------------------------------------------</span>
+<span class="c1"># [OP]Verbose settings</span>
+<span class="c1"># -------------------------------------------------------------------------------------</span>
+/control/verbose<span class="w"> </span><span class="m">1</span>
+/run/verbose<span class="w"> </span><span class="m">1</span>
+/tracking/verbose<span class="w"> </span><span class="m">0</span>
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA]Material</span>
+<span class="c1">#======================================================================================</span>
+/control/execute<span class="w"> </span>./macros/common/materials.mac
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA]PhysicsList</span>
+<span class="c1">#======================================================================================</span>
+/control/execute<span class="w"> </span>./macros/common/phys.mac
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA]Particle Therapy System Selection and Beam Module Registration</span>
+<span class="c1">#======================================================================================</span>
+/G4M/System<span class="w"> </span>DynamicPort
+/control/execute<span class="w">  </span>./macros/DynamicPort/beamModule0.mac
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA]Run Initialize</span>
+<span class="c1">#======================================================================================</span>
+/run/initialize
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  (Idle State)</span>
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA]Beam Module Implmentation</span>
+<span class="c1">#======================================================================================</span>
+/G4M/Module/list
+<span class="c1"># -----------------------------------------</span>
+<span class="c1"># Water Phantom settings and installation</span>
+<span class="c1"># ----------------------------------------- </span>
+<span class="c1">## Water Phantom Size (Half length)</span>
+/G4M/Module/Phantom/size<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">250</span>.0<span class="w"> </span>mm
+<span class="c1">## Water Phantom SD Size (Half length) </span>
+/G4M/Module/Phantom/sdsize<span class="w"> </span><span class="m">150</span>.0<span class="w"> </span><span class="m">150</span>.0<span class="w"> </span><span class="m">250</span>.0<span class="w"> </span>mm
+<span class="c1">## Segmentation of water phantom ( Nx, Ny, Nz )</span>
+/G4M/Module/Phantom/dim<span class="w"> </span><span class="m">300</span>.<span class="w"> </span><span class="m">300</span>.<span class="w"> </span><span class="m">500</span>.
+<span class="c1">## Installation of WaterPhantom. </span>
+/G4M/Module/install<span class="w"> </span>WaterPhantom
+<span class="c1">#</span>
+<span class="c1"># -----------------------------------------</span>
+<span class="c1"># Installation of the other modules</span>
+<span class="c1"># ----------------------------------------- </span>
+/G4M/Module/install<span class="w"> </span>Extract
+/G4M/Module/install<span class="w"> </span>Scatter
+/G4M/Module/install<span class="w"> </span>WobblerX
+/G4M/Module/install<span class="w"> </span>WobblerY
+/G4M/Module/install<span class="w"> </span>MainMonitor
+/G4M/Module/install<span class="w"> </span>SECMonitor
+/G4M/Module/install<span class="w"> </span>FlatMonitor
+/G4M/Module/install<span class="w"> </span>Collimator
+/G4M/Module/install<span class="w"> </span>MLC
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA] Beam Parameters</span>
+<span class="c1">#======================================================================================</span>
+/control/execute<span class="w"> </span>macros/DynamicPort/particleGun.mac
+<span class="c1">#</span>
+<span class="c1"># -------------------------------------------------------------------------------------</span>
+<span class="c1"># [OP] ROOT Output file Name</span>
+<span class="c1"># -------------------------------------------------------------------------------------</span>
+/My/runaction/dumpfile<span class="w"> </span>SampleAttachSD.root
+<span class="c1">#</span>
+<span class="c1">#======================================================================================</span>
+<span class="c1"># [MA] BeamOn</span>
+<span class="c1">#======================================================================================</span>
+/My/runaction/hist/enable<span class="w"> </span>JST<span class="w">     </span><span class="nb">true</span>
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>de<span class="w">  </span>F<span class="w">  </span>keV
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>ix<span class="w">  </span>I<span class="w"> </span>
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>iy<span class="w">  </span>I<span class="w"> </span>
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>iz<span class="w">  </span>I<span class="w"> </span>
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>triggerid<span class="w"> </span>I
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>triggerx<span class="w"> </span>F<span class="w"> </span>mm
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>triggery<span class="w"> </span>F<span class="w"> </span>mm
+/My/runaction/ntuple/addColumn<span class="w"> </span>JST<span class="w"> </span>triggerz<span class="w"> </span>F<span class="w"> </span>mm
+<span class="c1">#</span>
+<span class="c1"># Geometrical Scorer ----</span>
+/G4M/Module/select<span class="w">     </span>Scatter
+/G4M/Module/dumpLV<span class="w">     </span>Scatter
+/G4M/Module/createSD<span class="w">   </span>ScatterSD<span class="w"> </span>HitsCollection
+/G4M/Module/selectLV<span class="w">   </span>Scatter<span class="w">  </span><span class="m">0</span>
+/G4M/Module/attachSD<span class="w">   </span>ScatterSD
+<span class="c1">##</span>
+/My/runaction/ntuple/create<span class="w"> </span>SCT<span class="w"> </span>ScatterSD/HitsCollection
+/My/runaction/ntuple/addColumn<span class="w"> </span>SCT<span class="w"> </span>evno<span class="w"> </span>I
+/My/runaction/ntuple/addColumn<span class="w"> </span>SCT<span class="w"> </span>pid<span class="w"> </span>I
+/My/runaction/ntuple/addColumn<span class="w"> </span>SCT<span class="w"> </span>de<span class="w">  </span>F<span class="w">  </span>keV
+/My/runaction/ntuple/addColumn<span class="w"> </span>SCT<span class="w"> </span>x<span class="w">  </span>F<span class="w"> </span>mm<span class="w"> </span>
+/My/runaction/ntuple/addColumn<span class="w"> </span>SCT<span class="w"> </span>y<span class="w">  </span>F<span class="w"> </span>mm
+<span class="c1">##</span>
+<span class="c1">##/run/beamOn 1</span>
+/run/beamOn<span class="w"> </span><span class="m">10000</span>
+<span class="c1">#</span>
+<span class="c1"># --EOF----------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

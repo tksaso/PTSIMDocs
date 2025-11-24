@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example A6(ParallelWorld-Score） &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example A7(Layered-Mass）" href="exampleA7.html" />
+    <link rel="prev" title="Example A5(DICOM-CTジオメトリ）" href="exampleA5.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="launchOpt.html">起動オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA0.html">Example A0(基本構成)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA1.html">Example A1(ファントム/スコア）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA2.html">Example A2(初期粒子発生GPS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA3.html">Example A3(ビーム機器登録/操作）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA4.html">Example A4(GDMLビーム機器）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA5.html">Example A5(DICOM-CTジオメトリ）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example A6(ParallelWorld-Score）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">例題マクロファイル</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">マクロファイルの解説</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA7.html">Example A7(Layered-Mass）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA8.html">Example A8(Scan/Raster-Beam）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA9.html">Example A9(TriggerSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA10.html">Example A10(attachSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA11.html">Example A11(Layered-Mass w/ MagField）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Example A6(ParallelWorld-Score）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorial/exampleA6.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="example-a6-parallelworld-score">
+<h1>Example A6(ParallelWorld-Score）<a class="headerlink" href="#example-a6-parallelworld-score" title="Link to this heading"></a></h1>
+<p>Geant4では通常は、ジオメトリのオーバラップが許されませんが、実体が置かれたシミュレーション空間と並列するパラレルワールドを用いることで、自由なスコアリング領域を定義することが可能です。</p>
+<p>ここでは、パラレルワールドの作成方法とスコアリングへの適用方法を解説します。</p>
+<p><strong>パラレルワールド・スコアリング</strong></p>
+<ul class="simple">
+<li><p>パラレルワールドの作成</p></li>
+<li><p>パラレルワールド用スコアリングプロセスの有効化</p></li>
+<li><p>パラレルワールドでのスコアリングジオメトリ構築</p></li>
+<li><p>スコア方法</p></li>
+</ul>
+<p>以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。</p>
+<section id="id1">
+<h2>例題マクロファイル<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>PTSIMコードに付属するマクロファイル<code class="docutils literal notranslate"><span class="pre">exampleA6.mac</span></code>をコピーして用います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp  ./macros/tut/exampleA6.mac  .
+</pre></div>
+</div>
+<p>実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -i  exampleA6.mac
+</pre></div>
+</div>
+<p>簡素設定のために、治療室のみの体系となっていますが、治療室にビーム機器などが配置されていてもパラレルワールドのスコアリングは問題なく機能します。</p>
+<p><img alt="exampleA61" src="../_images/exampleA61.png" /></p>
+<p>この状態ではパラレルワールドのボリュームが見えていない状態です。
+パラレルワールドのスコアリングボリュームを可視化します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="o">/</span><span class="n">vis</span><span class="o">/</span><span class="n">drawVolume</span>  <span class="n">worlds</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/vis/drawVolume</span></code>コマンドの引数を<code class="docutils literal notranslate"><span class="pre">worlds</span></code>とすると、パラレルワールドのボリュームも表示できます。
+下記の表示では、治療室に板上のジオメトリが配置されています。可視化をスキップしていますが、この板は格子状に切り分けられており、セルでの粒子情報をスコアできるようになっています。</p>
+<p><img alt="exampleA62" src="../_images/exampleA62.png" /></p>
+<p>終了</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<section id="id2">
+<h3>マクロファイルの解説<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>解説するコマンド部分のみを抜粋して説明します。
+このマクロファイルでは、実空間(Mass-world)は治療室のみで、パラレルワールドに水ファントムのビームモジュールをスコアリングボリュームとして配置します。水ファントムの物質は無視されてスコアリングのみに用いられます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#</span>
+<span class="linenos"> 2</span><span class="c1"># (PreInit State)</span>
+<span class="linenos"> 3</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">verbose</span> <span class="mi">1</span>
+<span class="linenos"> 4</span><span class="c1">#</span>
+<span class="linenos"> 5</span><span class="c1"># Material</span>
+<span class="linenos"> 6</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">materials</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos"> 7</span><span class="c1">#</span>
+<span class="linenos"> 8</span><span class="c1"># PhysicsList</span>
+<span class="linenos"> 9</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">phys</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos">10</span><span class="c1">#</span>
+<span class="linenos">11</span><span class="c1"># System and module registration</span>
+<span class="linenos">12</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">System</span> <span class="n">DynamicPort</span>
+<span class="linenos">13</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Room</span><span class="o">/</span><span class="n">register</span> <span class="mf">525.</span>  <span class="mf">525.</span>  <span class="mf">3550.</span> <span class="n">mm</span>
+<span class="linenos">14</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">WaterPhantom</span><span class="o">/</span><span class="n">register</span> <span class="n">Phantom</span>
+<span class="linenos">15</span><span class="c1">#</span>
+<span class="linenos">16</span><span class="c1"># Create Parallel World</span>
+<span class="linenos">17</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">DetConstruction</span><span class="o">/</span><span class="n">createPW</span>  <span class="n">paraWorld0</span>
+<span class="linenos">18</span><span class="c1">#</span>
+<span class="linenos">19</span><span class="c1"># Activate Parallel World Process</span>
+<span class="linenos">20</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">pwProcess</span>     <span class="n">paraWorld0</span>   <span class="n">false</span>
+<span class="linenos">21</span><span class="c1">#</span>
+<span class="linenos">22</span><span class="c1">#</span>
+<span class="linenos">23</span><span class="c1"># Run Initialize</span>
+<span class="linenos">24</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">initialize</span>
+<span class="linenos">25</span><span class="c1">#</span>
+<span class="linenos">26</span><span class="c1"># (PreInit State)</span>
+<span class="linenos">27</span><span class="c1">#</span>
+<span class="linenos">28</span><span class="c1"># Primary particle</span>
+<span class="linenos">29</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span> <span class="n">GPS</span>
+<span class="linenos">30</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">gps</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos">31</span><span class="c1">#</span>
+<span class="linenos">32</span><span class="c1"># Scoring volume using WaterPhantom</span>
+<span class="linenos">33</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">size</span>   <span class="mf">500.</span> <span class="mf">100.</span> <span class="mf">3550.0</span> <span class="n">mm</span>
+<span class="linenos">34</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">dim</span>    <span class="mf">100.</span>   <span class="mf">1.</span>  <span class="mf">710.</span>
+<span class="linenos">35</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">material</span> <span class="n">G4_AIR</span>
+<span class="linenos">36</span><span class="c1">#</span>
+<span class="linenos">37</span><span class="c1"># Install in the ParallelWorld</span>
+<span class="linenos">38</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span>  <span class="n">Phantom</span>  <span class="n">paraWorld0</span>
+<span class="linenos">39</span><span class="c1">#</span>
+<span class="linenos">40</span><span class="c1"># Scoring</span>
+<span class="linenos">41</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">dumpfile</span>      <span class="n">A6</span><span class="o">.</span><span class="n">root</span>
+<span class="linenos">42</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">merge</span>  <span class="n">true</span>
+<span class="linenos">43</span><span class="c1">#</span>
+<span class="linenos">44</span><span class="c1"># Track analysis</span>
+<span class="linenos">45</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">create</span>    <span class="n">NT</span> <span class="n">Phantom</span><span class="o">/</span><span class="n">HitsCollection</span> 
+<span class="linenos">46</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">pid</span>  <span class="n">I</span>
+<span class="linenos">47</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">ix</span>   <span class="n">I</span>
+<span class="linenos">48</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">iz</span>   <span class="n">I</span>
+<span class="linenos">49</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">de</span>   <span class="n">F</span>  <span class="n">keV</span>
+<span class="linenos">50</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showScColumn</span> <span class="n">NT</span>
+<span class="linenos">51</span><span class="c1">#</span>
+<span class="linenos">52</span><span class="c1"># BeamOn</span>
+<span class="linenos">53</span><span class="c1">#/run/beamOn 100</span>
+<span class="linenos">54</span><span class="c1">#</span>
+</pre></div>
+</div>
+<section id="parallel-world">
+<h4>Parallel Worldを作成する<a class="headerlink" href="#parallel-world" title="Link to this heading"></a></h4>
+<p>パラレルワールドの作成は、以下のようにパラレルワールドにつける固有名を引数にコマンドを実行します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">DetConstruction</span><span class="o">/</span><span class="n">createPW</span>  <span class="n">paraWorld0</span>
+</pre></div>
+</div>
+<p>この例では、固有名は<em>paraWorld0</em>となります。複数のパラレルワールドを作成することができ、後に作成したものが呼び出し時に優先されます。複数のパラレルワールドを作成すると、粒子追跡の観点からパフォーマンスが低下しますので利用する際には検討が必要です。</p>
+</section>
+<section id="id3">
+<h4>Parallel World用のプロセスを有効化<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<p>粒子をトラッキングする際にパラレルワールドを参照するように、専用のプロセスを追加します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">pwProcess</span>     <span class="n">paraWorld0</span>   <span class="n">false</span>
+</pre></div>
+</div>
+<p>１番目の引数がパラレルワールドの固有名です。２番目の引数はパラレルワールドの物質を利用するかどうかを指定します。スコアリング用であれば、物質は不要であるので<code class="docutils literal notranslate"><span class="pre">false</span></code>にします。</p>
+</section>
+<section id="id4">
+<h4>パラレルワールドでのスコアリングジオメトリ構築<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>ジオメトリそのものは、通常のビームモジュールの扱いと変わりません。今回は、水ファントムのビームモジュールを用います。</p>
+<ul class="simple">
+<li><p>水ファントムビームモジュールの登録</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">WaterPhantom</span><span class="o">/</span><span class="n">register</span> <span class="n">Phantom</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>水ファントムの設定</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">size</span>   <span class="mf">500.</span> <span class="mf">100.</span> <span class="mf">3550.0</span> <span class="n">mm</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">dim</span>    <span class="mf">100.</span>   <span class="mf">1.</span>  <span class="mf">710.</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">material</span> <span class="n">G4_AIR</span>
+</pre></div>
+</div>
+<p>これらは通常の水ファントム設定と同じ手順です。</p>
+<ul class="simple">
+<li><p>パラレルワールドへの実体化
+設定した水ファントムのジオメトリを、パラレルワールドで実体化します。</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span>  <span class="n">Phantom</span>  <span class="n">paraWorld0</span>
+</pre></div>
+</div>
+<p>１番目の引数が、配置するビームモジュール名<code class="docutils literal notranslate"><span class="pre">Phantom</span></code>、２番目の引数がパラレルワールドの固有名<code class="docutils literal notranslate"><span class="pre">paraWorld0</span></code>です。
+通常の<code class="docutils literal notranslate"><span class="pre">install</span></code>コマンドとの違いは、パラレルワールドの固有名を指定するところだけです。</p>
+<ul class="simple">
+<li><p>スコアリング
+スコアリングに関するコマンド部分は、通常の手順と全く同じです。</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">dumpfile</span>      <span class="n">A6</span><span class="o">.</span><span class="n">root</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">merge</span>  <span class="n">true</span>
+<span class="c1">#</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">create</span>    <span class="n">NT</span> <span class="n">Phantom</span><span class="o">/</span><span class="n">HitsCollection</span> 
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">pid</span>  <span class="n">I</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">ix</span>   <span class="n">I</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">iz</span>   <span class="n">I</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">de</span>   <span class="n">F</span>  <span class="n">keV</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showScColumn</span> <span class="n">NT</span>
+<span class="c1">#</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/run/beamOn</span> <span class="pre">10000</span></code>の結果の例を示します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ root A6.root
+root[] NT-&gt;Draw(&quot;ix:iz&quot;,&quot;de&quot;,&quot;colz&quot;)
+</pre></div>
+</div>
+<p><img alt="exampleA6de" src="../_images/exampleA6de.png" /></p>
+<p>以上</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleA5.html" class="btn btn-neutral float-left" title="Example A5(DICOM-CTジオメトリ）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleA7.html" class="btn btn-neutral float-right" title="Example A7(Layered-Mass）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/PrimGen/ScanBeamMagnet2.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>2)G4ScanningMagnet
+電磁石のモジュールへの磁場値を設定する。
+＊磁場値は、デフォルトでは電磁石の位置と磁場の長さ、粒子エネルギーと指定されたアイソセンター面での座標から、近似式で計算されて用いられる。近似式の補正を行うために、(1)手動で磁場値を設定するコマンド、(2)磁場計算の近似式に補正係数を設定するコマンドが用意されている。これらのコマンドは、各電磁石において用いる。</p>
+<p>(2-1)手動で磁場値を設定するコマンド
+以下{module_name}は、電磁石のビームモジュール名を表す。
+/G4M/Module/{module_name}/fiedvalue  {field_value:d}  {unit:s}
+field_value:  磁場値
+unit:  T etc.</p>
+<p>アイソセンターから電磁石モジュールまでの距離を設定する。この距離がスキャニングのための磁場値を計算する際に用いられる。
+/G4M/Module/{module_name}/distance  {dist:d}  {unit:s}
+dist: 距離
+unit:  m etc.</p>
+<p>次の2つのコマンドで、スポットの位置とビームの運動エネルギーの入力データ点を手動で指定する
+アイソセンター面でのスポット位置を与える
+/G4M/Module/{module_name}/putXFieldMap {idx:i}  {xval:d} {unit:s}
+idx:  インデックス番号
+xval:  スポットの位置（座標）
+unit:  mm etc.</p>
+<p>ビームの運動エネルギーを与える
+/G4M/Module/{module_name}/putYFieldMap {idy:i}  {yval:d} {unit:s}
+idy:  インデックス番号
+yval:  ビームの運動エネルギー
+unit:  MeV etc.</p>
+<p>idx, idyで指定したスポット位置とビーム運動エネルギーでの磁場値を指定する
+/G4M/Module/{module_name}/putVaueFieldMap {idx:i} {idy:i} {value:d} {unit:s}
+idx:  スポット位置のインデックス番号
+idy:  ビームの運動エネルギーのインデックス番号
+value:  磁場値
+unit:  T etc.</p>
+<p>磁場の極性を設定する。
+/G4M/Module/{module_name}/sign  {sign:i}
+sign:  +1 又は -1</p>
+<p>アイソセンター面でのスポットの位置とビームの運動エネルギーで関連付けされる磁場値の表を作成する
+/G4M/Module/{module_name}/createFieldMap  {interpolation:b}
+interpolation:  データ間を補間（true）</p>
+<p>磁場値の対応表を削除する
+/G4M/Module/{module_name}/deleteFieldMap</p>
+<p>磁場値をASCIIファイルに保存する
+/G4M/Module/{module_name}/storeFieldMap  {file_name:s}
+file_name:  出力ファイル名</p>
+<p>ASCIIファイルから磁場値の表を読み込む
+/G4M/Module/{module_name}/retrieveFieldMap  {file_name:s}</p>
+<p>(2-2)磁場計算の近似式に補正係数を設定するコマンド
+磁場の補正係数表のスポット位置を与える
+/G4M/Module/{module_name}/putXFieldCoeff {idx:i}  {xval:d} {unit:s}
+idx:  インデックス番号,　　xval:  スポット位置
+unit:  mm etc.</p>
+<p>磁場補正係数表のビームの運動エネルギー値を与える
+/G4M/Module/{module_name}/putYFieldCoeff {idy:i}  {yval:d} {unit:s}
+idy:  インデックス番号
+yval:  ビームの運動エネルギー
+unit:  MeV etc.</p>
+<p>磁場補正係数表のidx, idyに対応する補正係数を与える
+/G4M/Module/{module_name}/putVaueFieldCoeff {idx:i} {idy:i} {value:d}
+idx:  スポット位置のインデックス番号
+idy:  ビームの運動エネルギーのインデックス番号
+value:  補正係数値</p>
+<p>スポット位置とビームの運動エネルギーに対応する磁場値への補正係数表を作成する
+/G4M/Module/{module_name}/createFieldCoeff  {interpolation:b}
+interpolation:  true 補間</p>
+<p>磁場値の補正係数表を削除する
+/G4M/Module/{module_name}/deleteFieldCoeff</p>
+<p>ASCIIファイルに磁場補正係数表を保存する
+/G4M/Module/{module_name}/storeFieldCoeff  {file_name:s}
+file_name:  出力ファイル名</p>
+<p>ASCIIファイルから磁場補正係数表を読み込む。
+/G4M/Module/{module_name}/retrieveFieldCoeff  {file_name:s}
+file_name:  ファイル名</p>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

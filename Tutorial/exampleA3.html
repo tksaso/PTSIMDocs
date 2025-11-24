@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example A3(ビーム機器登録/操作） &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example A4(GDMLビーム機器）" href="exampleA4.html" />
+    <link rel="prev" title="Example A2(初期粒子発生GPS）" href="exampleA2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="launchOpt.html">起動オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA0.html">Example A0(基本構成)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA1.html">Example A1(ファントム/スコア）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA2.html">Example A2(初期粒子発生GPS）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example A3(ビーム機器登録/操作）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">例題マクロファイル</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">マクロファイルの解説</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA4.html">Example A4(GDMLビーム機器）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA5.html">Example A5(DICOM-CTジオメトリ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA6.html">Example A6(ParallelWorld-Score）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA7.html">Example A7(Layered-Mass）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA8.html">Example A8(Scan/Raster-Beam）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA9.html">Example A9(TriggerSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA10.html">Example A10(attachSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA11.html">Example A11(Layered-Mass w/ MagField）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Example A3(ビーム機器登録/操作）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorial/exampleA3.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="example-a3">
+<h1>Example A3(ビーム機器登録/操作）<a class="headerlink" href="#example-a3" title="Link to this heading"></a></h1>
+<p>シミュレーション空間にビームモジュールを配置する際の利用例を解説します。</p>
+<ul class="simple">
+<li><p>ビームモジュールの登録</p></li>
+<li><p>ビームモジュールの実体化</p></li>
+</ul>
+<p>以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。</p>
+<section id="id1">
+<h2>例題マクロファイル<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>PTSIMコードに付属するマクロファイル<code class="docutils literal notranslate"><span class="pre">exampleA3.mac</span></code>をコピーして用います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp  ./macros/tut/exampleA3.mac  .
+</pre></div>
+</div>
+<p>実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -i  exampleA3.mac
+</pre></div>
+</div>
+<p><img alt="exampleA3" src="../_images/exampleA3.png" /></p>
+<p>終了</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<section id="id2">
+<h3>マクロファイルの解説<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>解説するコマンド部分のみを抜粋して説明します。
+この例題では、ユーザ実装用に用意したG4MBMTemplateクラス（空の箱）とMulti-leaf Collimatorの機器の配置を通じて説明します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#</span>
+<span class="linenos"> 2</span><span class="c1"># (PreInit State)</span>
+<span class="linenos"> 3</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">verbose</span> <span class="mi">1</span>
+<span class="linenos"> 4</span><span class="c1">#</span>
+<span class="linenos"> 5</span><span class="c1"># Material</span>
+<span class="linenos"> 6</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">materials</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos"> 7</span><span class="c1">#</span>
+<span class="linenos"> 8</span><span class="c1"># PhysicsList</span>
+<span class="linenos"> 9</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">phys</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos">10</span><span class="c1">#</span>
+<span class="linenos">11</span><span class="c1"># System and module registration</span>
+<span class="linenos">12</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">System</span> <span class="n">DynamicPort</span>
+<span class="linenos">13</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Room</span><span class="o">/</span><span class="n">register</span> <span class="mf">525.</span>  <span class="mf">525.</span>  <span class="mf">3550.</span> <span class="n">mm</span>
+<span class="linenos">14</span><span class="c1">#</span>
+<span class="linenos">15</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">BMT</span>  <span class="n">G4MBMTemplate</span>  <span class="n">dummy</span><span class="o">.</span><span class="n">dat</span>  <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="n">mm</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="n">deg</span>
+<span class="linenos">16</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">MLC</span>  <span class="n">G4MMLCX</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">Sample</span><span class="o">/</span><span class="n">G4MMLCX</span><span class="o">/</span><span class="n">mlc</span><span class="o">.</span><span class="n">dat</span>   <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1000.</span> <span class="n">mm</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="n">deg</span>
+<span class="linenos">17</span><span class="c1">#</span>
+<span class="linenos">18</span><span class="c1"># Run Initialize</span>
+<span class="linenos">19</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">initialize</span>
+<span class="linenos">20</span><span class="c1">#</span>
+<span class="linenos">21</span><span class="c1"># (PreInit State)</span>
+<span class="linenos">22</span><span class="c1">#</span>
+<span class="linenos">23</span><span class="c1"># Primary particle</span>
+<span class="linenos">24</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span> <span class="n">GPS</span>
+<span class="linenos">25</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">gps</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos">26</span><span class="c1">#</span>
+<span class="linenos">27</span><span class="c1"># Beam-module settings</span>
+<span class="linenos">28</span><span class="c1">#</span>
+<span class="linenos">29</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="nb">list</span>  <span class="mi">2</span>
+<span class="linenos">30</span><span class="c1">#</span>
+<span class="linenos">31</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span> <span class="n">BMT</span>
+<span class="linenos">32</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">translate</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">-</span><span class="mi">100</span> <span class="n">mm</span>
+<span class="linenos">33</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">BMT</span>
+<span class="linenos">34</span><span class="c1">#</span>
+<span class="linenos">35</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span> <span class="n">MLC</span>
+<span class="linenos">36</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">rotate</span>  <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">45.</span> <span class="n">degree</span>
+<span class="linenos">37</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">MLC</span>
+<span class="linenos">38</span><span class="c1">#</span>
+<span class="linenos">39</span><span class="c1">#</span>
+<span class="linenos">40</span><span class="c1">#/run/beamOn 10</span>
+<span class="linenos">41</span><span class="c1">#</span>
+</pre></div>
+</div>
+<section id="id3">
+<h4>ビーム機器の登録<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<p>使用するビーム機器を<code class="docutils literal notranslate"><span class="pre">PreInit</span> <span class="pre">State</span></code>で、<code class="docutils literal notranslate"><span class="pre">/Dynamic/Module/register</span></code>コマンドにより登録します。
+コマンドの引数は順番に、モジュールの固有名{mname}、モジュールタイプ{mtype}、パラメタファイル名{param}、配置座標と単位、回転角と単位です。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span>  <span class="p">{</span><span class="n">mname</span><span class="p">}</span> <span class="p">{</span><span class="n">mtype</span><span class="p">}</span> <span class="p">{</span><span class="n">param</span><span class="p">}</span>  <span class="p">{</span><span class="n">x</span><span class="p">}</span> <span class="p">{</span><span class="n">y</span><span class="p">}</span> <span class="p">{</span><span class="n">z</span><span class="p">}</span> <span class="p">{</span><span class="n">lunit</span><span class="p">}</span> <span class="p">{</span><span class="n">rx</span><span class="p">}</span> <span class="p">{</span><span class="n">ry</span><span class="p">}</span> <span class="p">{</span><span class="n">rz</span><span class="p">}</span> <span class="p">{</span><span class="n">runit</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>配置座標や回転角の設定を省略した場合は、原点に回転なしの配置になります。
+モジュールタイプ{mtype}は、モジュールのクラス名で、パラメタファイル{param}と対応します。利用可能なモジュールタイプとパラメタの書式については<a class="reference internal" href="../cmd-reference.html#beam-module-registration"><span class="std std-ref">解説</span></a>を参照してください。</p>
+</section>
+<section id="id4">
+<h4>ビーム機器の選択と配置条件の再設定<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>ビーム機器の配置座標や回転は、ビーム機器名を引数に<code class="docutils literal notranslate"><span class="pre">/G4M/Module/select</span></code>コマンドで選択した後に、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/translate</span></code>コマンド及び<code class="docutils literal notranslate"><span class="pre">/G4M/Module/rotate</span></code>コマンドで変更することができます。</p>
+</section>
+<section id="id5">
+<h4>ビーム機器の実体化<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>設定したビーム機器を治療室に実体化して配置するには、ビーム機器名を引数に<code class="docutils literal notranslate"><span class="pre">/G4M/Module/install</span></code>コマンドを実行します。先に示したビーム機器の選択と配置条件の再設定は、実体化した後でも可能です。<br />
+(注）可視化で確認するには描画し直しが必要です。<code class="docutils literal notranslate"><span class="pre">/vis/drawVolume</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span> <span class="n">MLC</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">rotate</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="n">degree</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">vis</span><span class="o">/</span><span class="n">drawVolume</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h4>ビーム機器の登録状況の確認<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>上記マクロファイルにはありませんが、登録されているビーム機器の一覧表示が可能です。
+<code class="docutils literal notranslate"><span class="pre">PreInit&gt;</span></code>でも<code class="docutils literal notranslate"><span class="pre">Idle&gt;</span></code>でも確認可能です。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="nb">list</span>
+ <span class="o">+++</span> <span class="n">G4MParticleTherapySystemMessenger</span>  <span class="n">List</span> <span class="o">+++</span>
+<span class="o">*</span> <span class="n">Module</span> <span class="n">BMT</span>                 <span class="n">Active</span>    <span class="n">Mass</span><span class="o">-</span><span class="n">Geom</span> 
+<span class="o">*</span> <span class="n">Module</span> <span class="n">MLC</span>                 <span class="n">Active</span>    <span class="n">Mass</span><span class="o">-</span><span class="n">Geom</span> 
+<span class="o">*</span> <span class="n">Module</span> <span class="n">Room</span>                <span class="n">Active</span>    <span class="n">Mass</span><span class="o">-</span><span class="n">Geom</span>
+</pre></div>
+</div>
+<p>表示レベル2を指定すると、配置座標情報を確認できます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="nb">list</span>  <span class="mi">2</span>
+<span class="o">+++</span> <span class="n">G4MParticleTherapySystemMessenger</span>  <span class="n">List</span> <span class="o">+++</span>
+<span class="o">*</span> <span class="n">Module</span> <span class="n">BMT</span>                 <span class="n">Active</span>    <span class="n">Center</span><span class="p">:</span> <span class="mi">0</span>     <span class="mi">0</span>     <span class="mi">0</span>         <span class="n">width</span><span class="p">:</span> <span class="mi">50</span>    <span class="mi">50</span>    <span class="mi">30</span>        <span class="n">mm</span>
+<span class="o">*</span> <span class="n">Module</span> <span class="n">MLC</span>                 <span class="n">Active</span>    <span class="n">Center</span><span class="p">:</span> <span class="mi">0</span>     <span class="mi">0</span>     <span class="mi">1000</span>      <span class="n">width</span><span class="p">:</span> <span class="mi">500</span>   <span class="mi">125</span>   <span class="mi">70</span>        <span class="n">mm</span>
+<span class="o">*</span> <span class="n">Module</span> <span class="n">Room</span>                <span class="n">Active</span>    <span class="n">Center</span><span class="p">:</span> <span class="mi">0</span>     <span class="mi">0</span>     <span class="mi">0</span>         <span class="n">width</span><span class="p">:</span> <span class="mi">525</span>   <span class="mi">525</span>   <span class="mi">3550</span>      <span class="n">mm</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleA2.html" class="btn btn-neutral float-left" title="Example A2(初期粒子発生GPS）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleA4.html" class="btn btn-neutral float-right" title="Example A4(GDMLビーム機器）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

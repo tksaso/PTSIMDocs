@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScanBeam &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ScanBeam</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/PrimGen/ScanBeam.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scanbeam">
+<h1>ScanBeam<a class="headerlink" href="#scanbeam" title="Link to this heading"></a></h1>
+<p>スポットスキャニングを行う。３つのASCIIファイル入力が必要である。</p>
+<section id="id1">
+<h2>デバッグモードの設定<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">verbose</span>  <span class="p">{</span><span class="n">v</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>v:  デバッグフラグ</p>
+</section>
+<section id="scanning-magnet">
+<h2>Scanning Magnetの登録と有効化<a class="headerlink" href="#scanning-magnet" title="Link to this heading"></a></h2>
+<p>事前にScanning Magnetがビームモジュールとして登録済みである必要がある。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanMagXY</span>   <span class="p">{</span><span class="n">mnameX</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>   <span class="p">{</span><span class="n">mnameY</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>mnameX, mnameY:  ビームモジュール名</p>
+</section>
+<section id="ascii-eid">
+<h2>ビームエネルギーとその揺らぎ，そしてスポットサイズを記載したASCIIファイル（eidファイルと呼ぶ）を読み込み，設定を行うためのコマンド。<a class="headerlink" href="#ascii-eid" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">eidFile</span>   <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>eidFileName:  eidファイル名</p>
+<p>eidファイルの書式</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> data/Sample/G4MScanBeam/EIDSample.dat	Description
+ 3
+ 0 100.  0.  0.  0.
+ 1 200.  0.  0.  0.
+ 2 250.  0.  0.  0.	Number of lines (e.g. number of beams)
+ ID  E(MeV)  dE(MeV) SigX(mm)  SigY(mm)
+ *ID must be given in Sequential.
+</pre></div>
+</div>
+</section>
+<section id="eid">
+<h2>eidファイルを与えるもうひとつのコマンド。<a class="headerlink" href="#eid" title="Link to this heading"></a></h2>
+<p>こちらのコマンドの場合には，エネルギー，エネルギー揺らぎ，スポットに加えて，初期角度を各BeamID毎に定義したASCIIデータファイルを読み込む。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">eidFile2</span>   <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>eid2FileName:  eid2ファイル名</p>
+<p>eidファイルの書式:
+data/Sample/G4MScanBeam/EIDSample2.dat</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<span class="mi">0</span> <span class="mf">100.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span>
+<span class="mi">1</span> <span class="mf">200.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span>
+<span class="mi">2</span> <span class="mf">250.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span>	<span class="n">Number</span> <span class="n">of</span> <span class="n">lines</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">number</span> <span class="n">of</span> <span class="n">beams</span><span class="p">)</span>
+<span class="n">ID</span>  <span class="n">E</span><span class="p">(</span><span class="n">MeV</span><span class="p">)</span>  <span class="n">dE</span><span class="p">(</span><span class="n">MeV</span><span class="p">)</span> <span class="n">SigX</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>  <span class="n">SigY</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span> <span class="n">AngSigX</span><span class="p">(</span><span class="n">mrad</span><span class="p">)</span> <span class="n">AngSigY</span><span class="p">(</span><span class="n">mrad</span><span class="p">)</span>
+<span class="o">*</span><span class="n">ID</span> <span class="n">must</span> <span class="n">be</span> <span class="n">given</span> <span class="ow">in</span> <span class="n">Sequential</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="ascii-scan">
+<h2>スポット座標と線量強度を与えるASCIIファイル(scanファイル)を指定する。<a class="headerlink" href="#ascii-scan" title="Link to this heading"></a></h2>
+<p>スポット座標は，アイソセンター面でのx,y座標である。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanFile</span>   <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>scanFileName:  scanファイル名</p>
+<p>scanファイルの書式
+data/Sample/G4MScanBeam/ScanSample.dat</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5
+0  -100.  -30.  5.
+1     0.   30.  2.
+1    50.  -50.  2.
+2  -100. -100.  1.
+2    10. -100.  2.	Number of lines (e.g. Number of spots)
+ID  x(mm)  y(mm)  Gy
+</pre></div>
+</div>
+</section>
+<section id="wieghtascii">
+<h2>wieght係数を記載したASCIIファイルを指定<a class="headerlink" href="#wieghtascii" title="Link to this heading"></a></h2>
+<p>異なるエネルギーでも同じピーク線量値となるように初期粒子数を調節する係数(weight)を指定する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">weightFile</span>   <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>weightFileName:  weightファイル名
+weightファイルの書式
+data/Sample/G4MScanBeam/WeightSample.dat</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  3
+  90.    1.
+  200.   1.
+  300.   1.	Number of lines
+  E(MeV)  Weight
+</pre></div>
+</div>
+<p>異なるエネルギーだが，同じ粒子数の計算を行ったときに得られた線量の相対値を表す。</p>
+</section>
+<section id="id2">
+<h2>設定を表示<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">show</span>  <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>type: eid,  spot,  weight
+(*) 個々のスポットの粒子発生数を表す確率は/run/beamOnが実行されたときに，自動的に計算される。</p>
+</section>
+<section id="run-beamon">
+<h2>/run/beamOnの前に粒子発生数を計算(デバッグ用）<a class="headerlink" href="#run-beamon" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">calcProb</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

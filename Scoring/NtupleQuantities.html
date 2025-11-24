@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Score量の指定 &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Score量の指定</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Scoring/NtupleQuantities.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="score">
+<h1>Score量の指定<a class="headerlink" href="#score" title="Link to this heading"></a></h1>
+<p>Scoringで指定する識別名とその説明を示します。
+基本的にスコアするセル単位で値を保存します。トラック番号が同じトラックのセル内でのエネルギー付与や線量値は、積算されて記録されます。また、その他の値については、セルに侵入した時点での情報、またはセル内で発生した時点での値を記録します。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>識別名</p></th>
+<th class="head text-left"><p>説明</p></th>
+<th class="head text-left"><p>備考</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>evno</p></td>
+<td class="text-left"><p>イベント番号</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>trkid</p></td>
+<td class="text-left"><p>トラック識別番号</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>pid</p></td>
+<td class="text-left"><p>粒子種識別番号</p></td>
+<td class="text-left"><p>(注)PDGコード</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>de</p></td>
+<td class="text-left"><p>エネルギー付与値</p></td>
+<td class="text-left"><p>セル内積算値</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>dose</p></td>
+<td class="text-left"><p>線量値</p></td>
+<td class="text-left"><p>セル内積算値</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>stepL</p></td>
+<td class="text-left"><p>ステップ長</p></td>
+<td class="text-left"><p>セル内積算値</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>stepNo</p></td>
+<td class="text-left"><p>ステップ数</p></td>
+<td class="text-left"><p>セル内積算値</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ix</p></td>
+<td class="text-left"><p>セルの識別番号(1)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>iy</p></td>
+<td class="text-left"><p>セルの識別番号(2)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>iz</p></td>
+<td class="text-left"><p>セルの識別番号(3)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>imod</p></td>
+<td class="text-left"><p>セルの識別番号(4)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>isec</p></td>
+<td class="text-left"><p>セルの識別番号(5)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>iext</p></td>
+<td class="text-left"><p>セルの識別番号(6)</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>w</p></td>
+<td class="text-left"><p>トラックの重み</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>proc</p></td>
+<td class="text-left"><p>初期粒子の反応を二次粒子以降が継承</p></td>
+<td class="text-left"><p>(注)プロセスタイプ</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ke</p></td>
+<td class="text-left"><p>運動エネルギー</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>x</p></td>
+<td class="text-left"><p>X座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>y</p></td>
+<td class="text-left"><p>Y座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z</p></td>
+<td class="text-left"><p>Z座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>px</p></td>
+<td class="text-left"><p>X方向運動量</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>py</p></td>
+<td class="text-left"><p>Y方向運動量</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>pz</p></td>
+<td class="text-left"><p>Z方向運動量</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>t</p></td>
+<td class="text-left"><p>時刻</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>xvtx</p></td>
+<td class="text-left"><p>トラックの生成X座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>yvtx</p></td>
+<td class="text-left"><p>トラックの生成Y座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>zvtx</p></td>
+<td class="text-left"><p>トラックの生成Z座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>parenttrkid</p></td>
+<td class="text-left"><p>親トラック識別番号</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>parentpid</p></td>
+<td class="text-left"><p>親トラックの粒子識別番号</p></td>
+<td class="text-left"><p>(注)PDGコード</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>triggerid</p></td>
+<td class="text-left"><p>ジオメトリトリガビット</p></td>
+<td class="text-left"><p>TriggerSD参照</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>triggerx</p></td>
+<td class="text-left"><p>直近のジオメトリトリガのX座標</p></td>
+<td class="text-left"><p>TriggerSD参照</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>triggery</p></td>
+<td class="text-left"><p>直近のジオメトリトリガのY座標</p></td>
+<td class="text-left"><p>TriggerSD参照</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>triggerz</p></td>
+<td class="text-left"><p>直近のジオメトリトリガのZ座標</p></td>
+<td class="text-left"><p>TriggerSD参照</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>volx</p></td>
+<td class="text-left"><p>セルのX座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>voly</p></td>
+<td class="text-left"><p>セルのY座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>volz</p></td>
+<td class="text-left"><p>セルのZ座標</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>riid</p></td>
+<td class="text-left"><p>RIの生成を記録bit</p></td>
+<td class="text-left"><p>*試験運用</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>rix</p></td>
+<td class="text-left"><p>RI生成のX座標</p></td>
+<td class="text-left"><p>*試験運用</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>riy</p></td>
+<td class="text-left"><p>RI生成のY座標</p></td>
+<td class="text-left"><p>*試験運用</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>riz</p></td>
+<td class="text-left"><p>RI生成のZ座標</p></td>
+<td class="text-left"><p>*試験運用</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf">注 PDGコード</a>
+イオンの場合は、<code class="docutils literal notranslate"><span class="pre">±100ZZZAAA</span></code>で表記される。</p>
+<p><a class="reference internal" href="ProcessType.html"><span class="std std-doc">注 プロセスタイプ(proc)</span></a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

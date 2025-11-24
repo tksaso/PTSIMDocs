@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>起動オプション &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example A0(基本構成)" href="exampleA0.html" />
+    <link rel="prev" title="Tutorial" href="../tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">起動オプション</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ptsim">PTSIMの起動オプション</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">PTSIMの起動オプションには、以下の表のものがあります。</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">インタラクティブモードでの起動例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">バッチモードでの起動例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA0.html">Example A0(基本構成)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA1.html">Example A1(ファントム/スコア）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA2.html">Example A2(初期粒子発生GPS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA3.html">Example A3(ビーム機器登録/操作）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA4.html">Example A4(GDMLビーム機器）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA5.html">Example A5(DICOM-CTジオメトリ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA6.html">Example A6(ParallelWorld-Score）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA7.html">Example A7(Layered-Mass）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA8.html">Example A8(Scan/Raster-Beam）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA9.html">Example A9(TriggerSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA10.html">Example A10(attachSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA11.html">Example A11(Layered-Mass w/ MagField）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">起動オプション</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorial/launchOpt.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>起動オプション<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="ptsim">
+<h2>PTSIMの起動オプション<a class="headerlink" href="#ptsim" title="Link to this heading"></a></h2>
+<p>通常、シミュレーション体系を確認する目的で、GUI環境のインタラクティブモードで可視化を行います。
+そして、確認ができたら照射コマンド(/run/beamOn)を追加して発生粒子数を増やし、可視化をオフにしたバッチモードで実行します。
+GUIの有無やインタラクティブモード、バッチモードは、起動オプションで切り替えます。</p>
+<section id="id2">
+<h3>PTSIMの起動オプションには、以下の表のものがあります。<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>起動時のオプション</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>-t {n}</p></td>
+<td class="text-left"><p>{n}はスレッド数。 デフォルト=2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>-u {utype}</p></td>
+<td class="text-left"><p>{utype}はユーザインターフェイス。<code class="docutils literal notranslate"><span class="pre">tcsh</span></code> または<code class="docutils literal notranslate"><span class="pre">qt</span></code>を選択。 デフォルト=qt</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>-i {macro}</p></td>
+<td class="text-left"><p>{macro}はマクロファイル名。インタラクティブモードで起動する。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>-m {macro}</p></td>
+<td class="text-left"><p>{macro}はマクロファイル名。バッチモードで起動する。</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>と<code class="docutils literal notranslate"><span class="pre">-m</span></code>オプションは排他利用です。どちら選択してください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>を指定した場合、マクロファイルのコマンドを実行後に、コマンド入力待ち状態となります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m</span></code>を指定した場合、マクロファイルのコマンドを実行してアプリケーションは終了します。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>インタラクティブモードでの起動例<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="gui">
+<h4>GUI環境<a class="headerlink" href="#gui" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -u qt  -i  Sample0.mac
+</pre></div>
+</div>
+<p>Qtウインドウが起動し、コマンド入力待ち状態になります。</p>
+</section>
+<section id="cui">
+<h4>CUI環境<a class="headerlink" href="#cui" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -u tcsh  -i  Sample0.mac
+</pre></div>
+</div>
+<p>ターミナル上で起動して、コマンド入力待ち状態になる。</p>
+</section>
+</section>
+<section id="id4">
+<h3>バッチモードでの起動例<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h4>CUI環境で実行<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -m  Sample0.mac
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h4>スレッド数を指定して実行する場合<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>スレッド数を12にする例</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo -t 12  -m  Sample0.mac
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleA0.html" class="btn btn-neutral float-right" title="Example A0(基本構成)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

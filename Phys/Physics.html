@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Phys/Physics.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#######################################################################
+# EM processes including generic ions.
+########################################################################
+#/My/physics/register G4EmStandardPhysics
+#/My/physics/register G4EmStandardPhysics_option1
+#/My/physics/register G4EmStandardPhysics_option2
+/My/physics/register G4EmStandardPhysics_option3
+#/My/physics/register G4EmStandardPhysics_option4
+#/My/physics/register G4EmDNAPhysics
+#/My/physics/register G4EmLivermorePhysics
+#/My/physics/register G4EmPenelopePhysics
+#/My/physics/register G4EmLowEPPhysics
+#/My/physics/register G4EmStandardPhysicsGS
+#/My/physics/register G4EmStandardPhysicsSS
+#/My/physics/register G4EmStandardPhysicsWVI
+########################################################################
+# Elastic process for hadrons.
+########################################################################
+/My/physics/register G4HadronElasticPhysics
+#/My/physics/register G4HadronDElasticPhysics
+#/My/physics/register G4HadronDElasticPhysicsHP
+#/My/physics/register G4HadronDElasticPhysicsHPT
+#/My/physics/register G4HadronDElasticPhysicsLEND
+#/My/physics/register G4HadronDElasticPhysicsPHP
+#/My/physics/register G4HadronDElasticPhysicsVI
+#/My/physics/register G4HadronDElasticPhysicsXS
+########################################################################
+# Elastic process for other ions.
+########################################################################
+#/My/physics/register G4IonElasticPhysics
+########################################################################
+# Elatic process for thermal neutrons
+########################################################################
+#/My/physics/register G4ThermalNeutrons
+########################################################################
+# Inelastic processes except for ions.
+########################################################################
+#/My/physics/register G4HadronPhysicsQBBC
+#/My/physics/register G4HadronPhysicsQBBC_ABLA
+#/My/physics/register G4HadronPhysicsFTFP_BERT
+#/My/physics/register G4HadronPhysicsFTFP_BERT_ATL
+#/My/physics/register G4HadronPhysicsFTFP_BERT_HP
+#/My/physics/register G4HadronPhysicsFTFP_BERT_TRV
+#/My/physics/register G4HadronPhysicsFTFPQGSP_BERT
+/My/physics/register G4HadronPhysicsFTF_BIC
+#/My/physics/register G4HadronPhysicsINCLXX
+#/My/physics/register G4HadronPhysicsQGSP_BERT
+#/My/physics/register G4HadronPhysicsQGSP_BERT_HP
+#/My/physics/register G4HadronPhysicsQGSP_BIC
+#/My/physics/register G4HadronPhysicsQGSP_BIC_AllHP
+#/My/physics/register G4HadronPhysicsQGSP_BIC_HP
+#/My/physics/register G4HadronPhysicsQGSP_FTFP_BERT
+#/My/physics/register G4HadronPhysicsQGS_BIC
+#/My/physics/register G4HadronPhysicsShielding
+#/My/physics/register G4HadronPhysicsShieldingLEND
+########################################################################
+# Stopping Physics  (Capture)
+########################################################################
+/My/physics/register G4StoppingPhysics
+#/My/physics/register G4StoppingPhysicsFritiofWithBinaryCascade
+#/My/physics/register G4StoppingPhysicsWithINCLXX
+########################################################################
+# Radioactive decay
+########################################################################
+/My/physics/register G4RadioactiveDecayPhysics
+########################################################################
+# Inelastic Ions physics including Generic Ions.
+########################################################################
+/My/physics/register G4IonBinaryCascadePhysics
+#/My/physics/register G4IonINCLXXPhysics
+#/My/physics/register G4IonPhysics
+#/My/physics/register G4IonQMDPhysics
+#/My/physics/register G4LightIonQMDPhysics
+########################################################################
+# Decay Physics
+########################################################################
+/My/physics/register G4DecayPhysics
+########################################################################
+# VERBOSE
+########################################################################
+/My/physics/verbose 0
+##
+# Enable production cut for gamma intractions
+# (Photoelectron and compton electron )
+###/process/em/applyCuts true
+# RdaioactiveDecay time window (V11.2 default 1 year)
+###/process/had/rdm/thresholdForVeryLongDecayTime 1.e+60 year
+#------------------------------------------------------------------------
+# (Updates)
+# 2024-08-28 thresholdForVeryLongDecayTime. (V11.2 or later)
+# 2024-08-31 Add physicsconstructors available in v11.2.2
+###
+</pre></div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

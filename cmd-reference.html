@@ -1,0 +1,2022 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Reference &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Material-file format" href="material.html" />
+    <link rel="prev" title="Example A11(Layered-Mass w/ MagField）" href="Tutorial/exampleA11.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">コマンド引数の表記</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geant4-ptsim-version">Geant4/PTSIM version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geant4version">Geant4のversionを表示する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ptstoolkitversion">PTStoolkitのversionを表示する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pts-application-version-number">PTS application version numberを表示する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#material-definition">Material Definition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#element">Elementデータの指定</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nist-databaseelement">NIST database定義のElementを利用する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">ユーザ定義のElementデータファイルを利用する</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#material">Materialデータの指定と作成</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">物質データファイルのパスを指定する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">マテリアルファイル例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">物質を作成する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">物質情報を表示する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#primary-beam-generator">Primary Beam Generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">選択コマンド</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beam-generators">Beam Generators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#physics-list">Physics List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">登録コマンド</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">物理過程を手動で更新する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#physics-list-options">Physics List options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#radioactivedecay">RadioactiveDecay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regionsteplimitter">指定RegionにStepLimitterを設定する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">パラレルワールドプロセスを定義する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-selection">System Selection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">システムを選択する。</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">システムを切り替える</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-module-registration">Beam Module Registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">ビーム機器を登録する</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">ビームモジュールのクラスとパラメタファイルの書式</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">ビーム機器の登録を解除する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">特別なビーム機器の登録</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#room">治療室(Room)の登録</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">水ファントムの登録</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dicom">DICOMジオメトリの登録</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-module-installation">Beam Module Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">ビームモジュールの実体化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">ビームモジュールを再度実体化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">ビームモジュールの複製を配置す</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">ビームモジュールの実体を削除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">全ビーム機器をインストール/アンインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">全ビームライン機器のインストール/アンインストール</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">ビームモジュールの再構築</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">登録ビームモジュールの状態を一覧表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">実体化されているビーム機器の一覧を表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">ビームモジュールを選択して操作する</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id29">ビーム機器を選択する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">ビーム機器情報の情報表示</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">ビーム機器情報の表示と保存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">ビーム機器の形式パラメタを更新する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">ビーム機器の中心座標を設定をする</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#z">ビーム機器の下流z面で位置あわせする</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">ビーム機器の上流z面で位置合わせする</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xyz">ビーム機器のX軸、Y軸、Z軸周りに回転する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">ビーム機器の-Z面に別のビーム機器を接して配置する</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">デバッグフラグ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">動的なビーム機器の設定</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id38">ワブラー電磁石を有効化する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id39">回転モジュレータ有効化にする</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id40">ワブラー電磁石や回転モジュレータの更新モード</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">回転モジュレータの初期角度と更新角度を設定</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#special-beam-modules">Special Beam Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#g4room-commands"><span class="xref myst">G4Room commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waterphantom-commands"><span class="xref myst">WaterPhantom commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dicom-commands"><span class="xref myst">DICOM commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dicom-rt-commands"><span class="xref myst">DICOM-RT commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdml-commands"><span class="xref myst">GDML commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtk-commands"><span class="xref myst">VTK commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dumper-commands"><span class="xref myst">Dumper commands</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bmfield-commands"><span class="xref myst">BMField commands</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mass-and-parallel-world-geometry">Mass and Parallel World Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id42">シミュレーション空間のデバック出力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id43">パラレルワールドジオメトリ</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id44">パラレルワールドジオメトリを作成する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id45">パラレルワールドの一覧を表示する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scoring-and-histograming">Scoring and Histograming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-logical-volume-for-scoring">Choosing Logical Volume for scoring</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logical-volume">ビーム機器のLogical Volume名の一覧表示</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id46">ビームモジュール名とモジュール内での順序番号を指定して、論理ボリュームを選択する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id47">ビームモジュール名とモジュール内の論理ボリューム名を指定して、論理ボリュームを選択する</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sensitivedetector-detectorsd">SensitiveDetector(DetectorSD)を作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id48">論理ボリュームを指定してのスコア利用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sensitivedetector">SensitiveDetectorを取付ける</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#triggersd">TriggerSDを取り付ける</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id49">TriggerSDの取り付け</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id50">論理ボリュームの物質を変更</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ntuples-histograms-for-output">Ntuples/Histograms for output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id51">出力するファイル名を指定</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#g4analysismanager">ファイル出力後もG4AnalysisManagerが結果を保持</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ntuple">スレッドのNtupleをマスターにマージする</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#primaryvtxntuple">PrimaryVtxのNtupleを有効化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waterphantom-dicom">WaterPhantom/DICOMでのヒストグラムの有効化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id52">ヒストグラムの設定状態を表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ntuplesensitive-detector">Ntuple作成とSensitive Detectorの対応付け</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id53">スコアリング物理量の候補を一覧表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id54">Ntupleに保存する物理量を追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id55">Ntupleに登録済みの物理量を一覧表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h1-h2-h3-p1-p2-g4analysismanager">ヒストグラム H1,H2,H3,P1,P2 (G4AnalysisManager)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id56">ヒストグラム宣言</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id57">ヒストグラムとヒットコレクションとの対応付</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#event-and-tracking">Event and Tracking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#myeventactformonitor">MyEventActForMonitor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id58">イベント番号をファイルに出力する</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mytrackingactforkilltrkmessenger">MyTrackingActForKillTrkMessenger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id59">粒子生成を抑制するz領域を設定する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id60">中性子の生成をしない</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id61">軽粒子の生成をしない</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id62">二次粒子の生成をしない</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#digi">Digi ヒストグラム設定(試験運用)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#digi-ntuple">Digi Ntuple 作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id63">Digiスコアリング可能な物理量を表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id64">Digi 保存情報を追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id65">Digi 登録済み情報を表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#digiset-ntuple">DigiSet Ntuple 作成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#digiset">DigiSetスコアリング可能な物理量を表示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id66">DigiSet 保存情報を追加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id67">DigiSet 登録済み情報を表示</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#digitizer">Digitizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id68">元データからデジタイズしたデータを作成する</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#digitype">DigiTypeの選択肢</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id69">Digitizerモジュール選択</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id70">Digitizerモジュールの時間ウインドウ設定</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id71">時間/エネルギーウインドウを定</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cmd-reference.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="command-reference">
+<h1>Command Reference<a class="headerlink" href="#command-reference" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>コマンド引数の表記<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>コマンドに与える引数は、{} で囲んで表ます。<br />
+また、その内容は、 <strong>{値:型}</strong> と表記しています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">value</span><span class="p">:</span><span class="nb">type</span><span class="p">}</span>  
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>value</p></td>
+<td class="text-left"><p>引数の値(変数名)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>type</p></td>
+<td class="text-left"><p>引数の型(s=string, i=int, f=float, d=double)</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>記載例</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span>  <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  
+</pre></div>
+</div>
+<p>引数として文字列型の値を指定します。引数名はmnameと呼びます。</p>
+<ul class="simple">
+<li><p>利用例 (文字列型の引数)</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span>  <span class="n">WaterPhantom</span>  
+</pre></div>
+</div>
+<p><strong>特に以下の３つの引数名については、以降では説明なく用いている場合があります。</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>Beam module name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ifilename:s</p></td>
+<td class="text-left"><p>Input file name</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>Output file name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>Unit</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="geant4-ptsim-version">
+<h2>Geant4/PTSIM version<a class="headerlink" href="#geant4-ptsim-version" title="Link to this heading"></a></h2>
+<section id="geant4version">
+<h3>Geant4のversionを表示する<a class="headerlink" href="#geant4version" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">PTS</span><span class="o">/</span><span class="n">G4Version</span> <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>出力ファイル名。標準出力は<strong>stdout</strong>を指定する。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ptstoolkitversion">
+<h3>PTStoolkitのversionを表示する<a class="headerlink" href="#ptstoolkitversion" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">PTS</span><span class="o">/</span><span class="n">TKVersion</span> <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>出力ファイル名。標準出力は<strong>stdout</strong>を指定する。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pts-application-version-number">
+<h3>PTS application version numberを表示する<a class="headerlink" href="#pts-application-version-number" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">PTS</span><span class="o">/</span><span class="n">AppVersion</span> <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>出力ファイル名。標準出力は<strong>stdout</strong>を指定する。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="material-definition">
+<h2>Material Definition<a class="headerlink" href="#material-definition" title="Link to this heading"></a></h2>
+<p>物質を定義して作成します。  Geant4 NIST materialを用いる方法のほかに、ユーザ定義の物質を作成することもできます。</p>
+<section id="element">
+<h3>Elementデータの指定<a class="headerlink" href="#element" title="Link to this heading"></a></h3>
+<p>Element(元素)については、一般的にNISTが定義した元素を用いることを推奨します。これには自然混合比の同位体も含まれています。</p>
+<section id="nist-databaseelement">
+<h4>NIST database定義のElementを利用する<a class="headerlink" href="#nist-databaseelement" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Element</span><span class="o">/</span><span class="n">useG4Element</span> <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>NIST Element = true,  Userdefined = false.</p></td>
+</tr>
+</tbody>
+</table>
+<p>*デフォルト設定でNIST-Elementが使用されことになっています。</p>
+</section>
+<section id="id2">
+<h4>ユーザ定義のElementデータファイルを利用する<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<section id="id3">
+<h5>Elementデータファイルのパスを指定する<a class="headerlink" href="#id3" title="Link to this heading"></a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Element</span><span class="o">/</span><span class="n">path</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>path:s</p></td>
+<td class="text-left"><p>実行場所からの相対パス. Default: ./data/commom/element</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="Mat/Eledef.html"><span class="std std-doc">Elementファイル書式</span></a></p>
+</section>
+</section>
+</section>
+<section id="material">
+<h3>Materialデータの指定と作成<a class="headerlink" href="#material" title="Link to this heading"></a></h3>
+<p>物質(Material)を作成します。</p>
+<section id="id4">
+<h4>物質データファイルのパスを指定する<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>ユーザ独自の物質構成を必要とする場合は、その構成要素を記述したファイルのパスを指定します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Material</span><span class="o">/</span><span class="n">path</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>path:s</p></td>
+<td class="text-left"><p>実行場所からの相対パス. Default: ./data/commom/material/</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h4>マテリアルファイル例<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>このパスに物質の構成要素を記述するファイルを作成しておきます。
+物質構成書は、以下のリンクを参照してください。
+<a class="reference internal" href="Mat/Matdef.html"><span class="std std-doc"> Materialファイルの書式 </span></a></p>
+<ul class="simple">
+<li><p>元素数による構成例: <a class="reference internal" href="Mat/H_2O.html"><span class="std std-doc">./data/common/material/H_2O.dat</span></a></p></li>
+<li><p>元素重量比による構成例: <a class="reference internal" href="Mat/Air.html"><span class="std std-doc">./data/common/material/Air.dat</span></a></p></li>
+<li><p>物質の混合比による構成例: <a class="reference internal" href="Mat/G10.html"><span class="std std-doc">./data/common/material/G10.dat</span></a></p></li>
+</ul>
+</section>
+<section id="id6">
+<h4>物質を作成する<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>ユーザ定義の物質、またはNISTデータベースの物質ともに、次のコマンドで物質を作成します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Material</span><span class="o">/</span><span class="n">create</span>  <span class="p">{</span><span class="n">ifilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ifilename:s</p></td>
+<td class="text-left"><p>物質のパラメタファイル名、またはNISTの物質名 e.g/ G4_WATER</p></td>
+</tr>
+</tbody>
+</table>
+<p>NISTの物質を利用する場合には、パラメタファイル名の代わりに、G4_WATERのように物質名を指定します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">例</span><span class="p">)</span>  <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Material</span>  <span class="n">G4_WATER</span>    
+</pre></div>
+</div>
+<p>NISTデータベースの物質は、<a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html?highlight=nist%20material">こちら</a>で確認してください。</p>
+<p>ユーザ定義の物質パラメタファイルを利用して物質を作成する場合は、データファイル名の拡張子は、.dat とします。作成コマンドでは、ファイル名の拡張子を除いた物質名を指定します。例えば、パラメタファイル名が、Water.datの場合は、Waterを指定します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">例</span><span class="p">)</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Material</span>  <span class="n">Water</span>  
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h4>物質情報を表示する<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Material</span><span class="o">/</span><span class="nb">property</span>  <span class="p">{</span><span class="n">matname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>matname:s</p></td>
+<td class="text-left"><p>物質名. 原則、上記の{ifilename}と同じです。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="primary-beam-generator">
+<h2>Primary Beam Generator<a class="headerlink" href="#primary-beam-generator" title="Link to this heading"></a></h2>
+<p>Primmary Beam geaneratpr（初期粒子発生器）を選択するコマンドです。</p>
+<section id="id8">
+<h3>選択コマンド<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span> <span class="p">{</span><span class="n">gname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>gname:s</p></td>
+<td class="text-left"><p>Beam generator name. 下記に示す初期粒子発生器のいずれか１つを選択します。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="beam-generators">
+<h3>Beam Generators<a class="headerlink" href="#beam-generators" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="PrimGen/ParticleGun.html"><span class="std std-doc">ParticleGun</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/GPS.html"><span class="std std-doc">General Particle Source, GPS</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/BeamGun.html"><span class="std std-doc">BeamGun</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/ScanBeam.html"><span class="std std-doc">ScanBeam</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/FocusGun.html"><span class="std std-doc">FocusGun</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/FocusGunEdist.html"><span class="std std-doc">FocusGunEdist</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/FanBeam.html"><span class="std std-doc">FanBeam</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/IAEAphsp.html"><span class="std std-doc">IAEAphsp</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/EvtGun.html"><span class="std std-doc">EvtGun</span></a></p></li>
+<li><p><a class="reference internal" href="PrimGen/Root3d.html"><span class="std std-doc">Root3d</span></a></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="physics-list">
+<h2>Physics List<a class="headerlink" href="#physics-list" title="Link to this heading"></a></h2>
+<p>物理過程を選択します。PTSIMでは、Geant4が提供する物理コンストラクタ単位で登録を行う仕組みになっています。</p>
+<section id="id9">
+<h3>登録コマンド<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">register</span> <span class="p">{</span><span class="n">physName</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>physName:s</p></td>
+<td class="text-left"><p>Physics Constructor name</p></td>
+</tr>
+</tbody>
+</table>
+<p>{PhysName:s}は、PTSIMのデフォルトで読み込まれるphys.macを参照してください。<br />
+物理カテゴリごとに１つの物理コンストラクタを選択します。</p>
+<p><a class="reference internal" href="Phys/Physics.html"><span class="std std-doc">マクロファイルPhy.mac</span></a></p>
+<section id="id10">
+<h4>物理過程を手動で更新する<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
+<p>ビームモジュールの変更や物質を変更した際に、手動で物理過程を更新する場合に用います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">physicsModified</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="physics-list-options">
+<h2>Physics List options<a class="headerlink" href="#physics-list-options" title="Link to this heading"></a></h2>
+<section id="radioactivedecay">
+<h3>RadioactiveDecay<a class="headerlink" href="#radioactivedecay" title="Link to this heading"></a></h3>
+<p>Geant4-v11.2より、デフォルト設定では、放射性同位体の崩壊時刻が長いものは発生させない設定になっている。これまで通り、崩壊時刻によらず壊変させたい場合には、次のコマンドを用いる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">process</span><span class="o">/</span><span class="n">had</span><span class="o">/</span><span class="n">rdm</span><span class="o">/</span><span class="n">thresholdForVeryLongDecayTime</span> <span class="mf">1.0e+60</span> <span class="n">year</span>
+</pre></div>
+</div>
+</section>
+<section id="regionsteplimitter">
+<h3>指定RegionにStepLimitterを設定する<a class="headerlink" href="#regionsteplimitter" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">stepLimitForRegion</span> <span class="p">{</span><span class="n">Region</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">stepsize</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Region:s</p></td>
+<td class="text-left"><p>Region name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>setpsize:d</p></td>
+<td class="text-left"><p>ステップリミットの最大ステップ長</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>デフォルト (mm)</p></td>
+</tr>
+</tbody>
+</table>
+<p>PTSIMでは、各ビームモジュールごとにRegionを自動生成しています。原則的に{Region}と{mname}が同じになります。</p>
+</section>
+<section id="id11">
+<h3>パラレルワールドプロセスを定義する<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">pwProcess</span> <span class="p">{</span><span class="n">pwname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">layered</span><span class="p">:</span><span class="n">b</span><span class="p">}</span> 
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>pwname:s</p></td>
+<td class="text-left"><p>Parallel World name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>layered:b</p></td>
+<td class="text-left"><p>Layered mass geometry用の場合はtrue, スコアのみはfalse</p></td>
+</tr>
+</tbody>
+</table>
+<p>パラレルワールド {pwname}を別途作成する必要があります。ジオメトリセクションを参照してください。</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="system-selection">
+<h2>System Selection<a class="headerlink" href="#system-selection" title="Link to this heading"></a></h2>
+<p>PTSIMは、粒子線施設のシミュレーション体系を切り替えられるように設計してあります。これは施設特有の実装を、一般的な用途と切り離すためです。<br />
+そのため、一般的な利用に際しては、以下の説明の通り、選択するシステム名は<strong>DynamicPort</strong>を選択してください。</p>
+<section id="id12">
+<h3>システムを選択する。<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">System</span> <span class="p">{</span><span class="n">system_name</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>system_name:s</p></td>
+<td class="text-left"><p>System name, <strong>DynamicPort</strong>を選択する。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="id13">
+<h4>システムを切り替える<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
+<p>一度選択したシステムを別のシステムに切り替える。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ChangeSystem</span> <span class="p">{</span><span class="n">system_name</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="beam-module-registration">
+<h2>Beam Module Registration<a class="headerlink" href="#beam-module-registration" title="Link to this heading"></a></h2>
+<p>シミュレーションで利用するビーム機器を登録します。後で登録したビーム機器を実体化してビームラインを構成して行きます。</p>
+<section id="id14">
+<h3>ビーム機器を登録する<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">mtype</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">param</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">lunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">rx</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">ry</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">rz</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">runit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュールにつける固有名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>mtype:s</p></td>
+<td class="text-left"><p>ビームモジュールのクラス名</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>param:s</p></td>
+<td class="text-left"><p>形状データファイルパス</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>x:d, y:d, z:d lunit:s</p></td>
+<td class="text-left"><p>配置座標(x,y,z)と単位</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>rx:d, ry:d, rz:d, runit:s</p></td>
+<td class="text-left"><p>回転角と単位. rx-&gt;ry-&gt;rz順で回転される.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="id15">
+<h4>ビームモジュールのクラスとパラメタファイルの書式<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>ビーム機器で指定可能なクラス名とそのパラメタファイル書式は、<a class="reference download internal" download="" href="_downloads/022a6c94bb8e391ee2f5d926efd99e59/20240327Parameter_Files_for_Beam_Modules.pdf"><span class="xref download myst">こちら</span></a>を参照してください。</p></li>
+<li><p>C++コードで独自のビーム機器を実装したい場合は、PTSprojectのソースコード<code class="docutils literal notranslate"><span class="pre">PTSproject/PTStoolkit/source/G4Mmodules/src</span></code>に、<code class="docutils literal notranslate"><span class="pre">G4MBMTemplate.cc</span></code>, <code class="docutils literal notranslate"><span class="pre">G4MBMTemplat1.cc</span></code>, <code class="docutils literal notranslate"><span class="pre">G4MTemplate2.cc</span></code>の空のファイルにジオメトリを実装して利用してください。</p></li>
+<li><p>GDMLで独自のビーム機器を実装したい場合は、G4MBMGdmlクラスを指定してください。このときのパラメタファイルはGDMLファイルとなります。</p></li>
+</ul>
+</section>
+</section>
+<section id="id16">
+<h3>ビーム機器の登録を解除する<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">unregister</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id17">
+<h3>特別なビーム機器の登録<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<p>ワールドボリュームに当たる治療室やスコアリング機能付き水ファントムなど、特別なビーム機器の登録には、専用の登録コマンドが用意されています。</p>
+<section id="room">
+<h4>治療室(Room)の登録<a class="headerlink" href="#room" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Room</span><span class="o">/</span><span class="n">register</span> <span class="p">{</span><span class="n">dx</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">dy</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">dz</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>dx:d, dy:d, dz:d, unit:s</p></td>
+<td class="text-left"><p>各辺の長さの半値と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id18">
+<h4>水ファントムの登録<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">WaterPhantom</span><span class="o">/</span><span class="n">register</span>  <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>モジュール名。デフォルトは<code class="docutils literal notranslate"><span class="pre">WaterPhantom</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dicom">
+<h4>DICOMジオメトリの登録<a class="headerlink" href="#dicom" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">DICOM</span><span class="o">/</span><span class="n">register</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="beam-module-installation">
+<h2>Beam Module Installation<a class="headerlink" href="#beam-module-installation" title="Link to this heading"></a></h2>
+<p>登録されたビームモジュールの実体化・治療室への配置に関するコマンドです。</p>
+<section id="id19">
+<h3>ビームモジュールの実体化<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">pwname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">layered</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>pwname:s</p></td>
+<td class="text-left"><p>パラレルワールド名。デフォルト値 <strong>none</strong> (マスジオメトリに配置する場合)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>layered:b</p></td>
+<td class="text-left"><p>Layered mass geometryである場合は<strong>true</strong>. デフォルト値は<strong>false</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id20">
+<h3>ビームモジュールを再度実体化<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<p>既にインストールされているビームモジュールの場合には，引数の設定を基づいて再インストールします。インストールされていないビームモジュールの場合には、インストールは行われません。<br />
+このコマンドは，mass worldにインストールされたビームモジュールを，パラレルワールドに再配置するために用意されます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">installIfExist</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">pwName</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">layered</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>pwname:s</p></td>
+<td class="text-left"><p>パラレルワールド名。デフォルト値 <strong>none</strong> (マスジオメトリに配置する場合)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>layered:b</p></td>
+<td class="text-left"><p>Layered mass geometryである場合は<strong>true</strong>. デフォルト値は<strong>false</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id21">
+<h3>ビームモジュールの複製を配置す<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p>既にインストールされているビームモジュールがあるとき、引数の設定に基づいて論理ボリュームのコピーを作成してインストールします。
+このコマンドは、ビームモジュールのエンベロープにコピー番号を付けて複数配置するために用意されます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">cloneIfExist</span>  <span class="p">{</span><span class="n">mnameFrom</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">mnameTo</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">copyid</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">rx</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">ry</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">rz</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mnameFrom:s</p></td>
+<td class="text-left"><p>コピー元の実体化されているビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>mnameTo:s</p></td>
+<td class="text-left"><p>コピーで複製されたビームモジュールにつけられる固有名</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>copyid:i</p></td>
+<td class="text-left"><p>コピー先のビームモジュールのエンベロープのコピー番号</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>x:d, y:d, z:d, unit:s</p></td>
+<td class="text-left"><p>コピー先の座標と単位</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>rx:d, ry:d, rz:d,  unit:s</p></td>
+<td class="text-left"><p>コピー先での回転と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id22">
+<h3>ビームモジュールの実体を削除<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">uninstall</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h3>全ビーム機器をインストール/アンインストール<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>登録済みのビームモジュール全てが対象に実体化や実体削除を行います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">installAll</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">uninstallAll</span>
+</pre></div>
+</div>
+</section>
+<section id="id24">
+<h3>全ビームライン機器のインストール/アンインストール<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<p>水ファントムとDICOMを除くビームモジュールの実体化や実体削除を行います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">installBM</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">uninstallBM</span>
+</pre></div>
+</div>
+</section>
+<section id="id25">
+<h3>ビームモジュールの再構築<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<p>ビーム機器が既に実体化されている場合は、実体を削除して再構築し直します。ビーム機器のパラメタを更新した後の適用に用いられます。ビーム機器が実体化されていない場合は、ビーム機器のカタログパラメタに沿って、パラメタの更新のみが行われます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">rebuild</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id26">
+<h3>登録ビームモジュールの状態を一覧表示<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="nb">list</span>  <span class="p">{</span><span class="n">lvl</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>  <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>lvl:i</p></td>
+<td class="text-left"><p>表示レベル</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>出力ファイル名。デフォルト stdout (標準出力)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id27">
+<h3>実体化されているビーム機器の一覧を表示<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">listInWorld</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id28">
+<h3>ビームモジュールを選択して操作する<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<p>ビームモジュールを選択して、選択した特定のビームモジュールに対して操作するコマンドを説明します。</p>
+<section id="id29">
+<h4>ビーム機器を選択する<a class="headerlink" href="#id29" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">select</span>  <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+</tbody>
+</table>
+<p>選択されたビームモジュールに対して，次に紹介するコマンドが利用可能となる。</p>
+</section>
+<section id="id30">
+<h4>ビーム機器情報の情報表示<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">lang</span>   <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>type:i</p></td>
+<td class="text-left"><p>表示タイプ。機器によって表示内容は異なる。 <br> DICOMモジュールの例 <br> Default=0 Comments in Japanese, <br> type=1 Comments in English, <br> type=10 dcmodify command shell script.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id31">
+<h4>ビーム機器情報の表示と保存<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">dump</span>
+<span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">dumpToFile</span>   <span class="p">{</span><span class="n">ofilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ofilename:s</p></td>
+<td class="text-left"><p>デフォルト=stdout, またはファイル名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id32">
+<h4>ビーム機器の形式パラメタを更新する<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">typeid</span> <span class="p">{</span><span class="n">ifilename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ifilename:s</p></td>
+<td class="text-left"><p>機器形状パラメタファイル</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id33">
+<h4>ビーム機器の中心座標を設定をする<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">translate</span>  <span class="p">{</span><span class="n">X</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">Y</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">Z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>X:d, Y:d, Z:d, unit:s</p></td>
+<td class="text-left"><p>x, y, z座標と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="z">
+<h4>ビーム機器の下流z面で位置あわせする<a class="headerlink" href="#z" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">downEdgeZ</span>   <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>z:d, unit:d</p></td>
+<td class="text-left"><p>z座標と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id34">
+<h4>ビーム機器の上流z面で位置合わせする<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">upEdgeZ</span>   <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>z:d, unit:d</p></td>
+<td class="text-left"><p>z座標と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="xyz">
+<h4>ビーム機器のX軸、Y軸、Z軸周りに回転する<a class="headerlink" href="#xyz" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">rotate</span>  <span class="p">{</span><span class="n">Rx</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">Ry</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">Rz</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Rx:d, Ry:d, Rz:d, unit:s</p></td>
+<td class="text-left"><p>回転角度と単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id35">
+<h4>ビーム機器の-Z面に別のビーム機器を接して配置する<a class="headerlink" href="#id35" title="Link to this heading"></a></h4>
+<p>このコマンドは、DICOMビームモジュールに、カウチとなるを別のビーム機器を接して配置するために用いられる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">attachZ</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>設置させるビーム機器の固有名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id36">
+<h3>デバッグフラグ<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">verbose</span>  <span class="p">{</span><span class="n">lvl</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>lvl:i</p></td>
+<td class="text-left"><p>デバッグレベル</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id37">
+<h3>動的なビーム機器の設定<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<section id="id38">
+<h4>ワブラー電磁石を有効化する<a class="headerlink" href="#id38" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">updateEvent</span><span class="o">/</span><span class="n">wobbling</span> <span class="p">{</span><span class="n">wnamex</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wnamey</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>wnamex:s, wnamey:s</p></td>
+<td class="text-left"><p>ワブラー電磁石のビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>有効化=true, 無効化=false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id39">
+<h4>回転モジュレータ有効化にする<a class="headerlink" href="#id39" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">updateEvent</span><span class="o">/</span><span class="n">rotating</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mnamex:s</p></td>
+<td class="text-left"><p>回転対称のビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>有効化=true, 無効化=false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id40">
+<h4>ワブラー電磁石や回転モジュレータの更新モード<a class="headerlink" href="#id40" title="Link to this heading"></a></h4>
+<p>設定値の更新をイベント番号に従って順次更新する方法と、乱数によって更新する方法が選択可能です。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">updateEvent</span><span class="o">/</span><span class="n">sequential</span> <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>sequential = true, random = false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id41">
+<h4>回転モジュレータの初期角度と更新角度を設定<a class="headerlink" href="#id41" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">updateEvent</span><span class="o">/</span><span class="n">rotatingAngle</span> <span class="p">{</span><span class="n">init</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">step</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>init:d</p></td>
+<td class="text-left"><p>初期角度</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>step:d</p></td>
+<td class="text-left"><p>追加する角度</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>rad, degree</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="special-beam-modules">
+<h2>Special Beam Modules<a class="headerlink" href="#special-beam-modules" title="Link to this heading"></a></h2>
+<section id="g4room-commands">
+<h3><a class="reference internal" href="BeamModules/Room.html"><span class="std std-doc">G4Room commands</span></a><a class="headerlink" href="#g4room-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="waterphantom-commands">
+<h3><a class="reference internal" href="BeamModules/WaterPhantom.html"><span class="std std-doc">WaterPhantom commands</span></a><a class="headerlink" href="#waterphantom-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="dicom-commands">
+<h3><a class="reference internal" href="BeamModules/DICOM.html"><span class="std std-doc">DICOM commands</span></a><a class="headerlink" href="#dicom-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="dicom-rt-commands">
+<h3><a class="reference internal" href="BeamModules/DICOMRT.html"><span class="std std-doc">DICOM-RT commands</span></a><a class="headerlink" href="#dicom-rt-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="gdml-commands">
+<h3><a class="reference internal" href="BeamModules/GDML.html"><span class="std std-doc">GDML commands</span></a><a class="headerlink" href="#gdml-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="vtk-commands">
+<h3><a class="reference internal" href="BeamModules/VTK.html"><span class="std std-doc">VTK commands</span></a><a class="headerlink" href="#vtk-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="dumper-commands">
+<h3><a class="reference internal" href="BeamModules/Dumper.html"><span class="std std-doc">Dumper commands</span></a><a class="headerlink" href="#dumper-commands" title="Link to this heading"></a></h3>
+</section>
+<section id="bmfield-commands">
+<h3><a class="reference internal" href="BeamModules/BMField.html"><span class="std std-doc">BMField commands</span></a><a class="headerlink" href="#bmfield-commands" title="Link to this heading"></a></h3>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mass-and-parallel-world-geometry">
+<h2>Mass and Parallel World Geometry<a class="headerlink" href="#mass-and-parallel-world-geometry" title="Link to this heading"></a></h2>
+<section id="id42">
+<h3>シミュレーション空間のデバック出力<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">DetConstruction</span><span class="o">/</span><span class="n">verbose</span> <span class="p">{</span><span class="n">lvl</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>lvl:i</p></td>
+<td class="text-left"><p>verbose level.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id43">
+<h3>パラレルワールドジオメトリ<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<section id="id44">
+<h4>パラレルワールドジオメトリを作成する<a class="headerlink" href="#id44" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">DetConstruction</span><span class="o">/</span><span class="n">createPW</span> <span class="p">{</span><span class="n">pwname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>pwname:s</p></td>
+<td class="text-left"><p>パラレルワールドの固有名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id45">
+<h4>パラレルワールドの一覧を表示する<a class="headerlink" href="#id45" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">DetConstruction</span><span class="o">/</span><span class="n">listPW</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="scoring-and-histograming">
+<h2>Scoring and Histograming<a class="headerlink" href="#scoring-and-histograming" title="Link to this heading"></a></h2>
+<p>スコアリングにより粒子情報を記録するためには、論理ボリューム(LV)を選択してSD(SensitiveDetector)を有効化し、SDが蓄積している情報からNtupleファイルに出力する設定の２段階からなります。<br />
+WatarPhantomやDICOMなどの特別なビーム機器は、スコアリング機能が内包されているので、それぞれのセクションを参照してください。<br />
+ここでは一般的なスコアリング設定のコマンドを解説しています。</p>
+<section id="choosing-logical-volume-for-scoring">
+<h3>Choosing Logical Volume for scoring<a class="headerlink" href="#choosing-logical-volume-for-scoring" title="Link to this heading"></a></h3>
+<section id="logical-volume">
+<h4>ビーム機器のLogical Volume名の一覧表示<a class="headerlink" href="#logical-volume" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">dumpLV</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+</tbody>
+</table>
+<p>コマンド出力には、ビームモジュールを構成している論理ボリュームと、そのシリアル番号(lvid)が付けられて表示される。</p>
+</section>
+<section id="id46">
+<h4>ビームモジュール名とモジュール内での順序番号を指定して、論理ボリュームを選択する<a class="headerlink" href="#id46" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">selectLV</span>  <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>   <span class="p">{</span><span class="n">lvid</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>lvid:i</p></td>
+<td class="text-left"><p>論理ボリュームのシリアル番号</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>WaterPhantom、CylinderPhantom、 DICOM、PCTTubeDetector, PCTBoxDetectorジオメトリでは、SDは自動的に取り付けられている。下記のコマンドcreateSDやattachSDは、それら以外のジオメトリでのスコアリングを想定して用意されている。</p></li>
+</ul>
+</section>
+<section id="id47">
+<h4>ビームモジュール名とモジュール内の論理ボリューム名を指定して、論理ボリュームを選択する<a class="headerlink" href="#id47" title="Link to this heading"></a></h4>
+<p>モジュール内での論理ボリューム名を指定します。論理ボリューム名が複数ある場合は、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/selectLV</span></code>コマンドを使ってください。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">selectLVByName</span>  <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>   <span class="p">{</span><span class="n">lvname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>ビームモジュール名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>lvname:s</p></td>
+<td class="text-left"><p>論理ボリューム名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sensitivedetector-detectorsd">
+<h3>SensitiveDetector(DetectorSD)を作成<a class="headerlink" href="#sensitivedetector-detectorsd" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">createSD</span> <span class="p">{</span><span class="n">sdname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">colname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">edepFlag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span> <span class="p">{</span><span class="n">depx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">depy</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">depz</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">depm</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">deps</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>sdname:s</p></td>
+<td class="text-left"><p>SD name</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>colname:s</p></td>
+<td class="text-left"><p>HistCollection name (Default: HitsCollection )</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>edepFlag:b</p></td>
+<td class="text-left"><p>true=付与エネルギーがある場合のみ記録する。ガンマ線などでは、反応時のみ記録される。<br> false=ガンマ線などは、反応が起きなくてもLVに入った時点で記録される。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>depx:i, depy:i, depz:i, depm:i, deps:i</p></td>
+<td class="text-left"><p>ジオメトリ識別番号を取得するレイヤ番号</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id48">
+<h3>論理ボリュームを指定してのスコア利用<a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
+<section id="sensitivedetector">
+<h4>SensitiveDetectorを取付ける<a class="headerlink" href="#sensitivedetector" title="Link to this heading"></a></h4>
+<p>選択中の論理ボリュームが取り付け対象になります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">attachSD</span>  <span class="p">{</span><span class="n">sdname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>sdname:s</p></td>
+<td class="text-left"><p>SD name</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="triggersd">
+<h3>TriggerSDを取り付ける<a class="headerlink" href="#triggersd" title="Link to this heading"></a></h3>
+<p>selectLVコマンドで選択中の論理ボリュームに、TriggerSDを取り付ける。
+TiggerSDは、初回の取り付け時に自動的に作成されます。上記のcreateSDコマンドは不要です。
+TriggerSDは、粒子が論理ボリュームに入るとあらかじめ設定したビットが粒子飛跡情報として記録されます。
+これによりスコア結果のビット列を確認することにより、通過したジオメトリを確認することができます。</p>
+<section id="id49">
+<h4>TriggerSDの取り付け<a class="headerlink" href="#id49" title="Link to this heading"></a></h4>
+<p>選択中の論理ボリュームが取り付け対象になります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">attachTrgID</span>    <span class="p">{</span><span class="n">tirgid</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>  <span class="p">{</span><span class="n">sdname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>trigid:i</p></td>
+<td class="text-left"><p>選択中の論理ボリュームに割り振るトリガー識別番号</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>sdname:s</p></td>
+<td class="text-left"><p>TriggerSDの固有名, デフォルト”TreiggerSD”</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>SD名で登録の有無を確認し、TriggerSDの存在を識別し、未作成の場合には自動的に生成される。原則としてTriggerSDは、１つしか作ってはいけないので注意。</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id50">
+<h4>論理ボリュームの物質を変更<a class="headerlink" href="#id50" title="Link to this heading"></a></h4>
+<p>指定した論理ボリュームの物質を変更することが可能です。物質はあらかじめ作成しておく必要があります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">setMaterial</span>    <span class="p">{</span><span class="n">matname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>matname:s</p></td>
+<td class="text-left"><p>選択中の論理ボリュームに割り当てる作成済みの物質名。<br></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>パラレルワールドでのレイヤジオメトリでは、”null”または”NULL”で不要なボリュームの物質をnullに設定することができる。</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>スコアの説明で、物質の変更機能を上げているのは、パラレルワールドのジオメトリでスコアリングを利用する場合や、同じくパラレルワールドでレイヤードマスジオメトリを用いる場合、パラレルワールドに配置するジオメトリで、物質を無視する領域は、物質をnullに設定することが必要だからです。</p>
+<ul class="simple">
+<li><p>関連コマンド: /G4M/Module/dump, /G4M/Module/selectLV</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ntuples-histograms-for-output">
+<h2>Ntuples/Histograms for output<a class="headerlink" href="#ntuples-histograms-for-output" title="Link to this heading"></a></h2>
+<section id="id51">
+<h3>出力するファイル名を指定<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">dumpfile</span> <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>filename:s</p></td>
+<td class="text-left"><p>出力ファイル名（拡張子要）, .root,  .xml,  .csv</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="g4analysismanager">
+<h3>ファイル出力後もG4AnalysisManagerが結果を保持<a class="headerlink" href="#g4analysismanager" title="Link to this heading"></a></h3>
+<p>Geant4のVisualizationが提供するplotter機能を使って結果を表示するために、Run終了後もヒストグラム情報を保持することができる。
+継続してRunを実行すると、スコア結果は追加されていく。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">keep</span> <span class="p">{</span><span class="n">bkeep</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>bkeep:b</p></td>
+<td class="text-left"><p>true=ヒストグラムを保持。false=ヒストグラムはRunごとにリセットされる。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ntuple">
+<h3>スレッドのNtupleをマスターにマージする<a class="headerlink" href="#ntuple" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">merge</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>true = merge</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="primaryvtxntuple">
+<h3>PrimaryVtxのNtupleを有効化<a class="headerlink" href="#primaryvtxntuple" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">primary</span> <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p>true = score primary vertex info.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>The ntuple name is “PRIM”.</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="waterphantom-dicom">
+<h3>WaterPhantom/DICOMでのヒストグラムの有効化<a class="headerlink" href="#waterphantom-dicom" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">hist</span><span class="o">/</span><span class="n">enable</span> <span class="p">{</span><span class="n">hname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span> <span class="p">{</span><span class="n">mname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>hname:s</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">TTree</span></code>: <code class="docutils literal notranslate"><span class="pre">DICOMCT</span></code>, <code class="docutils literal notranslate"><span class="pre">DICOM</span></code> <br> <code class="docutils literal notranslate"><span class="pre">TH3</span></code>: <code class="docutils literal notranslate"><span class="pre">JSTEdep</span></code>, <code class="docutils literal notranslate"><span class="pre">JSTDose</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>flag:b</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code> / <code class="docutils literal notranslate"><span class="pre">false</span></code>（有効化 / 無効化）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>mname:s</p></td>
+<td class="text-left"><p>モジュール名 <br>  省略可：<code class="docutils literal notranslate"><span class="pre">WaterPhantom</span></code> または <code class="docutils literal notranslate"><span class="pre">DICOM</span></code> <br> <code class="docutils literal notranslate"><span class="pre">TH3</span></code> 型で複数検出器がある場合、対象の検出器を指定 <br><code class="docutils literal notranslate"><span class="pre">TTree</span></code> 型では、以下のコマンドでビームモジュールとの対応付けを行う</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id52">
+<h3>ヒストグラムの設定状態を表示<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runnaction</span><span class="o">/</span><span class="n">histList</span>
+</pre></div>
+</div>
+</section>
+<section id="ntuplesensitive-detector">
+<h3>Ntuple作成とSensitive Detectorの対応付け<a class="headerlink" href="#ntuplesensitive-detector" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">ntname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">colname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ntname:s</p></td>
+<td class="text-left"><p>多次元ヒストグラム（ntuple）の固有名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>colname:s</p></td>
+<td class="text-left"><p>記録するデータ元のヒットコレクション名（形式： <code class="docutils literal notranslate"><span class="pre">SDname/HitsCollection</span></code>）</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p><strong>スコア付きビーム機器の場合の対応表：</strong></p>
+</div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>BeamModule</p></th>
+<th class="head"><p>colname</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>WaterPhantom</p></td>
+<td><p>WaterPhantom/HitsCollection</p></td>
+</tr>
+<tr class="row-odd"><td><p>DICOM</p></td>
+<td><p>DICOM/HitsCollection</p></td>
+</tr>
+<tr class="row-even"><td><p>TubeDetector</p></td>
+<td><p>TubeDetector/HitsCollection</p></td>
+</tr>
+<tr class="row-odd"><td><p>BoxDetector</p></td>
+<td><p>BoxDetector/HitsCollection</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id53">
+<h3>スコアリング物理量の候補を一覧表示<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showScName</span>
+</pre></div>
+</div>
+</section>
+<section id="id54">
+<h3>Ntupleに保存する物理量を追加<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addScColumn</span> <span class="p">{</span><span class="n">nname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">qname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ntname:s</p></td>
+<td class="text-left"><p>Ntuple 名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>qname:s</p></td>
+<td class="text-left"><p>スコアリング対象の物理量名</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>type:s</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">I</span></code>（整数）, <code class="docutils literal notranslate"><span class="pre">D</span></code>（実数）, <code class="docutils literal notranslate"><span class="pre">F</span></code>（実数）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>単位（例: <code class="docutils literal notranslate"><span class="pre">MeV</span></code>, <code class="docutils literal notranslate"><span class="pre">mm</span></code>, 単位なし: <code class="docutils literal notranslate"><span class="pre">none</span></code>）</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id55">
+<h3>Ntupleに登録済みの物理量を一覧表示<a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showScColumn</span> <span class="p">{</span><span class="n">ntname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ntname:s</p></td>
+<td class="text-left"><p>Ntuple 名</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="h1-h2-h3-p1-p2-g4analysismanager">
+<h3>ヒストグラム H1,H2,H3,P1,P2 (G4AnalysisManager)<a class="headerlink" href="#h1-h2-h3-p1-p2-g4analysismanager" title="Link to this heading"></a></h3>
+<p>G4AnalysisManagerのコマンドを使ってヒストグラムを宣言します。</p>
+<section id="id56">
+<h4>ヒストグラム宣言<a class="headerlink" href="#id56" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">h1</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">htname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">nbinx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">xmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">h2</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">htname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">nbinx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">xmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbiny</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">ymin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">ymax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">yunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">yfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ybinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">h3</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">htname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">nbinx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">xmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbiny</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">ymin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">ymax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">yunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">yfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ybinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbinz</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">zmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">zmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">zunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">p1</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">htname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">nbinx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">xmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbiny</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">ymin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">ymax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">yunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">yfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ybinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">p2</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">htname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">nbinx</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">xmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">xunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">xbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbiny</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">ymin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">ymax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">yunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">yfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ybinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+		               <span class="p">{</span><span class="n">nbinz</span><span class="p">:</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span><span class="n">zmin</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">zmax</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">zunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zfcn</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zbinScheme</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>htname:s</p></td>
+<td class="text-left"><p>histogram 名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>nbin:i</p></td>
+<td class="text-left"><p>Number of bins</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>min:d</p></td>
+<td class="text-left"><p>Minimum edge</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>max:d</p></td>
+<td class="text-left"><p>Maximum edge</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>Unit of the axis</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Fcn:s</p></td>
+<td class="text-left"><p>Function applied for the filling value. log, log10, exp, none</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>bunScheme:s</p></td>
+<td class="text-left"><p>Binning type of the axies. linear, log</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id57">
+<h4>ヒストグラムとヒットコレクションとの対応付<a class="headerlink" href="#id57" title="Link to this heading"></a></h4>
+<p>G4AnalysisManagerのコマンドを使って作成した、H1, H2, H3, P1, P2のヒストグラムとヒットコレクションの対応付けを行います。
+対応付られたヒットコレクションから指定されたスコア量が取り出されて、ヒストグラムにフィルされる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">h1</span><span class="o">/</span><span class="n">link</span>  <span class="p">{</span><span class="n">htmame</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">xpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wandunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">fullcollection</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">h2</span><span class="o">/</span><span class="n">link</span>  <span class="p">{</span><span class="n">htmame</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">xpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ypar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wandunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">fullcollection</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">h3</span><span class="o">/</span><span class="n">link</span>  <span class="p">{</span><span class="n">htmame</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">xpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ypar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wandunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">fullcollection</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">p1</span><span class="o">/</span><span class="n">link</span>  <span class="p">{</span><span class="n">htmame</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">xpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ypar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wandunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">fullcollection</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">p2</span><span class="o">/</span><span class="n">link</span>  <span class="p">{</span><span class="n">htmame</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">xpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ypar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">zpar</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">wandunit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">fullcollection</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ntname:s</p></td>
+<td class="text-left"><p>Ntuple 名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>xpar:s</p></td>
+<td class="text-left"><p>x軸となるスコアリングの物理量名(qname)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ypar:s</p></td>
+<td class="text-left"><p>y軸となるスコアリングの物理量名(qname)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>zpar:s</p></td>
+<td class="text-left"><p>z軸となるスコアリングの物理量名(qname)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>wandunit:s</p></td>
+<td class="text-left"><p>weightの物理量名(qname)と単位(unit)を”/”で区切って指定する（例  de/MeV). weight=1.0の場合には、noneを指定する。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>fullcollection:s</p></td>
+<td class="text-left"><p>SD名/ヒットコレクション名で表記する. Digitizerのコレクションの場合は、コレクション名でも可。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="event-and-tracking">
+<h2>Event and Tracking<a class="headerlink" href="#event-and-tracking" title="Link to this heading"></a></h2>
+<section id="myeventactformonitor">
+<h3>MyEventActForMonitor<a class="headerlink" href="#myeventactformonitor" title="Link to this heading"></a></h3>
+<section id="id58">
+<h4>イベント番号をファイルに出力する<a class="headerlink" href="#id58" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">/</span><span class="n">eventMonitor</span>   <span class="p">{</span><span class="n">nevent</span><span class="p">:</span><span class="n">i</span><span class="p">}</span>   <span class="p">{</span><span class="n">filename</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>nevent:  イベントを出力する間隔</p></li>
+<li><p>filename:  出力ファイル名</p></li>
+</ul>
+</section>
+</section>
+<section id="mytrackingactforkilltrkmessenger">
+<h3>MyTrackingActForKillTrkMessenger<a class="headerlink" href="#mytrackingactforkilltrkmessenger" title="Link to this heading"></a></h3>
+<p>コマンドの{name}部分は、tracking1, tracking2の２つがデフォルトで使用可能。</p>
+<section id="id59">
+<h4>粒子生成を抑制するz領域を設定する<a class="headerlink" href="#id59" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">/</span><span class="n">killZUpStream</span> <span class="p">{</span><span class="n">z</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>z:  z座標</p></li>
+<li><p>defaule unit: mm</p></li>
+</ul>
+</section>
+<section id="id60">
+<h4>中性子の生成をしない<a class="headerlink" href="#id60" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">/</span><span class="n">killNeutral</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag:  true 生成しない</p></li>
+</ul>
+</section>
+<section id="id61">
+<h4>軽粒子の生成をしない<a class="headerlink" href="#id61" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">/</span><span class="n">killLepton</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag:  true 生成しない</p></li>
+</ul>
+</section>
+<section id="id62">
+<h4>二次粒子の生成をしない<a class="headerlink" href="#id62" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">/</span><span class="n">killSecondary</span>  <span class="p">{</span><span class="n">flag</span><span class="p">:</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flag:  true 生成しない</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="digi">
+<h2>Digi ヒストグラム設定(試験運用)<a class="headerlink" href="#digi" title="Link to this heading"></a></h2>
+<section id="digi-ntuple">
+<h3>Digi Ntuple 作成<a class="headerlink" href="#digi-ntuple" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">dc</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">ntname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">colname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id63">
+<h3>Digiスコアリング可能な物理量を表示<a class="headerlink" href="#id63" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showDcName</span>
+</pre></div>
+</div>
+</section>
+<section id="id64">
+<h3>Digi 保存情報を追加<a class="headerlink" href="#id64" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addDcColumn</span> <span class="p">{</span><span class="n">nname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">qname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id65">
+<h3>Digi 登録済み情報を表示<a class="headerlink" href="#id65" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showDcSetColumn</span> <span class="p">{</span><span class="n">nname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="digiset-ntuple">
+<h3>DigiSet Ntuple 作成<a class="headerlink" href="#digiset-ntuple" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">dcset</span><span class="o">/</span><span class="n">create</span> <span class="p">{</span><span class="n">ntname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">colname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="digiset">
+<h3>DigiSetスコアリング可能な物理量を表示<a class="headerlink" href="#digiset" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showDcSetName</span>
+</pre></div>
+</div>
+</section>
+<section id="id66">
+<h3>DigiSet 保存情報を追加<a class="headerlink" href="#id66" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addDcSetColumn</span> <span class="p">{</span><span class="n">nname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">qname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id67">
+<h3>DigiSet 登録済み情報を表示<a class="headerlink" href="#id67" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showDcSetColumn</span> <span class="p">{</span><span class="n">nname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="digitizer">
+<h2>Digitizer<a class="headerlink" href="#digitizer" title="Link to this heading"></a></h2>
+<section id="id68">
+<h3>元データからデジタイズしたデータを作成する<a class="headerlink" href="#id68" title="Link to this heading"></a></h3>
+<p>元データのコレクションからデジタイズタイプに応じた処理を行い、処理後のデータコレクションを作成する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">eventaction</span><span class="o">/</span><span class="n">digi</span><span class="o">/</span><span class="n">create</span>  <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>  <span class="p">{</span><span class="n">DigiType</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ColFrom</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">ColTo</span><span class="p">:</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span><span class="n">sdname</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>name:s</p></td>
+<td class="text-left"><p>Digitizerの固有名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>DigiType:s</p></td>
+<td class="text-left"><p>Digitizer処理を指定する</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ColFrome:s</p></td>
+<td class="text-left"><p>元となるコレクション名</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ColTo:s</p></td>
+<td class="text-left"><p>処理後のコレクション名</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>sdname:s</p></td>
+<td class="text-left"><p>コレクション名の重複を区別するためにHitコレクションのSD名を指定する</p></td>
+</tr>
+</tbody>
+</table>
+<section id="digitype">
+<h4>DigiTypeの選択肢<a class="headerlink" href="#digitype" title="Link to this heading"></a></h4>
+<p>| 値表記 | 変換 | 説明 |
+| DigiAccumulator| (Hit-&gt;Digi for accumulation) | 設定したkeyと物理量を参照して、物理量を積算して保持する。|
+| DigiVolMerger | (Hit-&gt;Digi for PET)|<br />
+同じジオメトリのコピー番号をもつHitをグループ化する。ジオメトリ単位ごとに信号量としてエネルギー付与値を積算する。|
+| DigiCoincidence | (Digi-&gt;DigiSet for PET)|
+PETでの時間コインシデンスをとり、設定時間幅のDigiデータをグループ化する。|</p>
+</section>
+</section>
+<section id="id69">
+<h3>Digitizerモジュール選択<a class="headerlink" href="#id69" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">eventaction</span><span class="o">/</span><span class="n">digi</span><span class="o">/</span><span class="n">select</span>  <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>name:s</p></td>
+<td class="text-left"><p>デジタイザーの固有名</p></td>
+</tr>
+</tbody>
+</table>
+<!-- {PET用デジタイザー} -->
+</section>
+<section id="id70">
+<h3>Digitizerモジュールの時間ウインドウ設定<a class="headerlink" href="#id70" title="Link to this heading"></a></h3>
+<p>selectで選択したdigitizerモジュールに時間ウインドウを設定する
+ただし、DigiCoincidenceのときのみ有効となる。</p>
+<section id="id71">
+<h4>時間/エネルギーウインドウを定<a class="headerlink" href="#id71" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">eventaction</span><span class="o">/</span><span class="n">coincidence</span><span class="o">/</span><span class="n">twin</span>  <span class="p">{</span><span class="n">tw</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">toff</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+<span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">eventaction</span><span class="o">/</span><span class="n">coincidence</span><span class="o">/</span><span class="n">ewin</span>  <span class="p">{</span><span class="n">emean</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>  <span class="p">{</span><span class="n">ew</span><span class="p">:</span><span class="n">d</span><span class="p">}</span> <span class="p">{</span><span class="n">unit</span><span class="p">:</span><span class="n">s</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>値表記</p></th>
+<th class="head text-left"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>tw:d</p></td>
+<td class="text-left"><p>時間ウインドウ</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>toff:d</p></td>
+<td class="text-left"><p>信号から時間ウインド開始までの時間オフセット</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>単位</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>emean:d</p></td>
+<td class="text-left"><p>エネルギー中心値</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>ew:d</p></td>
+<td class="text-left"><p>エネルギー幅（emean±ew）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>unit:s</p></td>
+<td class="text-left"><p>単位</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Tutorial/exampleA11.html" class="btn btn-neutral float-left" title="Example A11(Layered-Mass w/ MagField）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="material.html" class="btn btn-neutral float-right" title="Material-file format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

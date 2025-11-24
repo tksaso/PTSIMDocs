@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example A1(ファントム/スコア） &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example A2(初期粒子発生GPS）" href="exampleA2.html" />
+    <link rel="prev" title="Example A0(基本構成)" href="exampleA0.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="launchOpt.html">起動オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA0.html">Example A0(基本構成)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example A1(ファントム/スコア）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">例題マクロファイル</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">マクロファイルの解説</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA2.html">Example A2(初期粒子発生GPS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA3.html">Example A3(ビーム機器登録/操作）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA4.html">Example A4(GDMLビーム機器）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA5.html">Example A5(DICOM-CTジオメトリ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA6.html">Example A6(ParallelWorld-Score）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA7.html">Example A7(Layered-Mass）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA8.html">Example A8(Scan/Raster-Beam）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA9.html">Example A9(TriggerSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA10.html">Example A10(attachSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA11.html">Example A11(Layered-Mass w/ MagField）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Example A1(ファントム/スコア）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorial/exampleA1.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="example-a1">
+<h1>Example A1(ファントム/スコア）<a class="headerlink" href="#example-a1" title="Link to this heading"></a></h1>
+<p>シミュレーション空間への水ファントムの配置とスコアリングについて解説します。
+水ファントムのビームモジュール<code class="docutils literal notranslate"><span class="pre">G4MWaterPhantom</span></code>クラスは、３次元メッシュ化されたボクセル構造を持ち、各ボクセルでのスコアリングが可能です。</p>
+<p><strong>解説概要</strong></p>
+<ul class="simple">
+<li><p>水ファントムの登録と配置設定</p></li>
+<li><p>水ファントムでのスコアリング</p></li>
+</ul>
+<p>以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。</p>
+<section id="id1">
+<h2>例題マクロファイル<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>PTSIMコードに付属するマクロファイル<code class="docutils literal notranslate"><span class="pre">exampleA1.mac</span></code>をコピーして用います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp  ./macros/tut/exampleA1.mac  .
+</pre></div>
+</div>
+<p>実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -i  exampleA1.mac
+</pre></div>
+</div>
+<p>ビームを打ってみます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">beamOn</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>治療室の原点(アイソセンター)に水ファントムが配置されたシミュレーション空間です。
+<img alt="exampleA1" src="../_images/exampleA1.png" /></p>
+<p>終了</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<section id="id2">
+<h3>マクロファイルの解説<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>実行に必要なコマンド部分のみを抜粋して説明します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#</span>
+<span class="linenos"> 2</span><span class="c1">#  (PreInit State)</span>
+<span class="linenos"> 3</span>/control/verbose<span class="w"> </span><span class="m">1</span>
+<span class="linenos"> 4</span><span class="c1">#</span>
+<span class="linenos"> 5</span><span class="c1"># [MA]Material</span>
+<span class="linenos"> 6</span>/G4M/Material/create<span class="w"> </span>G4_AIR
+<span class="linenos"> 7</span>/G4M/Material/create<span class="w"> </span>G4_WATER
+<span class="linenos"> 8</span><span class="c1">#</span>
+<span class="linenos"> 9</span><span class="c1"># [MA]PhysicsList</span>
+<span class="linenos">10</span>/control/execute<span class="w"> </span>./macros/common/phys.mac
+<span class="linenos">11</span><span class="c1">#</span>
+<span class="linenos">12</span><span class="c1"># [MA]Particle Therapy System Selection and Beam Module Registration</span>
+<span class="linenos">13</span>/G4M/System<span class="w"> </span>DynamicPort
+<span class="linenos">14</span>/Dynamic/Module/Room/register<span class="w">  </span><span class="m">525</span>.<span class="w">  </span><span class="m">525</span>.<span class="w">  </span><span class="m">3550</span>.<span class="w"> </span>mm
+<span class="linenos">15</span><span class="c1">#</span>
+<span class="linenos">16</span>/Dynamic/Module/WaterPhantom/register<span class="w"> </span>Phantom
+<span class="linenos">17</span><span class="c1">#</span>
+<span class="linenos">18</span><span class="c1"># [MA]Run Initialize</span>
+<span class="linenos">19</span>/run/initialize
+<span class="linenos">20</span><span class="c1">#</span>
+<span class="linenos">21</span><span class="c1">#  (Idle State)</span>
+<span class="linenos">22</span><span class="c1">#</span>
+<span class="linenos">23</span><span class="c1"># Phantom settings and installation</span>
+<span class="linenos">24</span>/G4M/Module/Phantom/size<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">250</span>.0<span class="w"> </span>mm
+<span class="linenos">25</span>/G4M/Module/Phantom/dim<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">150</span>.<span class="w"> </span><span class="m">250</span>.
+<span class="linenos">26</span>/G4M/Module/Phantom/material<span class="w"> </span>G4_WATER
+<span class="linenos">27</span>/G4M/Module/select<span class="w"> </span>Phantom
+<span class="linenos">28</span>/G4M/Module/rotate<span class="w"> </span><span class="m">0</span>.<span class="w"> </span><span class="m">180</span>.<span class="w"> </span><span class="m">0</span>.<span class="w"> </span>degree
+<span class="linenos">29</span>/G4M/Module/install<span class="w"> </span>Phantom
+<span class="linenos">30</span><span class="c1">#</span>
+<span class="linenos">31</span><span class="c1"># [MA] Beam Parameters</span>
+<span class="linenos">32</span>/My/PrimaryGenerator/select<span class="w"> </span>GPS
+<span class="linenos">33</span>/control/execute<span class="w"> </span>./macros/common/gps.mac
+<span class="linenos">34</span><span class="c1">#</span>
+<span class="linenos">35</span><span class="c1"># Scoring</span>
+<span class="linenos">36</span>/My/runaction/dumpfile<span class="w">      </span>A1.root
+<span class="linenos">37</span>/My/runaction/ntuple/merge<span class="w">  </span><span class="nb">true</span>
+<span class="linenos">38</span><span class="c1">#</span>
+<span class="linenos">39</span><span class="c1"># Track analysis</span>
+<span class="linenos">40</span>/My/runaction/ntuple/create<span class="w">    </span>NT<span class="w"> </span>Phantom/HitsCollection<span class="w"> </span>
+<span class="linenos">41</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>evno<span class="w"> </span>I
+<span class="linenos">42</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>pid<span class="w">  </span>I
+<span class="linenos">43</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>proc<span class="w"> </span>I
+<span class="linenos">44</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>ix<span class="w">   </span>I
+<span class="linenos">45</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>iy<span class="w">   </span>I
+<span class="linenos">46</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>iz<span class="w">   </span>I
+<span class="linenos">47</span>/My/runaction/ntuple/addColumn<span class="w"> </span>NT<span class="w"> </span>de<span class="w">   </span>F<span class="w">  </span>keV
+<span class="linenos">48</span>/My/runaction/ntuple/showScColumn<span class="w"> </span>NT
+<span class="linenos">49</span><span class="c1">#</span>
+<span class="linenos">50</span><span class="c1"># BeamOn</span>
+<span class="linenos">51</span><span class="c1">#/run/beamOn 100</span>
+<span class="linenos">52</span><span class="c1">#</span>
+</pre></div>
+</div>
+<section id="id3">
+<h4>水ファントムモジュールの利用<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<p>水ファントム(G4MWaterPhantomクラス）は、水ファントムを想定したビームモジュールです。
+内部をx,y,z方向にスライスしてボクセル化して3次元線量分布等を取得することができます。</p>
+<p>以下に、使用における手順を説明します。</p>
+<ol class="arabic simple">
+<li><p>PreInit Stateで、水ファントムをシステムに登録する。<br>
+PreInit Stateとは、<code class="docutils literal notranslate"><span class="pre">/run/initialize</span></code>を実行する前までの状態です。<br />
+<code class="docutils literal notranslate"><span class="pre">/Dynamic/Module/WaterPhantom/register</span></code>コマンドで登録を行います。引数は、このモジュールに付ける固有名となります。登録後であっても、この固有名を指定してモジュールの設定を変更することが可能です。後ほど説明する水ファントムの詳細設定コマンドでは、コマンドの一部に固有名が自動的に使われています。そのため、異なる固有名で複数の水ファントムを導入し、個別に設定することも可能です。</p></li>
+<li><p>Idle Stateで、水ファントムの詳細設定や実体化を行う。<br>
+Idle Stateとは、<code class="docutils literal notranslate"><span class="pre">/run/initialize</span></code>を実行した後の状態です。<br />
+2.1 <code class="docutils literal notranslate"><span class="pre">/G4M/Module/Phantom/size</span></code>コマンドで、各辺の半長とその単位を設定します。<br />
+2.2 <code class="docutils literal notranslate"><span class="pre">/G4M/Module/Phantom/dim</span></code>コマンドで、x,y,z方向にボクセル分割します。この例では、2ミリ辺のボクセルとなります。<br />
+2.3 <code class="docutils literal notranslate"><span class="pre">/G4M/Module/Phantom/material</span></code>コマンドで、水ファントムの物質をG4_WATERに設定しています。デフォルトでも、G4_WATERが適用されます。水以外の物質を設定することが可能ですが、予め<code class="docutils literal notranslate"><span class="pre">/G4M/Material/create</span></code>コマンドで物質作成をしておく必要があります。
+2.4 <code class="docutils literal notranslate"><span class="pre">/G4M/Module/select</span> <span class="pre">Phantom</span></code>でモジュールを選択し、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/rotate</span>&#160; <span class="pre">0.</span> <span class="pre">180.</span> <span class="pre">0.</span> <span class="pre">degree</span></code>でy軸の周りに180度回転して配置しています。ボクセル番号は、各軸のマイナス方向からプラス方向にインデックス番号が割り振られます。そのため、ビーム入射面にz軸のインデックス番号0が来るように回転をさせています。</p></li>
+</ol>
+<p>*水ファントムモジュールの固有コマンドについての詳細は<a class="reference internal" href="../cmd-reference.html#waterphantom-commands"><span class="std std-ref">コマンドリファレンス</span></a>の<a class="reference internal" href="../BeamModules/WaterPhantom.html"><span class="std std-doc">WaterPhantom Commands</span></a>参照してください。</p>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">/G4M/Module/install</span></code>コマンドで治療室（ワールドボリューム）にモジュールを配置します。<br>
+デフォルトではモジュール中心が原点となるように配置されます。
+*モジュールにおいて、配置座標を指定したい場合は、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/select</span></code>、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/translate</span></code>、<code class="docutils literal notranslate"><span class="pre">/G4M/Module/rotate</span></code>などのコマンドを利用します。詳細は<a class="reference internal" href="../cmd-reference.html#beam-module-installation"><span class="std std-ref">コマンドリファレンス</span></a>を参照してください。</p></li>
+</ol>
+</section>
+<section id="id4">
+<h4>水ファントムモジュールでのスコアリング<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>水ファントムモジュールは、スコアリング機能がデフォルトで有効化されています。</p>
+<ul class="simple">
+<li><p>スコアリング情報へのアクセス<br>
+シミュレーション実行中にスコアリングされた粒子情報は、一時保存されています。この一時保存されているコンテナ（入れ物）を<code class="docutils literal notranslate"><span class="pre">HitsCollection</span></code>と呼び、その中に格納された記録データの単位を<code class="docutils literal notranslate"><span class="pre">Hit</span></code>と呼びます。<code class="docutils literal notranslate"><span class="pre">Hit</span></code>には、ボクセルに入ってきたトラック毎の情報が格納されています。PTSIMでは、この<code class="docutils literal notranslate"><span class="pre">HitsCollection</span></code>から情報を選択的に取り出して、ファイルに保存することができます。複数のモジュールが一時保存する<code class="docutils literal notranslate"><span class="pre">HitsCollection</span></code>を区別するために、<br> <code class="docutils literal notranslate"><span class="pre">{モジュール名/HitsCollection}</span></code> <br> と名前が付されています。上記の例題マクロでは、<code class="docutils literal notranslate"><span class="pre">Phantom/HitsCollection</span></code>となります。</p></li>
+<li><p>スコア量のファイル保存<br>
+<code class="docutils literal notranslate"><span class="pre">HitsCollection</span></code>から取り出したスコアリング結果は、root形式、csv形式、xml形式のいずれかの形式でファイル保存が可能です。
+ヒストグラムやNtuple(別名TTree)のデータ形式で保存が可能です。ここではNtuple形式で保存する例を示します。Ntupleとは、N個の情報を１行のデータ単位とし、情報が入る毎に行データを追加していくリストモードを想像してください。</p></li>
+</ul>
+<p>以下に、Ntupleを使ってデータを保存する手順を説明します。</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/My/runaction/dumpfile</span></code>コマンド<br>
+出力ファイル名を設定します。このとき、ファイルの拡張子が保存形式となります。拡張子は、<code class="docutils literal notranslate"><span class="pre">.root</span></code>, <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.xml</span></code>のいずれかです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/My/runaction/ntuple/merge</span></code>コマンド <br>
+(注)root形式を選択時のみ有効です。 <br>
+スレッド環境でシミュレーション実行が行われているとき、出力ファイルがスレッド毎に生成され、ファイル名に<code class="docutils literal notranslate"><span class="pre">_t0</span></code>のようにスレッド番号が自動的に付加されます。Ntupleデータは、各スレッドの出力ファイルに別々に保存されます。<br>
+出力ファイル名の拡張子が<code class="docutils literal notranslate"><span class="pre">.root</span></code>である場合のみ、このコマンドが有効です。<code class="docutils literal notranslate"><span class="pre">true</span></code>を設定すると、シミュレーション終了時にNtupleデータをメインスレッドの出力ファイルにマージして１つに集約します。そして、各スレッド出力ファイルのNtupleデータはマージ後に自動削除されます。<br>
+マージすることで、複数のファイルを解析する必要がなくなりますが、その反面でスレッド毎のNtupleデータが大きい場合、マージしたデータは当然ながら巨大になります。動作確認など、試験的に実行する場合に限ってtrueに設定するのが良いでしょう。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/My/runaction/ntuple/create</span></code>コマンド<br> Ntupleの固有名(例題では<code class="docutils literal notranslate"><span class="pre">NT</span></code>)を宣言し、情報元の<code class="docutils literal notranslate"><span class="pre">HitsCollection</span></code>とのリンク付けを行います。例題では<code class="docutils literal notranslate"><span class="pre">Phantom/HitsCollection</span></code>となります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/My/runaction/ntuple/addColumn</span></code>コマンド<br> Ntupleの固有名を指定して、保存するスコア量の名称と、保存時のデータ型(<code class="docutils literal notranslate"><span class="pre">I</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>)、そして単位を設定する場合には単位名を設定します。このコマンドを必要なスコア量を指定して繰り返し、Ntuple１行分のデータ単位を定義します。選択可能な格納されている情報は、こちら<a class="reference internal" href="../Scoring/NtupleQuantities.html"><span class="std std-doc">スコア量</span></a>を参照してください。また、これらのコマンドで入力したNtupleデータのスコア項目を確認したいときは、<code class="docutils literal notranslate"><span class="pre">/My/runaction/ntuple/showScColumn</span></code>コマンドでNtuple名を指定すると表示されます。</p></li>
+</ol>
+</section>
+<section id="id5">
+<h4>シミュレーション結果データ作成のための実行<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>通常は、バッチモードで実行しますが、今回は、インタラクティブモードで実行してみましょう。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -u  tcsh  -i exampleA1.mac
+</pre></div>
+</div>
+<p>PTSIMが起動して、マクロファイルに記載されたコマンドが実行されます。今回は<code class="docutils literal notranslate"><span class="pre">/run/beamOn</span> <span class="pre">10000</span></code>で実行してみましょう。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span>  <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">beamOn</span> <span class="mi">10000</span>
+</pre></div>
+</div>
+<p>実行が終わるり再度<code class="docutils literal notranslate"><span class="pre">Idle&gt;</span></code>になったら終了します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="n">exit</span>
+</pre></div>
+</div>
+</section>
+<section id="cern-root-analysis-tool">
+<h4>CERN ROOT Analysis Toolでの解析<a class="headerlink" href="#cern-root-analysis-tool" title="Link to this heading"></a></h4>
+<p>実行が終わると、<code class="docutils literal notranslate"><span class="pre">A1.root</span></code>という名前のファイルができています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
+..
+A1.root
+</pre></div>
+</div>
+<p>rootを起動してファイルを読み込みます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ root  A1.root
+</pre></div>
+</div>
+<p>rootのコマンドモードに入ります。
+今回は<code class="docutils literal notranslate"><span class="pre">NT</span></code>という名前のNtupleを作って情報を保存指定ます。
+下記のrootコマンドで、次のことを確認しています。</p>
+<ol class="arabic simple">
+<li><p>ファイルに<code class="docutils literal notranslate"><span class="pre">NT</span></code>が保存されているかを確認 (<code class="docutils literal notranslate"><span class="pre">.ls</span></code> )</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT</span></code>に含まれるデータ（ここではスコア名と呼びます）が何かを確認 (<code class="docutils literal notranslate"><span class="pre">NT-&gt;Print()</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NT</span></code>に記録されているデータの値をチラ見してみる。(<code class="docutils literal notranslate"><span class="pre">NT-&gt;Scan()</span></code>) <br> 終了は<code class="docutils literal notranslate"><span class="pre">q</span></code>.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="o">.</span><span class="n">ls</span>
+<span class="n">TFile</span><span class="o">**</span>		<span class="n">A1</span><span class="o">.</span><span class="n">root</span>	
+ <span class="n">TFile</span><span class="o">*</span>		<span class="n">A1</span><span class="o">.</span><span class="n">root</span>
+  <span class="n">KEY</span><span class="p">:</span> <span class="n">TTree</span>	<span class="n">NT</span><span class="p">;</span><span class="mi">1</span>	<span class="n">NT</span>
+
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">()</span>
+<span class="o">******************************************************************************</span>
+<span class="o">*</span><span class="n">Tree</span>    <span class="p">:</span><span class="n">NT</span>        <span class="p">:</span> <span class="n">NT</span>                                                     <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span> <span class="o">=</span>        <span class="mi">69525124</span> <span class="nb">bytes</span>  <span class="n">File</span>  <span class="n">Size</span> <span class="o">=</span>   <span class="mi">17045029</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="p">:</span>          <span class="p">:</span> <span class="n">Tree</span> <span class="n">compression</span> <span class="n">factor</span> <span class="o">=</span>   <span class="mf">4.08</span>                       <span class="o">*</span>
+<span class="o">******************************************************************************</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">0</span> <span class="p">:</span><span class="n">evno</span>      <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9932512</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">1598575</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">6.21</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">1</span> <span class="p">:</span><span class="n">pid</span>       <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9932198</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">1674186</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">5.93</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">2</span> <span class="p">:</span><span class="n">proc</span>      <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9932512</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">1616406</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">6.14</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">3</span> <span class="p">:</span><span class="n">ix</span>        <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9931884</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">1905703</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">5.21</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">4</span> <span class="p">:</span><span class="n">iy</span>        <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9931884</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">1902663</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">5.22</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">5</span> <span class="p">:</span><span class="n">iz</span>        <span class="p">:</span> <span class="n">Int_t</span> <span class="n">NT</span>                                               <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9931884</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">2311365</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">4.29</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+<span class="o">*</span><span class="n">Br</span>    <span class="mi">6</span> <span class="p">:</span><span class="n">de</span>        <span class="p">:</span> <span class="n">Float_t</span> <span class="n">NT</span>                                             <span class="o">*</span>
+<span class="o">*</span><span class="n">Entries</span> <span class="p">:</span>  <span class="mi">1237600</span> <span class="p">:</span> <span class="n">Total</span>  <span class="n">Size</span><span class="o">=</span>    <span class="mi">9931884</span> <span class="nb">bytes</span>  <span class="n">File</span> <span class="n">Size</span>  <span class="o">=</span>    <span class="mi">6021433</span> <span class="o">*</span>
+<span class="o">*</span><span class="n">Baskets</span> <span class="p">:</span>      <span class="mi">311</span> <span class="p">:</span> <span class="n">Basket</span> <span class="n">Size</span><span class="o">=</span>      <span class="mi">32000</span> <span class="nb">bytes</span>  <span class="n">Compression</span><span class="o">=</span>   <span class="mf">1.65</span>     <span class="o">*</span>
+<span class="o">*............................................................................*</span>
+
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-</span><span class="n">Scan</span><span class="p">()</span>
+<span class="o">************************************************************************</span>
+<span class="o">*</span>    <span class="n">Row</span>   <span class="o">*</span> <span class="n">evno</span><span class="o">.</span><span class="n">evno</span> <span class="o">*</span>   <span class="n">pid</span><span class="o">.</span><span class="n">pid</span> <span class="o">*</span> <span class="n">proc</span><span class="o">.</span><span class="n">proc</span> <span class="o">*</span>     <span class="n">iz</span><span class="o">.</span><span class="n">iz</span> <span class="o">*</span>     <span class="n">de</span><span class="o">.</span><span class="n">de</span> <span class="o">*</span>
+<span class="o">************************************************************************</span>
+<span class="o">*</span>        <span class="mi">0</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">249</span> <span class="o">*</span> <span class="mf">906.37304</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="mi">1</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">248</span> <span class="o">*</span>  <span class="mf">1031.677</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="mi">2</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">247</span> <span class="o">*</span> <span class="mf">788.84240</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="mi">3</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">246</span> <span class="o">*</span> <span class="mf">837.16821</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="mi">4</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">245</span> <span class="o">*</span> <span class="mf">820.92474</span> <span class="o">*</span>
+<span class="o">*</span>        <span class="mi">5</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>      <span class="mi">2212</span> <span class="o">*</span>         <span class="mi">0</span> <span class="o">*</span>       <span class="mi">244</span> <span class="o">*</span> <span class="mf">807.99725</span> <span class="o">*</span>
+<span class="o">....</span><span class="n">snippet</span>
+<span class="n">Type</span> <span class="o">&lt;</span><span class="n">CR</span><span class="o">&gt;</span> <span class="n">to</span> <span class="k">continue</span> <span class="ow">or</span> <span class="n">q</span> <span class="n">to</span> <span class="n">quit</span> <span class="o">==&gt;</span>  <span class="n">q</span>
+
+<span class="n">root</span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>次に<code class="docutils literal notranslate"><span class="pre">NT</span></code>き記録された情報で、グラフを作成します。
+Ntupleでグラフを書くには、<code class="docutils literal notranslate"><span class="pre">Ntuple名-&gt;Draw()</span></code>を使います。
+引数は次のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="n">Ntuple名</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;x軸スコア名&quot;</span><span class="p">,</span><span class="s2">&quot;積算する値*(論理式)&quot;</span><span class="p">,</span><span class="s2">&quot;表示モード&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">Ntuple名</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;x軸スコア名:y軸スコア名&quot;</span><span class="p">,</span><span class="s2">&quot;積算する値*(論理式)&quot;</span><span class="p">,</span><span class="s2">&quot;表示モード&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">Ntuple名</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;x軸スコア名:y軸スコア名:z軸スコア名&quot;</span><span class="p">,</span><span class="s2">&quot;積算する値*(論理式)&quot;</span><span class="p">,</span><span class="s2">&quot;表示モード&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>例えば、深度エネルギー付与分布を作成する場合は、横軸が<code class="docutils literal notranslate"><span class="pre">iz</span></code>などの位置情報、縦軸がエネルギー付与<code class="docutils literal notranslate"><span class="pre">de</span></code>の積算値です。
+つまり、次のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de&quot;</span><span class="p">,</span><span class="s2">&quot;hist&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="../images/exampleA1izde1.png" src="../_images/exampleA1izde1.png" /></p>
+<p>今回、izの大きい番号側(250)から陽子線が入射しています。izを置き換えたグラフは次のようになります。また、Ntupleで上記のように表示した時のビンニングは、rootが自動的に決めてしまいますが、自分でヒストグラムを宣言してフィルしなおすことも可能です。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="n">auto</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">TH1D</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span><span class="s2">&quot; title &quot;</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">);</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&gt;&gt;h1&quot;</span><span class="p">,</span><span class="s2">&quot;de&quot;</span><span class="p">,</span><span class="s2">&quot;hist&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="../images/exampleA1izde2.png" src="../_images/exampleA1izde2.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">TH1D</span></code>の引数は順番に、ヒストグラムの固有名(フィルするときは、変数名ではなく、この固有名を指定します）、タイトル、ビン数、xmin, xmaxを表します。<code class="docutils literal notranslate"><span class="pre">TH2D</span></code>,<code class="docutils literal notranslate"><span class="pre">TH3D</span></code>も軸の設定が同様に追加されるだけで使い方は同じ感じです。</p>
+<p>初期粒子の反応(proc)の種類毎に線量を重ね書きする場合は、次のようになります。<br>
+最後の引数にある<code class="docutils literal notranslate"><span class="pre">histsame</span></code>は、<code class="docutils literal notranslate"><span class="pre">hist</span></code>表示で重ね書き<code class="docutils literal notranslate"><span class="pre">same</span></code>を指示しています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==0)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==1)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==2)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==3)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==4)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+<span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iz&quot;</span><span class="p">,</span><span class="s2">&quot;de*(proc==5)&quot;</span><span class="p">,</span><span class="s2">&quot;histsame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>*<code class="docutils literal notranslate"><span class="pre">proc</span></code>の番号の意味は、<a class="reference internal" href="../Scoring/ProcessType.html"><span class="std std-doc">こちら</span></a></p>
+<p><img alt="../images/exampleA1izde3.png" src="../_images/exampleA1izde3.png" /></p>
+<p>入射面（iz=0)での陽子線の<em>個数</em>をix-iy平面でみたい場合は、次のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="n">NT</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;iy:ix&quot;</span><span class="p">,</span><span class="s2">&quot;iz==0&amp;&amp;pid==2212&quot;</span><span class="p">,</span><span class="s2">&quot;colz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="../images/exampleA1ixiy.png" src="../_images/exampleA1ixiy.png" /></p>
+<p>2次元分布の描画方法には、<code class="docutils literal notranslate"><span class="pre">colz</span></code>の他に<code class="docutils literal notranslate"><span class="pre">lego</span></code>,<code class="docutils literal notranslate"><span class="pre">surf</span></code>,<code class="docutils literal notranslate"><span class="pre">box</span></code>などもあります。</p>
+<p>rootを終了します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">[]</span> <span class="o">.</span><span class="n">q</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleA0.html" class="btn btn-neutral float-left" title="Example A0(基本構成)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleA2.html" class="btn btn-neutral float-right" title="Example A2(初期粒子発生GPS）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

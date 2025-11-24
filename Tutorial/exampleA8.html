@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example A8(Scan/Raster-Beam） &mdash; PTSIM project 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=ac6bd081" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example A9(TriggerSD）" href="exampleA9.html" />
+    <link rel="prev" title="Example A7(Layered-Mass）" href="exampleA7.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PTSIM project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation and Build</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="launchOpt.html">起動オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA0.html">Example A0(基本構成)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA1.html">Example A1(ファントム/スコア）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA2.html">Example A2(初期粒子発生GPS）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA3.html">Example A3(ビーム機器登録/操作）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA4.html">Example A4(GDMLビーム機器）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA5.html">Example A5(DICOM-CTジオメトリ）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA6.html">Example A6(ParallelWorld-Score）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA7.html">Example A7(Layered-Mass）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example A8(Scan/Raster-Beam）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">例題マクロファイル</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">マクロファイルの解説</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA9.html">Example A9(TriggerSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA10.html">Example A10(attachSD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exampleA11.html">Example A11(Layered-Mass w/ MagField）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmd-reference.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../material.html">Material-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry.html">Beam-Module-file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How-to : Example macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture.html">Lecure Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PTSIM project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorial.html">Tutorial</a></li>
+      <li class="breadcrumb-item active">Example A8(Scan/Raster-Beam）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorial/exampleA8.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="example-a8-scan-raster-beam">
+<h1>Example A8(Scan/Raster-Beam）<a class="headerlink" href="#example-a8-scan-raster-beam" title="Link to this heading"></a></h1>
+<p>スポットスキャニングビームやラスタースキャンビームの設定方法を解説します。</p>
+<ul class="simple">
+<li><p>パラメタファイル準備</p></li>
+<li><p>スキャニングマグネット設置</p></li>
+</ul>
+<p>スポットスキャニングやラスタースキャニングは、ビームを電磁石で走査して照射対象内のある深度に線量面を構成します。エネルギーを変えて同様の線量面を層状に重ね合わせることで、腫瘍領域に必要な線量を照射します。
+これらの設定を行うパラメタファイルには、次の３つが必要です。</p>
+<ol class="arabic simple">
+<li><p>ビームエネルギー定義（EIDSample.dat ）</p></li>
+<li><p>ビーム強度補正定義(WeightSample.dat)</p></li>
+<li><p>ビームスポット設定（ScanSample.dat）</p></li>
+</ol>
+<p>ここでは、スポットスキャニングを中心に、例題マクロファイルに沿って使用法を解説します。</p>
+<p>以下、PTSIMの実行ディレクトリ(例: ~/PTSproject-install/PTSapps/DynamicPort)で作業します。</p>
+<p>はじめに、パラメタファイルは編集することもあるので、サンプルのパラメタファイルを実行ディレクトリにコピーしましょう。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp ./data/Sample/G4MScanBeam/EIDSample.dat  .
+$ cp ./data/Sample/G4MScanBeam/WeightSample.dat  .
+$ cp ./data/Sample/G4MScanBeam/ScanSample.dat  .
+</pre></div>
+</div>
+<section id="id1">
+<h2>例題マクロファイル<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>PTSIMコードに付属するマクロファイル<code class="docutils literal notranslate"><span class="pre">exampleA8.mac</span></code>をコピーして用います。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp  ./macros/tut/exampleA8.mac  .
+</pre></div>
+</div>
+<p>実行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./bin/PTSdemo  -i  exampleA8.mac
+</pre></div>
+</div>
+<p><img alt="exampleA81" src="../_images/exampleA81.png" /></p>
+<p>陽子線を少し照射してみます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">beamOn</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>マグネットの磁場で陽子線の軌道が変わっているのが確認できます。</p>
+<p><img alt="exampleA82" src="../_images/exampleA82.png" /></p>
+<p>終了</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Session</span><span class="p">:</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<section id="id2">
+<h3>マクロファイルの解説<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>解説するコマンド部分のみを抜粋して説明します。
+マクロファイルでは、治療室にスキャニングマグネットを配置してビームを走査します。照射結果の線量分布を確認するために水ファントムを配置してスコアします。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#</span>
+<span class="linenos"> 2</span><span class="c1"># (PreInit State)</span>
+<span class="linenos"> 3</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">verbose</span> <span class="mi">1</span>
+<span class="linenos"> 4</span><span class="c1">#</span>
+<span class="linenos"> 5</span><span class="c1"># Material</span>
+<span class="linenos"> 6</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">materials</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos"> 7</span><span class="c1">#</span>
+<span class="linenos"> 8</span><span class="c1"># PhysicsList</span>
+<span class="linenos"> 9</span><span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="o">./</span><span class="n">macros</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">phys</span><span class="o">.</span><span class="n">mac</span>
+<span class="linenos">10</span><span class="c1">#</span>
+<span class="linenos">11</span><span class="c1"># System and module registration</span>
+<span class="linenos">12</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">System</span> <span class="n">DynamicPort</span>
+<span class="linenos">13</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Room</span><span class="o">/</span><span class="n">register</span> <span class="mf">525.</span>  <span class="mf">525.</span>  <span class="mf">3550.</span> <span class="n">mm</span>
+<span class="linenos">14</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">WaterPhantom</span><span class="o">/</span><span class="n">register</span> <span class="n">Phantom</span>
+<span class="linenos">15</span><span class="c1">#</span>
+<span class="linenos">16</span><span class="c1"># Scanning Magnets Registration</span>
+<span class="linenos">17</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">ScanMagnetX</span> <span class="n">G4MScanningMagnet</span>  <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">Sample</span><span class="o">/</span><span class="n">G4MScanningMagnet</span><span class="o">/</span><span class="n">SCMX</span><span class="o">.</span><span class="n">dat</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">2254.0</span> <span class="n">mm</span> 
+<span class="linenos">18</span><span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">ScanMagnetY</span> <span class="n">G4MScanningMagnet</span>  <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">Sample</span><span class="o">/</span><span class="n">G4MScanningMagnet</span><span class="o">/</span><span class="n">SCMY</span><span class="o">.</span><span class="n">dat</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1859.0</span> <span class="n">mm</span> 
+<span class="linenos">19</span><span class="c1">#</span>
+<span class="linenos">20</span><span class="c1"># Run Initialize</span>
+<span class="linenos">21</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">initialize</span>
+<span class="linenos">22</span><span class="c1">#</span>
+<span class="linenos">23</span><span class="c1"># ScanBeam and Scanning Magnets</span>
+<span class="linenos">24</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span>  <span class="n">ScanBeam</span>
+<span class="linenos">25</span><span class="c1">#</span>
+<span class="linenos">26</span><span class="c1"># Scanning Magnets installation</span>
+<span class="linenos">27</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanMagXY</span> <span class="n">ScanMagnetX</span> <span class="n">ScanMagnetY</span>
+<span class="linenos">28</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetX</span>
+<span class="linenos">29</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetY</span>
+<span class="linenos">30</span><span class="c1">#</span>
+<span class="linenos">31</span><span class="c1"># Beam default parameters</span>
+<span class="linenos">32</span><span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">particle</span>  <span class="n">proton</span>
+<span class="linenos">33</span><span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">energy</span>    <span class="mf">150.04</span> <span class="n">MeV</span>
+<span class="linenos">34</span><span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">position</span>  <span class="mf">0.</span> <span class="mf">0.</span>  <span class="mf">3231.55</span> <span class="n">mm</span>
+<span class="linenos">35</span><span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">direction</span> <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="o">-</span><span class="mf">1.</span>
+<span class="linenos">36</span><span class="c1">#</span>
+<span class="linenos">37</span><span class="c1"># Set Beam Parameter files</span>
+<span class="linenos">38</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">eidFile</span>    <span class="o">./</span><span class="n">EIDSample</span><span class="o">.</span><span class="n">dat</span>
+<span class="linenos">39</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">weightFile</span> <span class="o">./</span><span class="n">WeightSample</span><span class="o">.</span><span class="n">dat</span>
+<span class="linenos">40</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanFile</span>   <span class="o">./</span><span class="n">ScanSample</span><span class="o">.</span><span class="n">dat</span>
+<span class="linenos">41</span><span class="c1">#</span>
+<span class="linenos">42</span><span class="c1">#</span>
+<span class="linenos">43</span><span class="c1"># Phantom settings and installation</span>
+<span class="linenos">44</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">size</span> <span class="mf">150.</span> <span class="mf">150.</span> <span class="mf">250.0</span> <span class="n">mm</span>
+<span class="linenos">45</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">dim</span> <span class="mf">150.</span> <span class="mf">150.</span> <span class="mf">250.</span>
+<span class="linenos">46</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">Phantom</span><span class="o">/</span><span class="n">material</span> <span class="n">G4_WATER</span>
+<span class="linenos">47</span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">Phantom</span>
+<span class="linenos">48</span><span class="c1">#</span>
+<span class="linenos">49</span><span class="c1"># Scoring</span>
+<span class="linenos">50</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">dumpfile</span>      <span class="n">A8</span><span class="o">.</span><span class="n">root</span>
+<span class="linenos">51</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">merge</span>  <span class="n">true</span>
+<span class="linenos">52</span><span class="c1">#</span>
+<span class="linenos">53</span><span class="c1"># Track analysis</span>
+<span class="linenos">54</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">create</span>    <span class="n">NT</span> <span class="n">Phantom</span><span class="o">/</span><span class="n">HitsCollection</span> 
+<span class="linenos">55</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">ix</span>  <span class="n">I</span>
+<span class="linenos">56</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">iy</span>  <span class="n">I</span>
+<span class="linenos">57</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">iz</span>  <span class="n">I</span>
+<span class="linenos">58</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">addColumn</span> <span class="n">NT</span> <span class="n">de</span>  <span class="n">F</span>  <span class="n">keV</span>
+<span class="linenos">59</span><span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">runaction</span><span class="o">/</span><span class="n">ntuple</span><span class="o">/</span><span class="n">showScColumn</span> <span class="n">NT</span>
+<span class="linenos">60</span><span class="c1">#</span>
+<span class="linenos">61</span><span class="c1"># BeamOn</span>
+<span class="linenos">62</span><span class="c1">#/run/beamOn 100</span>
+<span class="linenos">63</span><span class="c1">#</span>
+</pre></div>
+</div>
+<section id="scanning-magnet">
+<h4>Scanning Magnetを登録する<a class="headerlink" href="#scanning-magnet" title="Link to this heading"></a></h4>
+<p>スキャニングマグネットのビームモジュールを登録します。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">ScanMagnetX</span> <span class="n">G4MScanningMagnet</span>  <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">Sample</span><span class="o">/</span><span class="n">G4MScanningMagnet</span><span class="o">/</span><span class="n">SCMX</span><span class="o">.</span><span class="n">dat</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">2254.0</span> <span class="n">mm</span>
+<span class="n">PreInit</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">Dynamic</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">register</span> <span class="n">ScanMagnetY</span> <span class="n">G4MScanningMagnet</span>  <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">Sample</span><span class="o">/</span><span class="n">G4MScanningMagnet</span><span class="o">/</span><span class="n">SCMY</span><span class="o">.</span><span class="n">dat</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1859.0</span> <span class="n">mm</span>
+</pre></div>
+</div>
+</section>
+<section id="scanbeam">
+<h4>初期粒子発生器としてScanBeamを選択する<a class="headerlink" href="#scanbeam" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span>  <span class="n">ScanBeam</span>
+</pre></div>
+</div>
+</section>
+<section id="x-yscanning-magnet">
+<h4>X-Y方向のScanning Magnetを連携させる<a class="headerlink" href="#x-yscanning-magnet" title="Link to this heading"></a></h4>
+<p>２つのスキャニングマグネットが協調してビームを走査できるようにします。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanMagXY</span> <span class="n">ScanMagnetX</span> <span class="n">ScanMagnetY</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>スキャニングマグネットを配置する<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetX</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetY</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h4>初期粒子のデフォルト値を設定する<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>ビームのデフォルト値として、粒子種、発生位置、方向を設定する。
+エネルギー値以外は、３つのパラメタファイルでは定義されていないので設定は必須である。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">particle</span>  <span class="n">proton</span>
+<span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">energy</span>    <span class="mf">150.04</span> <span class="n">MeV</span>
+<span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">position</span>  <span class="mf">0.</span> <span class="mf">0.</span>  <span class="mf">3231.55</span> <span class="n">mm</span>
+<span class="o">/</span><span class="n">gun</span><span class="o">/</span><span class="n">direction</span> <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="o">-</span><span class="mf">1.</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>3つのパラメタファイルを指定する<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>ビームエネルギーを定義する</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">eidFile</span>    <span class="o">./</span><span class="n">EIDSample</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">EIDSample.dat</span></code>の内容は次のようになっています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">3</span>
+<span class="linenos">2</span><span class="mi">0</span> <span class="mf">100.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>
+<span class="linenos">3</span><span class="mi">1</span> <span class="mf">200.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>
+<span class="linenos">4</span><span class="mi">2</span> <span class="mf">250.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>
+</pre></div>
+</div>
+<p>1行目がデータ数、２行目以降がビームパラメタです。ビームパラメタは、順番に、ビームID番号、ビームエネルギー(MeV)、エネルギー値の標準偏差(MeV)、X軸方向の位置の標準偏差(mm)、Y軸方向の位置の標準偏差(mm)を入力します。揺らぎは、それぞれガウス分布の標準偏差です。</p>
+<ol class="arabic simple" start="2">
+<li><p>ビーム強度を定義する</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">weightFile</span> <span class="o">./</span><span class="n">WeightSample</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>同じ強度(つまり、同じ数だけ）で照射した場合、エネルギーが小さいビームは浅い位置で高いピーク線量となり、、エネルギーが大きいビームは深い位置まで届いてピーク線量は低くなります。そのため、エネルギーによらず同じ線量を与えるための照射粒子数を求めるための係数を記述します。この係数は、例題では調整前の値として1.を設定していますが、具体的な調整値としては同じ照射粒子数で照射した時のピーク線量値に相当します。
+<code class="docutils literal notranslate"><span class="pre">WeightSample.dat</span></code>の記載例は次の通りです。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">3</span>
+<span class="linenos">2</span><span class="mf">100.</span>    <span class="mf">1.</span>
+<span class="linenos">3</span><span class="mf">200.</span>   <span class="mf">1.</span>
+<span class="linenos">4</span><span class="mf">250.</span>   <span class="mf">1.</span>
+</pre></div>
+</div>
+<p>1行目はデータ数、２行目以降が強度情報であり、順番に、ビームエネルギー(MeV)、強度係数です。データ点間のエネルギーが使用された場合、データ点の補間を行い強度係数が求められます。</p>
+<ol class="arabic simple" start="3">
+<li><p>スキャンするスポットを定義する</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanFile</span>   <span class="o">./</span><span class="n">ScanSample</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>実際に照射するスポット位置を記載したファイルです。スポット位置はアイソセンター平面でのX-Y座標です。
+<code class="docutils literal notranslate"><span class="pre">ScanSample.dat</span></code>の内容は次のようになっています。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">5</span>
+<span class="linenos">2</span><span class="mi">0</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="mf">5.</span>
+<span class="linenos">3</span><span class="mi">1</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="o">+</span><span class="mf">100.</span>  <span class="mf">5.</span>
+<span class="linenos">4</span><span class="mi">1</span>  <span class="o">+</span><span class="mf">100.</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="mf">5.</span>
+<span class="linenos">5</span><span class="mi">0</span>  <span class="o">+</span><span class="mf">100.</span>  <span class="o">+</span><span class="mf">100.</span>  <span class="mf">5.</span>
+<span class="linenos">6</span><span class="mi">2</span>     <span class="mf">0.</span>     <span class="mf">0.</span>  <span class="mf">2.</span>
+</pre></div>
+</div>
+<p>1行目はデータ数、２行目以降がスポット座標です。スポット情報は、順にビームID番号(<code class="docutils literal notranslate"><span class="pre">EIDSample.dat</span></code>参照)、X座標(mm)、Y座標(mm)、付与線量強度です。付与線量強度は、<code class="docutils literal notranslate"><span class="pre">WightSample.dat</span></code>の係数を適切に設定した後であれば、同じ値のときに同じピーク線量が得られることになります。</p>
+<p>*ラスタースキャンでも<code class="docutils literal notranslate"><span class="pre">EIDSample.dat</span></code>と<code class="docutils literal notranslate"><span class="pre">WeightSample.dat</span></code>は同じく利用可能です。
+ラインスキャンを利用する場合は、初期粒子発生器の選択を変更することと、スキャンするスポットの指定方法の２つが異なります。
+一連のコマンドをラインスキャン用に書き出すと次のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">My</span><span class="o">/</span><span class="n">PrimaryGenerator</span><span class="o">/</span><span class="n">select</span>  <span class="n">LineScanBeam</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">control</span><span class="o">/</span><span class="n">execute</span> <span class="n">macros</span><span class="o">/</span><span class="n">DynamicPort</span><span class="o">/</span><span class="n">scanBeamBase</span><span class="o">.</span><span class="n">mac</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanMagXY</span> <span class="n">ScanMagnetX</span> <span class="n">ScanMagnetY</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetX</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">Module</span><span class="o">/</span><span class="n">install</span> <span class="n">ScanMagnetY</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">eidFile</span>    <span class="o">./</span><span class="n">EIDSample</span><span class="o">.</span><span class="n">dat</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">weightFile</span> <span class="o">./</span><span class="n">WeightSample</span><span class="o">.</span><span class="n">dat</span>
+<span class="n">Idle</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">G4M</span><span class="o">/</span><span class="n">ScanBeam</span><span class="o">/</span><span class="n">scanFile</span>   <span class="o">./</span><span class="n">LineScanSample</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>このときの<code class="docutils literal notranslate"><span class="pre">LineScanSample.dat</span></code>は、次のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="mi">3</span>
+<span class="linenos">2</span><span class="mi">0</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="o">-</span><span class="mf">100.</span> <span class="o">+</span><span class="mi">100</span> <span class="o">-</span><span class="mf">100.</span>  <span class="mf">5.</span>
+<span class="linenos">3</span><span class="mi">1</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="o">+</span><span class="mf">100.</span> <span class="o">+</span><span class="mi">100</span> <span class="o">+</span><span class="mi">100</span>   <span class="mf">5.</span>
+<span class="linenos">4</span><span class="mi">2</span>  <span class="o">-</span><span class="mf">100.</span>  <span class="o">-</span><span class="mf">100.</span> <span class="o">+</span><span class="mi">100</span> <span class="o">+</span><span class="mi">100</span>   <span class="mf">5.</span>
+</pre></div>
+</div>
+<p>1行目はデータ数、２行目以降がラインデータです。ラインデータは、EID番号、ラインの始点X-Y座標(mm)、ラインの終点X-Y座標(mm)、付与線量強度です。付与線量強度は、ラインの長さ全体での強度です。</p>
+<p>ラインスキャンについては、<code class="docutils literal notranslate"><span class="pre">./macros/DynamicPort/SampleLineScan.mac</span></code>を参考にしてください。</p>
+<p>以上</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exampleA7.html" class="btn btn-neutral float-left" title="Example A7(Layered-Mass）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exampleA9.html" class="btn btn-neutral float-right" title="Example A9(TriggerSD）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2030, Tsukasa Aso.
+      <span class="lastupdated">Last updated on 2025-11-24 03:39:16.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
