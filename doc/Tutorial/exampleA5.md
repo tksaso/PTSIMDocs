@@ -14,7 +14,18 @@ CT画像のHUから物質への変換には、いくつかの選択オプショ�
 はじめにCT値から水等価患者モデルを構築するマクロファイルを示し、その中で使用されている入力ファイルを例を上げて説明します。また、オプションとしての選択肢について解説していきます。
 
 サンプルDICOM-CTデータとして、水ファントムのデータを用います。[こちらからダウンロード](http://wiki.kek.jp/download/attachments/82912951/DICOM_WP_Dist.zip?version=1&modificationDate=1536196171147&api=v2)
-ダウンロードしたファイルを展開してください。ここでは、ホームディレクトリにデータを展開する想定で解説します。
+ダウンロードしたファイルを展開してください。ここでは、ホームディレクトリにデータを展開する想定で解説します。(DICOM-CTデータには、パスワードが設定されています。）
+
+ダウンロードしたファイルが、拡張子`.zip`の場合
+```
+$ cd
+$ gunzip ~/Downloads/DICOM_WP_Dist.zip
+$ ls
+  DICOM_WP_Dist 
+```
+
+
+ダウンロードしたファイルが、拡張子`.tar.gz`の場合
 ```
 $ cd
 $ tar zxvf ~/Downloads/DICOM_WP_Dist.tar.gz
@@ -102,6 +113,25 @@ Session: exit
 /G4M/DICOM/gantry  0. deg
 /G4M/DICOM/isocenter  0. 0. -150. cm
 /G4M/Module/install DICOM
+#
+# Scoring
+/My/runaction/dumpfile A5.root
+##/My/runaction/ntuple/merge  true
+#
+# DICOM-CT Info. (ntuple/merge should be false)
+/My/runaction/hist/enable DICOMCT true
+#/My/runaction/hist/enable DICOM   true
+#
+# Track analysis
+/My/runaction/ntuple/create    NT DICOM/HitsCollection
+/My/runaction/ntuple/addColumn NT evno I
+/My/runaction/ntuple/addColumn NT pid  I
+/My/runaction/ntuple/addColumn NT proc I
+/My/runaction/ntuple/addColumn NT ix   I
+/My/runaction/ntuple/addColumn NT iy   I
+/My/runaction/ntuple/addColumn NT iz   I
+/My/runaction/ntuple/addColumn NT de     F  MeV
+/My/runaction/ntuple/showScColumn NT
 #
 #/run/beamOn 10
 #
@@ -263,6 +293,9 @@ Idle? /G4M/Module/install DICOM
 #### DICOM-CT情報のスコア
 
 DICOM-CTデータを下に作成した患者モデルを確認するために、構築したモデルのCT値等を保存することができます。
+
+(注）`DICOMCT`および`DICOM`を有効にする場合は、`/My/runaction/ntuple/merge true`は利用できません。
+
 ```
 Idle> /My/runaction/hist/enable  DICOMCT true
 Idle> /My/runaction/hist/enable  DICOM   true
@@ -288,21 +321,52 @@ Idle> /My/runaction/hist/enable  DICOM   true
 #### 粒子情報のスコア
 
 粒子情報のスコアは、水ファントムで解説(exampleA1)している使用方法と同じです。
+(注意）`DICOMCT`または`DICOM`のNtupleを出力するために、`/My/runaction/ntuple/merge`コマンドはコメントアウトしています。
+
 ```
 # Scoring
-/My/runaction/dumpfile      A5.root
-/My/runaction/ntuple/merge  true
+/My/runaction/dumpfile A5.root
+##/My/runaction/ntuple/merge  true
+#
+# DICOM-CT Info. (ntuple/merge should be false)
+/My/runaction/hist/enable DICOMCT true
+#/My/runaction/hist/enable DICOM   true
 #
 # Track analysis
-/My/runaction/ntuple/create    DT DICOM/HitsCollection 
-/My/runaction/ntuple/addColumn DT evno I
-/My/runaction/ntuple/addColumn DT pid  I
-/My/runaction/ntuple/addColumn DT proc I
-/My/runaction/ntuple/addColumn DT iz   I
-/My/runaction/ntuple/addColumn DT de   F  keV
-/My/runaction/ntuple/showScColumn DT
+/My/runaction/ntuple/create    NT DICOM/HitsCollection
+/My/runaction/ntuple/addColumn NT evno I
+/My/runaction/ntuple/addColumn NT pid  I
+/My/runaction/ntuple/addColumn NT proc I
+/My/runaction/ntuple/addColumn NT ix   I
+/My/runaction/ntuple/addColumn NT iy   I
+/My/runaction/ntuple/addColumn NT iz   I
+/My/runaction/ntuple/addColumn NT de     F  MeV
+/My/runaction/ntuple/showScColumn NT
 #
 ```
+マルチスレッドで実行した場合、A5.rootの出力ファイルは、次のように分割されて作成されます。
+デフォルトの２スレッドとすると。
+|出力ファイル| 保存されているNtuple | 備考 |
+|:--- |:--- |:--- |
+|A5.root | `DICOMCT` | マスタースレッドの出力<br> `NT`は空。 |
+|A5_t0.root | `NT` | スレッド0の出力 |
+|A5_t1.root | `NT` | スレッド1の出力 |
+
+スレッドが出力したA5_tx.rootに入った`NT`を繋ぎ合わせて(Chain)、A5.rootから参照するrootのスクリプトを紹介します。
+スクリプトをコピーします。
+```
+$ cp  macros/root/ChainJSTTree.C  .
+$ root
+root[] .x  ChainJSTTree.C("A5_t","A5",0,1,"NT");
+root[] .q
+```
+これで、A5.rootを読み込みます。
+```
+$ root  A5.root
+root[] DICOMCT->Draw("iy:iz","ct","colz")
+root[] NT->Draw("iy"iz","de","contsame")
+```
+![exampleA51](../images/exampleA51.png)
 
 以上
 

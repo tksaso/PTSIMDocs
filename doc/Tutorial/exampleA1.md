@@ -62,7 +62,7 @@ Session: exit
 /G4M/Module/Phantom/size 150. 150. 250.0 mm
 /G4M/Module/Phantom/dim 150. 150. 250.
 /G4M/Module/Phantom/material G4_WATER
-/G4M/Module/select Pantom
+/G4M/Module/select Phantom
 /G4M/Module/rotate 0. 180. 0. degree
 /G4M/Module/install Phantom
 #
@@ -181,27 +181,35 @@ TFile**		A1.root
 root[] NT->Print()
 ******************************************************************************
 *Tree    :NT        : NT                                                     *
-*Entries :  1237495 : Total =        49657146 bytes  File  Size =   13231595 *
-*        :          : Tree compression factor =   3.75                       *
+*Entries :  1237600 : Total =        69525124 bytes  File  Size =   17045029 *
+*        :          : Tree compression factor =   4.08                       *
 ******************************************************************************
 *Br    0 :evno      : Int_t NT                                               *
-*Entries :  1237495 : Total  Size=    9931672 bytes  File Size  =    1598502 *
+*Entries :  1237600 : Total  Size=    9932512 bytes  File Size  =    1598575 *
 *Baskets :      311 : Basket Size=      32000 bytes  Compression=   6.21     *
 *............................................................................*
 *Br    1 :pid       : Int_t NT                                               *
-*Entries :  1237495 : Total  Size=    9931358 bytes  File Size  =    1673710 *
+*Entries :  1237600 : Total  Size=    9932198 bytes  File Size  =    1674186 *
 *Baskets :      311 : Basket Size=      32000 bytes  Compression=   5.93     *
 *............................................................................*
 *Br    2 :proc      : Int_t NT                                               *
-*Entries :  1237495 : Total  Size=    9931672 bytes  File Size  =    1616101 *
+*Entries :  1237600 : Total  Size=    9932512 bytes  File Size  =    1616406 *
 *Baskets :      311 : Basket Size=      32000 bytes  Compression=   6.14     *
 *............................................................................*
-*Br    3 :iz        : Int_t NT                                               *
-*Entries :  1237495 : Total  Size=    9931044 bytes  File Size  =    2311829 *
+*Br    3 :ix        : Int_t NT                                               *
+*Entries :  1237600 : Total  Size=    9931884 bytes  File Size  =    1905703 *
+*Baskets :      311 : Basket Size=      32000 bytes  Compression=   5.21     *
+*............................................................................*
+*Br    4 :iy        : Int_t NT                                               *
+*Entries :  1237600 : Total  Size=    9931884 bytes  File Size  =    1902663 *
+*Baskets :      311 : Basket Size=      32000 bytes  Compression=   5.22     *
+*............................................................................*
+*Br    5 :iz        : Int_t NT                                               *
+*Entries :  1237600 : Total  Size=    9931884 bytes  File Size  =    2311365 *
 *Baskets :      311 : Basket Size=      32000 bytes  Compression=   4.29     *
 *............................................................................*
-*Br    4 :de        : Float_t NT                                             *
-*Entries :  1237495 : Total  Size=    9931044 bytes  File Size  =    6020680 *
+*Br    6 :de        : Float_t NT                                             *
+*Entries :  1237600 : Total  Size=    9931884 bytes  File Size  =    6021433 *
 *Baskets :      311 : Basket Size=      32000 bytes  Compression=   1.65     *
 *............................................................................*
 

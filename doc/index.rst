@@ -14,6 +14,8 @@ PTSIM Documentation
    install.md
    tutorial.rst
    cmd-reference.md
+   material.md
+   geometry.md   
    how_to.md
    lecture.rst   
    faq.md

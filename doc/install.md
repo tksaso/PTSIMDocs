@@ -10,17 +10,19 @@ PTSIMの実行は、Linux環境またはMac環境を前提としています。W
 - 独自のビーム機器をGDMLで記述: XMLパーサ\(libxerces\)
 - データ解析：CERN Analysis ROOT
 
-これらのインストールについては、以下の手引きを参考にしてください。
+## 参考: Geant4等のインストール方法
+
+必要なソフトウェア環境のインストール方法については、以下の手引きを参考にしてください。
 
 但し、OSバージョン等により手順が変わることがあります。  
-[WSLでのインストール Geant4-v11.3](./Geant4/installWSL_Geant4_113.pdf)  
-[Macでのインストール Geant4-v11.3](./Geant4/installMac_Geant4_113.pdf)  
+- [WSLでのインストール Geant4-v11.3](./Geant4/installWSL_Geant4_113.pdf)  
+- [Macでのインストール Geant4-v11.3](./Geant4/installMac_Geant4_113.pdf)  
 
 ## PTSIMソースコード
 
 PTSIMのソースコードをKEKのWikiサイトからダウンロードしてください。
 
-[KEK Wikiサイト eant4医学応用](https://wiki.kek.jp/spaces/g4med/pages/5343876/PTSIM)
+- [KEK Wikiサイト eant4医学応用](https://wiki.kek.jp/spaces/g4med/pages/5343876/PTSIM)
 
 ## ソースコードの展開とビルド
 
